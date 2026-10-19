@@ -16,7 +16,7 @@ Three interactive personal demonstrations built with Codex assistance:
 
 The brief was to extend a professional portfolio with visually engaging houses, birds, and airplanes. The resulting examples demonstrate SVG illustration, interactive controls, animation, and responsive CSS.
 
-Vannetta directed the subject selection and requested revisions. Codex generated the implementation and assisted with verification and publication. These are personal demonstrations, not client engagements or evidence of independent hand coding.
+Vannetta directed the subject selection and requested revisions. Codex generated the implementation and assisted with verification and publication.
 
 ## Implementation
 
