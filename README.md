@@ -2,6 +2,12 @@
 
 [Open the portfolio](https://vhane-create.github.io/portfolio/)
 
+## Featured business project
+
+[Open the Salon Business Dashboard](https://vhane-create.github.io/portfolio/salon-dashboard/)
+
+Two-location monthly planning tool with synthetic data, scenario controls, sample budget comparisons, break-even analysis, input validation, and CSV export. [Read the case study and model documentation](salon-dashboard/README.md).
+
 ## Codex creative lab
 
 Three interactive personal demonstrations built with Codex assistance:
