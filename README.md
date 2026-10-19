@@ -1,7 +1,39 @@
-# Vannetta Haney Professional Portfolio
+# Vannetta Haney — Professional Portfolio
 
-Finance, analytical quality review, scientific research, and Codex-assisted projects.
+[Open the portfolio](https://vhane-create.github.io/portfolio/)
 
-Built with Codex assistance using HTML, CSS, and JavaScript. No build dependencies.
+## Codex creative lab
 
-To update the site, edit index.html. Publish with GitHub Pages from the main branch, root folder.
+Three interactive personal demonstrations built with Codex assistance:
+
+| Demo | Interaction | Source |
+| --- | --- | --- |
+| [House design studio](https://vhane-create.github.io/portfolio/demos/houses.html) | Exterior finishes, daylight, solar roof, reset | [HTML](demos/houses.html) |
+| [Bird flight scene](https://vhane-create.github.io/portfolio/demos/birds.html) | Flock size, speed, pause and resume | [HTML](demos/birds.html) |
+| [Airplane dashboard](https://vhane-create.github.io/portfolio/demos/planes.html) | Route position, simulated distance, animation and reset | [HTML](demos/planes.html) |
+
+## Project context
+
+The brief was to extend a professional portfolio with visually engaging houses, birds, and airplanes. The resulting examples demonstrate SVG illustration, interactive controls, animation, and responsive CSS.
+
+Vannetta directed the subject selection and requested revisions. Codex generated the implementation and assisted with verification and publication. These are personal demonstrations, not client engagements or evidence of independent hand coding.
+
+## Implementation
+
+Each example is a standalone HTML file containing CSS, JavaScript, and SVG. No API keys, build tools, external assets, or paid services are needed. Open any file in a browser. Deployment uses GitHub Pages from the main branch, root folder.
+
+Controls have labels, keyboard focus styling, and narrow-screen layouts. The bird scene respects reduced-motion preferences; airplane animation starts only when requested. Illustration and flight values are conceptual.
+
+## Verification and limitations
+
+Automated control-logic checks covered house finish and solar visibility, flock size and pause, and route-distance calculations and reset. Full browser rendering could not be verified in the build environment; visual and device testing remain useful follow-up work.
+
+## Next development steps
+
+- Add browser interaction tests and a mobile visual review.
+- Add a finance demonstration using synthetic data with reconciliation checks.
+- Document user feedback and subsequent improvements.
+
+## Editing
+
+Edit index.html to change the main portfolio. Edit demos/houses.html, demos/birds.html, or demos/planes.html for the interactive examples.
