@@ -2,6 +2,10 @@
 
 [Open the portfolio](https://vhane-create.github.io/portfolio/)
 
+## Finance and analytical skills
+
+SQL (professional experience), advanced Excel, budgeting and forecasting, financial modeling, budget versus actual analysis, scenario analysis, data reconciliation, and management reporting.
+
 ## Professional experience and certification
 
 - **Mercor — Contract Financial Planning & Analysis (FP&A), remote | August–October 2026:** Reviewed revenue and operating-income calculations, forecast assumptions, spreadsheet inputs, and analytical quality against project requirements.
