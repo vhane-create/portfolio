@@ -2,6 +2,11 @@
 
 [Open the portfolio](https://vhane-create.github.io/portfolio/)
 
+## Professional experience and certification
+
+- **Mercor — Contract Financial Planning & Analysis (FP&A), remote | August–October 2026:** Reviewed revenue and operating-income calculations, forecast assumptions, spreadsheet inputs, and analytical quality against project requirements.
+- **Mercor Academy — Introduction to Agents, Certificate of Recognition | October 15, 2026:** Completed training in rigorous, calibrated AI agent evaluation.
+
 ## Featured business project
 
 [Open the Salon Business Dashboard](https://vhane-create.github.io/portfolio/salon-dashboard/)
