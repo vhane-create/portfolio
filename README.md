@@ -8,6 +8,8 @@ SQL (professional experience), advanced Excel, budgeting and forecasting, financ
 
 ## Professional experience and certification
 
+- **FP&A Modeling: Variance Analysis & Forecasting — IBM, via Coursera | October 23, 2026:** [Verify course certificate](https://coursera.org/verify/5N2ODALI7T2H).
+
 - **AI for Data Analysis — Google | Issued October 2026:** Credential ID: `7NMYU729VOSW`. Expires January 2036.
 
 - **Mercor — Contract Financial Planning & Analysis (FP&A), remote | August–October 2026:** Reviewed revenue and operating-income calculations, forecast assumptions, spreadsheet inputs, and analytical quality against project requirements.
