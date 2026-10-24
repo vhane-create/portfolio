@@ -8,6 +8,8 @@ SQL (professional experience), advanced Excel, budgeting and forecasting, financ
 
 ## Professional experience and certification
 
+- **Project Execution: Running the Project — Google, via Coursera | October 24, 2026:** [Verify course certificate](https://coursera.org/verify/HN80SZTAZNV9).
+
 - **FinTech Law and Policy — Duke University, via Coursera | October 23, 2026:** [Verify course certificate](https://coursera.org/verify/85Z820Z3JO6N).
 
 - **FP&A Modeling: Variance Analysis & Forecasting — IBM, via Coursera | October 23, 2026:** [Verify course certificate](https://coursera.org/verify/5N2ODALI7T2H).
