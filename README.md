@@ -17,6 +17,14 @@ SQL (professional experience), advanced Excel, budgeting and forecasting, financ
 - **Mercor — Contract Financial Planning & Analysis (FP&A), remote | August–October 2026:** Reviewed revenue and operating-income calculations, forecast assumptions, spreadsheet inputs, and analytical quality against project requirements.
 - **Mercor Academy — Introduction to Agents, Certificate of Recognition | October 15, 2026:** Completed training in rigorous, calibrated AI agent evaluation.
 
+## Excel and SQL finance projects
+
+[Explore both projects](https://vhane-create.github.io/portfolio/finance-projects.html)
+
+- [Excel budget-versus-actual workbook](Vannetta_Haney_Excel_Budget_Analysis.xlsx): editable inputs, formulas, profit and margin analysis, and a linked native chart.
+- [SQL project ZIP](Vannetta_Haney_SQL_Finance_Project.zip): schema, simulated transactions, aggregation, joins, CTEs, window functions, diagnostics and CSV results. [SQL documentation](sql/README.md).
+- Verified shared result: $35,000 budgeted profit, $24,000 actual profit, and an $11,000 unfavorable variance. Illustrative data only.
+
 ## Featured business project
 
 [Open the Salon Business Dashboard](https://vhane-create.github.io/portfolio/salon-dashboard/)
@@ -52,7 +60,6 @@ Automated control-logic checks covered house finish and solar visibility, flock 
 ## Next development steps
 
 - Add browser interaction tests and a mobile visual review.
-- Add a finance demonstration using synthetic data with reconciliation checks.
 - Document user feedback and subsequent improvements.
 
 ## Editing
