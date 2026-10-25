@@ -89,24 +89,24 @@ Completed learning credentials are listed separately from employment and persona
 
 ### Certifications
 
-- **Advanced Financial Planning for Forecasting and Valuation** — John Wiley & Sons · Completed October 24, 2026 | OCT 24, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/verify/SPVNC91V1JPI).
-- **Performance Management and Strategic Planning in Finance** — John Wiley & Sons · Completed October 24, 2026 | OCT 24, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/records/9ZP4KUWJKM79).
-- **Master Financial Budgeting and Forecasting** — EDUCBA · Completed October 24, 2026 | OCT 24, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/verify/R1LKRIJCA3J2).
-- **Boost FP&A Variance Analysis with Copilot** — Completed October 24, 2026 | OCT 24, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/verify/YPJLWFDFPIYN).
-- **Foundations of Financial Analysis and Business Performance** — John Wiley & Sons · Completed October 24, 2026 | OCT 24, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/records/UD3N08634LZS).
-- **Corporate & Business Strategy** — Corporate Finance Institute · Completed October 24, 2026 | OCT 24, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/records/4AGHY0CAQM7L).
-- **Financial Analysis Fundamentals** — Corporate Finance Institute · Completed October 2026 | OCT 2026. [Verify credential](https://www.coursera.org/account/accomplishments/records/6XS7MXROJK38).
-- **Reading Financial Statements** — Corporate Finance Institute · Completed October 24, 2026 | OCT 24, 2026. [Verify credential](https://coursera.org/verify/UH4WOC2M0JOD).
-- **Operational Modeling** — Corporate Finance Institute · Completed October 24, 2026 | OCT 24, 2026. [Verify credential](https://coursera.org/verify/N3WXVFCPBXUX).
-- **Create a Financial Statement using Microsoft Excel** — Completed October 2026 | OCT 2026. [Verify credential](https://www.coursera.org/account/accomplishments/verify/KHBT5PT2DULE).
-- **Create Charts and Dashboards Using Microsoft Excel** — Completed October 2026 | OCT 2026. [Verify credential](https://www.coursera.org/account/accomplishments/verify/2S916JBQ7560).
-- **Fundamentals of Quantitative Modeling** — University of Pennsylvania · Completed October 24, 2026 | OCT 24, 2026. [Verify credential](https://coursera.org/verify/PVXB3VOVO4EK).
-- **SQL for Data Science** — University of California, Davis · Completed October 2026 | OCT 2026. [Verify credential](https://www.coursera.org/account/accomplishments/records/ENZPC7RHRZ5L).
-- **Power BI Masterclass 8 - Python, Finance, and Advanced DAX** — Packt · Completed October 2026 | OCT 2026. [Verify credential](https://www.coursera.org/account/accomplishments/records/63HT1Z2VSU9B).
-- **Project Execution: Running the Project** — Google · Completed October 24, 2026 | OCT 24, 2026. [Verify credential](https://coursera.org/verify/HN80SZTAZNV9).
-- **FinTech Law and Policy** — Duke University · Completed October 23, 2026 | OCT 23, 2026. [Verify credential](https://coursera.org/verify/85Z820Z3JO6N).
-- **FP&A Modeling: Variance Analysis & Forecasting** — IBM · Completed October 23, 2026 | OCT 23, 2026. [Verify credential](https://coursera.org/verify/5N2ODALI7T2H).
-- **AI for Data Analysis** — Google · Issued October 2026 · Expires January 2036Credential ID: 7NMYU729VOSW | OCT 2026. [Verify credential](https://www.coursera.org/account/accomplishments/records/7NMYU729VOSW).
+- **Advanced Financial Planning for Forecasting and Valuation** — John Wiley & Sons · Completed October 24, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/verify/SPVNC91V1JPI).
+- **Performance Management and Strategic Planning in Finance** — John Wiley & Sons · Completed October 24, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/records/9ZP4KUWJKM79).
+- **Master Financial Budgeting and Forecasting** — EDUCBA · Completed October 24, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/verify/R1LKRIJCA3J2).
+- **Boost FP&A Variance Analysis with Copilot** — Completed October 24, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/verify/YPJLWFDFPIYN).
+- **Foundations of Financial Analysis and Business Performance** — John Wiley & Sons · Completed October 24, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/records/UD3N08634LZS).
+- **Corporate & Business Strategy** — Corporate Finance Institute · Completed October 24, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/records/4AGHY0CAQM7L).
+- **Financial Analysis Fundamentals** — Corporate Finance Institute · Completed October 2026. [Verify credential](https://www.coursera.org/account/accomplishments/records/6XS7MXROJK38).
+- **Reading Financial Statements** — Corporate Finance Institute · Completed October 24, 2026. [Verify credential](https://coursera.org/verify/UH4WOC2M0JOD).
+- **Operational Modeling** — Corporate Finance Institute · Completed October 24, 2026. [Verify credential](https://coursera.org/verify/N3WXVFCPBXUX).
+- **Create a Financial Statement using Microsoft Excel** — Completed October 2026. [Verify credential](https://www.coursera.org/account/accomplishments/verify/KHBT5PT2DULE).
+- **Create Charts and Dashboards Using Microsoft Excel** — Completed October 2026. [Verify credential](https://www.coursera.org/account/accomplishments/verify/2S916JBQ7560).
+- **Fundamentals of Quantitative Modeling** — University of Pennsylvania · Completed October 24, 2026. [Verify credential](https://coursera.org/verify/PVXB3VOVO4EK).
+- **SQL for Data Science** — University of California, Davis · Completed October 2026. [Verify credential](https://www.coursera.org/account/accomplishments/records/ENZPC7RHRZ5L).
+- **Power BI Masterclass 8 - Python, Finance, and Advanced DAX** — Packt · Completed October 2026. [Verify credential](https://www.coursera.org/account/accomplishments/records/63HT1Z2VSU9B).
+- **Project Execution: Running the Project** — Google · Completed October 24, 2026. [Verify credential](https://coursera.org/verify/HN80SZTAZNV9).
+- **FinTech Law and Policy** — Duke University · Completed October 23, 2026. [Verify credential](https://coursera.org/verify/85Z820Z3JO6N).
+- **FP&A Modeling: Variance Analysis & Forecasting** — IBM · Completed October 23, 2026. [Verify credential](https://coursera.org/verify/5N2ODALI7T2H).
+- **AI for Data Analysis** — Google · Issued October 2026 · Expires January 2036 · Credential ID: 7NMYU729VOSW. [Verify credential](https://www.coursera.org/account/accomplishments/records/7NMYU729VOSW).
 - **Introduction to Agents — Certificate of Recognition** — Mercor Academy · AI agent evaluation, rigor, calibration, and clarity | OCT 15, 2026.
 - **Financial Planning & Analysis (FP&A): Foundations** — IBM · Course certificate | OCT 2026. [Verify credential](https://www.coursera.org/account/accomplishments/records/2RFBQ5DUJR1N).
 - **Emergency Medical Tech-Basic** — Lincoln Land Community College · Certificate of Completion | MAY 2011.
