@@ -4,7 +4,11 @@
 
 I focus on strategic finance and FP&A: budgeting, forecasting, variance analysis, scenario modeling, and checking financial information against its source. This repository brings together working financial samples and their documentation.
 
-## Start with these projects
+## Technical Projects
+
+Personal simulations with downloadable files, documented assumptions, and reviewable calculations.
+
+### Featured projects
 
 | Project | Business question | Tools | Review |
 | --- | --- | --- | --- |
@@ -56,13 +60,61 @@ The baseline produces **$25,700 revenue and $11,420 operating profit**. Change v
 node salon-dashboard/model.test.js
 ```
 
-## Relevant learning
+## Professional Experience
 
-**Financial Modeling and Analysis Specialization — Corporate Finance Institute | October 2026**
+- **Uber — Strategic Finance, Revenue Planning & FP&A | 2021–2025:** forecasting, budgeting, variance analysis, financial models, and management reporting.
+- **Handshake — Contract Data Evaluation & Quality Assurance | 2026–Present:** structured evaluation, source verification, and error documentation.
+- **Mercor — Contract FP&A Analyst (Independent Contractor) | August–October 2026:** financial calculation and forecast review.
+- **Beautiunlimited Salon and Spa LLC — Owner / Hairstylist | 2020–Present:** business operations across two locations.
+- **University of Illinois Springfield — Student Research Assistant, Chemistry | June 2026–Present:** literature review, data organization, and technical documentation.
+- **SIU School of Medicine — Student Hotspotting Participant | October 2025–March 2026:** interdisciplinary student case reviews and information synthesis.
+- **NEMT LLC — Medical Transport | 2016–2018.**
+- **Springfield Fire Department — EMT / Firefighter I | 2012–2015.**
 
-Completed courses: Operational Modeling; Reading Financial Statements; Financial Analysis Fundamentals; Corporate & Business Strategy.
+## Education
 
-Additional credentials and verification links are maintained in the [portfolio credentials section](https://vhane-create.github.io/portfolio/#credentials).
+- **DeVry University:** Bachelor’s Degree, Business & Finance, 2003–2007.
+- **Lincoln Land Community College:** Associate of Biology, 2010–2012.
+- **University of Illinois Springfield:** BS in Biology, in progress; Pre-Medical Studies, 2025–Present.
+- **University of Spa & Cosmetology Arts:** Cosmetology Diploma, September 2023; 1,500 instructional hours.
+
+## Certifications & Specializations
+
+Completed learning credentials are listed separately from employment and personal projects.
+
+### Specializations
+
+- **Financial Planning & Analysis and Performance Management — Specialization — John Wiley & Sons**, October 24, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/specialization/GL29W3RGC8PN).
+- **Financial Modeling and Analysis — Specialization — Corporate Finance Institute**, October 24, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/specialization/6SGTM35J92TP).
+
+### Certifications
+
+- **Advanced Financial Planning for Forecasting and Valuation** — John Wiley & Sons · Completed October 24, 2026 | OCT 24, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/verify/SPVNC91V1JPI).
+- **Performance Management and Strategic Planning in Finance** — John Wiley & Sons · Completed October 24, 2026 | OCT 24, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/records/9ZP4KUWJKM79).
+- **Master Financial Budgeting and Forecasting** — EDUCBA · Completed October 24, 2026 | OCT 24, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/verify/R1LKRIJCA3J2).
+- **Boost FP&A Variance Analysis with Copilot** — Completed October 24, 2026 | OCT 24, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/verify/YPJLWFDFPIYN).
+- **Foundations of Financial Analysis and Business Performance** — John Wiley & Sons · Completed October 24, 2026 | OCT 24, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/records/UD3N08634LZS).
+- **Corporate & Business Strategy** — Corporate Finance Institute · Completed October 24, 2026 | OCT 24, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/records/4AGHY0CAQM7L).
+- **Financial Analysis Fundamentals** — Corporate Finance Institute · Completed October 2026 | OCT 2026. [Verify credential](https://www.coursera.org/account/accomplishments/records/6XS7MXROJK38).
+- **Reading Financial Statements** — Corporate Finance Institute · Completed October 24, 2026 | OCT 24, 2026. [Verify credential](https://coursera.org/verify/UH4WOC2M0JOD).
+- **Operational Modeling** — Corporate Finance Institute · Completed October 24, 2026 | OCT 24, 2026. [Verify credential](https://coursera.org/verify/N3WXVFCPBXUX).
+- **Create a Financial Statement using Microsoft Excel** — Completed October 2026 | OCT 2026. [Verify credential](https://www.coursera.org/account/accomplishments/verify/KHBT5PT2DULE).
+- **Create Charts and Dashboards Using Microsoft Excel** — Completed October 2026 | OCT 2026. [Verify credential](https://www.coursera.org/account/accomplishments/verify/2S916JBQ7560).
+- **Fundamentals of Quantitative Modeling** — University of Pennsylvania · Completed October 24, 2026 | OCT 24, 2026. [Verify credential](https://coursera.org/verify/PVXB3VOVO4EK).
+- **SQL for Data Science** — University of California, Davis · Completed October 2026 | OCT 2026. [Verify credential](https://www.coursera.org/account/accomplishments/records/ENZPC7RHRZ5L).
+- **Power BI Masterclass 8 - Python, Finance, and Advanced DAX** — Packt · Completed October 2026 | OCT 2026. [Verify credential](https://www.coursera.org/account/accomplishments/records/63HT1Z2VSU9B).
+- **Project Execution: Running the Project** — Google · Completed October 24, 2026 | OCT 24, 2026. [Verify credential](https://coursera.org/verify/HN80SZTAZNV9).
+- **FinTech Law and Policy** — Duke University · Completed October 23, 2026 | OCT 23, 2026. [Verify credential](https://coursera.org/verify/85Z820Z3JO6N).
+- **FP&A Modeling: Variance Analysis & Forecasting** — IBM · Completed October 23, 2026 | OCT 23, 2026. [Verify credential](https://coursera.org/verify/5N2ODALI7T2H).
+- **AI for Data Analysis** — Google · Issued October 2026 · Expires January 2036Credential ID: 7NMYU729VOSW | OCT 2026. [Verify credential](https://www.coursera.org/account/accomplishments/records/7NMYU729VOSW).
+- **Introduction to Agents — Certificate of Recognition** — Mercor Academy · AI agent evaluation, rigor, calibration, and clarity | OCT 15, 2026.
+- **Financial Planning & Analysis (FP&A): Foundations** — IBM · Course certificate | OCT 2026. [Verify credential](https://www.coursera.org/account/accomplishments/records/2RFBQ5DUJR1N).
+- **Emergency Medical Tech-Basic** — Lincoln Land Community College · Certificate of Completion | MAY 2011.
+- **Fire Prevention Principles** — Lincoln Land Community College · Certificate of Completion | DEC 2011.
+- **Vehicle/Machinery Operations** — Lincoln Land Community College · Certificate of Completion | MAY 2012.
+- **Technical Rescue Awareness** — Lincoln Land Community College · Certificate of Completion | JUL 2012.
+
+The specialization and certificate lists expand as additional credentials are completed and verified.
 
 ## Additional creative demonstrations
 
@@ -81,9 +133,3 @@ I selected the portfolio content and business use cases, reviewed results, and d
 - `demos/`: additional creative demonstrations
 
 The website uses GitHub Pages. Static pages can be opened in a browser; the financial dashboard's tests require Node.js.
-
-
-## Additional completed finance training
-
-- **Master Financial Budgeting and Forecasting — EDUCBA**, October 24, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/verify/R1LKRIJCA3J2).
-- **Boost FP&A Variance Analysis with Copilot**, October 24, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/verify/YPJLWFDFPIYN).
