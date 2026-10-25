@@ -81,3 +81,9 @@ I selected the portfolio content and business use cases, reviewed results, and d
 - `demos/`: additional creative demonstrations
 
 The website uses GitHub Pages. Static pages can be opened in a browser; the financial dashboard's tests require Node.js.
+
+
+## Additional completed finance training
+
+- **Master Financial Budgeting and Forecasting — EDUCBA**, October 24, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/verify/R1LKRIJCA3J2).
+- **Boost FP&A Variance Analysis with Copilot**, October 24, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/verify/YPJLWFDFPIYN).
