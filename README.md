@@ -4,6 +4,23 @@
 
 I focus on strategic finance and FP&A: budgeting, forecasting, variance analysis, scenario modeling, and checking financial information against its source. This repository brings together working financial samples and their documentation.
 
+## Featured Specializations
+
+Four completed specializations support my FP&A experience:
+
+- **Financial Reporting** — University of Illinois Urbana-Champaign
+- **Cost Accounting** — Technical University of Munich
+- **Financial Planning & Analysis and Performance Management** — John Wiley & Sons
+- **Financial Modeling and Analysis** — Corporate Finance Institute
+
+[Review all verified credentials](https://vhane-create.github.io/portfolio/#credentials).
+
+## Excel for Business — Featured Capability
+
+**Excel Skills for Business: Intermediate I — Macquarie University**, completed October 26, 2026; grade **97%**. [Verify course credential](https://www.coursera.org/account/accomplishments/verify/8H9Z7YHEIQM1).
+
+Start with the [Excel budget-versus-actual case study](https://vhane-create.github.io/portfolio/finance-projects.html): review the working formulas, chart, and an $11,000 unfavorable operating-profit variance. The companion SQL project independently reconciles the same simulated inputs. This course credential is separate from my completed specializations; the workbook is a personal simulation.
+
 ## Technical Projects
 
 Personal simulations with downloadable files, documented assumptions, and reviewable calculations.
@@ -90,6 +107,8 @@ Completed learning credentials are listed separately from employment and persona
 - **Financial Modeling and Analysis — Specialization — Corporate Finance Institute**, October 24, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/specialization/6SGTM35J92TP).
 
 ### Certifications
+
+- **Excel Skills for Business: Intermediate I — Macquarie University**, October 26, 2026. Grade: 97%. [Verify credential](https://www.coursera.org/account/accomplishments/verify/8H9Z7YHEIQM1).
 
 - **Financial Markets — Yale University**, October 26, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/records/7THDQFV7J51T).
 - **Accounting Analysis II: Accounting for Liabilities and Equity — University of Illinois Urbana-Champaign**, October 26, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/records/7NVRK3BEG2HO).
