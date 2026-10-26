@@ -90,6 +90,8 @@ Completed learning credentials are listed separately from employment and persona
 
 ### Certifications
 
+- **Project and Stress-Test Financial Plans — Coursera**, October 25, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/verify/UHTYEDOV79MG).
+- **Financial Ratios: Analyze & Apply Key Metrics — Coursera**, October 25, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/verify/JRCQ8OXKJUCY).
 - **Accounting Analysis I: Measurement and Disclosure of Assets — University of Illinois Urbana-Champaign**, October 25, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/verify/LQMAWAKK7TIJ).
 - **SOX Compliance and Corporate Governance — EDUCBA**, October 25, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/records/00J90TJZ299M).
 - **Cost Accounting: Decision Making — Technical University of Munich (TUM)**, October 25, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/records/8MV907JA3RBW).
@@ -141,5 +143,6 @@ I selected the portfolio content and business use cases, reviewed results, and d
 - `demos/`: additional creative demonstrations
 
 The website uses GitHub Pages. Static pages can be opened in a browser; the financial dashboard's tests require Node.js.
+
 
 
