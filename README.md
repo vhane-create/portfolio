@@ -84,12 +84,17 @@ Completed learning credentials are listed separately from employment and persona
 
 ### Specializations
 
+- **Financial Reporting Specialization — University of Illinois Urbana-Champaign**, October 26, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/specialization/JCRHAUSJIDLP).
 - **Cost Accounting Specialization — Technical University of Munich (TUM)**, October 25, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/specialization/3TIK9IM7G333).
 - **Financial Planning & Analysis and Performance Management — Specialization — John Wiley & Sons**, October 24, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/specialization/GL29W3RGC8PN).
 - **Financial Modeling and Analysis — Specialization — Corporate Finance Institute**, October 24, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/specialization/6SGTM35J92TP).
 
 ### Certifications
 
+- **Financial Markets — Yale University**, October 26, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/records/7THDQFV7J51T).
+- **Accounting Analysis II: Accounting for Liabilities and Equity — University of Illinois Urbana-Champaign**, October 26, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/records/7NVRK3BEG2HO).
+- **Accounting Analysis II: Measurement and Disclosure of Liabilities — University of Illinois Urbana-Champaign**, October 26, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/records/TAMGVW746H14).
+- **Introduction to Microsoft Excel — Coursera**, October 25, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/records/51R9P2JU5MZF).
 - **Project and Stress-Test Financial Plans — Coursera**, October 25, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/verify/UHTYEDOV79MG).
 - **Financial Ratios: Analyze & Apply Key Metrics — Coursera**, October 25, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/verify/JRCQ8OXKJUCY).
 - **Accounting Analysis I: Measurement and Disclosure of Assets — University of Illinois Urbana-Champaign**, October 25, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/verify/LQMAWAKK7TIJ).
@@ -143,6 +148,7 @@ I selected the portfolio content and business use cases, reviewed results, and d
 - `demos/`: additional creative demonstrations
 
 The website uses GitHub Pages. Static pages can be opened in a browser; the financial dashboard's tests require Node.js.
+
 
 
 
