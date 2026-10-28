@@ -56,3 +56,4 @@ async def ask(req:AskRequest,request:Request,authorization:str|None=Header(defau
     answer=(response.output_text or "").strip()
     if not answer:raise HTTPException(502,"Model returned no text")
     return {"answer":answer,"model":os.getenv("OPENAI_MODEL","gpt-4.1-mini"),"mode":req.mode,"synthetic_finance_data_only":req.mode=="finance","human_review_required":True}
+

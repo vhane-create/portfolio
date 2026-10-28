@@ -10,3 +10,4 @@ async def main():
         r=await client.responses.create(model=os.getenv("OPENAI_MODEL","gpt-6-luna"),instructions="Use only this synthetic dataset: "+json.dumps(facts())+". Do not invent causes. Expense actual above budget is unfavorable.",input=prompt,max_output_tokens=300,store=False)
         print(json.dumps({"prompt":prompt,"answer":r.output_text,"review_required":True}))
 if __name__=="__main__":asyncio.run(main())
+

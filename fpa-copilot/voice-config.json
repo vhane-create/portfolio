@@ -1,0 +1,16 @@
+{
+  "engine": "kokoro",
+  "package_version": "0.9.4",
+  "repository": "hexgrad/Kokoro-82M",
+  "voice": "af_heart",
+  "language": "a",
+  "sample_rate_hz": 24000,
+  "device": "cpu",
+  "cpu_threads": 2,
+  "animation": "MuseTalk V1.5",
+  "render_batch_size": 1,
+  "render_float16": true,
+  "mps_high_watermark_ratio": 0.7,
+  "mps_low_watermark_ratio": 0.5,
+  "instant_streaming": false
+}

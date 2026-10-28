@@ -1,0 +1,173 @@
+{
+  "portrait_sha256": "9889d86d17f07437243204107a91ed7ab4a49a5a9d1841ec56c59d117247d958",
+  "media": [
+    {
+      "file": "assets/ARIA_Heart_Introduction.mp4",
+      "full_decode": "passed",
+      "probe": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "codec_type": "video",
+            "width": 852,
+            "height": 1280
+          },
+          {
+            "codec_name": "aac",
+            "codec_type": "audio"
+          }
+        ],
+        "format": {
+          "duration": "5.250000"
+        }
+      }
+    },
+    {
+      "file": "assets/ARIA_Variance_Reply.mp4",
+      "full_decode": "passed",
+      "probe": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "codec_type": "video",
+            "width": 852,
+            "height": 1280
+          },
+          {
+            "codec_name": "aac",
+            "codec_type": "audio"
+          }
+        ],
+        "format": {
+          "duration": "16.925000"
+        }
+      }
+    },
+    {
+      "file": "assets/aria-approved--d0.mp4",
+      "full_decode": "passed",
+      "probe": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "codec_type": "video",
+            "width": 852,
+            "height": 1280
+          }
+        ],
+        "format": {
+          "duration": "3.120000"
+        }
+      }
+    },
+    {
+      "file": "assets/ARIA_Variance_Reply.wav",
+      "channels": 1,
+      "sample_rate": 24000,
+      "seconds": 16.925
+    },
+    {
+      "file": "assets/aria-heart-intro.wav",
+      "channels": 1,
+      "sample_rate": 24000,
+      "seconds": 5.25
+    },
+    {
+      "file": "assets/aria-heart-reply-test.wav",
+      "channels": 1,
+      "sample_rate": 24000,
+      "seconds": 6.35
+    }
+  ],
+  "javascript_syntax": [
+    {
+      "page": "aria-final.html",
+      "result": "passed"
+    },
+    {
+      "page": "aria-heart-preview.html",
+      "result": "passed"
+    }
+  ],
+  "python_syntax": [
+    "heart-backend/collect_working_assets.py",
+    "heart-backend/test_heart_server.py",
+    "heart-backend/heart_server.py",
+    "liveportrait/test_runtime.py",
+    "liveportrait/aria_runtime.py",
+    "liveportrait/connect_heart_preview.py",
+    "working-runtime/musetalk/utils/utils.py",
+    "working-runtime/musetalk/models/unet.py",
+    "working-runtime/musetalk/models/vae.py"
+  ],
+  "automated_tests": [
+    {
+      "command": [
+        "node",
+        "test.js"
+      ],
+      "exit_code": 0,
+      "output": "PASS: FP&A calculations, thresholds, disclosure and invalid inputs\n"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "heart-backend",
+        "-p",
+        "test_*.py"
+      ],
+      "exit_code": 0,
+      "output": "Reply failed: USB not connected\n127.0.0.1 - - [28/Oct/2026 22:56:24] \"POST /api/reply HTTP/1.1\" 202 -\n127.0.0.1 - - [28/Oct/2026 22:56:24] \"GET /api/job/32eeeb60c39d4b5f92fb96df5655d945 HTTP/1.1\" 200 -\n127.0.0.1 - - [28/Oct/2026 22:56:24] \"GET /api/job/32eeeb60c39d4b5f92fb96df5655d945 HTTP/1.1\" 200 -\n127.0.0.1 - - [28/Oct/2026 22:56:24] \"GET /api/media/32eeeb60c39d4b5f92fb96df5655d945.wav HTTP/1.1\" 200 -\n.127.0.0.1 - - [28/Oct/2026 22:56:25] \"POST /api/reply HTTP/1.1\" 400 -\n127.0.0.1 - - [28/Oct/2026 22:56:25] \"POST /api/reply HTTP/1.1\" 400 -\n127.0.0.1 - - [28/Oct/2026 22:56:25] \"POST /api/reply HTTP/1.1\" 400 -\n.127.0.0.1 - - [28/Oct/2026 22:56:25] \"GET / HTTP/1.1\" 403 -\n127.0.0.1 - - [28/Oct/2026 22:56:25] \"POST /api/reply HTTP/1.1\" 403 -\n127.0.0.1 - - [28/Oct/2026 22:56:25] \"GET /secret.env HTTP/1.1\" 404 -\n127.0.0.1 - - [28/Oct/2026 22:56:25] \"GET /../secret.env HTTP/1.1\" 404 -\n127.0.0.1 - - [28/Oct/2026 22:56:25] \"GET /.git/config HTTP/1.1\" 404 -\n127.0.0.1 - - [28/Oct/2026 22:56:25] \"GET /api/media/nope.mp4 HTTP/1.1\" 404 -\n.127.0.0.1 - - [28/Oct/2026 22:56:26] \"GET / HTTP/1.1\" 200 -\n...\n----------------------------------------------------------------------\nRan 6 tests in 3.057s\n\nOK\n"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "liveportrait",
+        "-p",
+        "test_*.py"
+      ],
+      "exit_code": 0,
+      "output": "Render and audio decode passed: /tmp/ARIA path with spaces qwdddjlq/animations/20261028-225627-0a9c20f0/aria-approved--speaking clip.mp4\nOpen this MP4 in QuickTime. Review identity, teeth, lip timing, blinking and head motion before publication.\n.......\n----------------------------------------------------------------------\nRan 7 tests in 0.170s\n\nOK\n"
+    }
+  ],
+  "verification_limits": [
+    "No actual MPS inference run in Linux packaging workspace. User confirmed real Mac introduction and new finance reply voice/lip sync.",
+    "Fresh-machine installation and public deployment not verified.",
+    "Audio-only service test uses synthetic waveform, not a claim of real voice inference."
+  ],
+  "browser_checks": {
+    "page": "aria-final.html",
+    "portrait": "approved appearance visually inspected",
+    "introduction": {
+      "duration": 5.25,
+      "readyState": 4,
+      "paused_after_play": false,
+      "error": null
+    },
+    "variance_reply": {
+      "duration": 16.925,
+      "readyState": 4,
+      "paused_after_calculate": false,
+      "error": null
+    },
+    "variance_text": "Actual 120000; budget 100000; variance 20000; percentage 20.00%",
+    "scope": "Local managed Chromium preview; no public deployment claimed"
+  },
+  "source_snapshots": {
+    "LivePortrait": "9b294b3d0536135442ea73cb01e6cb3ca7029dd3",
+    "MuseTalk-Mac": "7fd019315127d7f31e2e7f9853547ddceabbeb6e",
+    "working_patches": "exact uploaded Mac wrappers and batch device fix"
+  },
+  "launcher_shell_syntax": "passed (bash parser; actual execution is zsh on macOS)"
+}

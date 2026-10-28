@@ -1,0 +1,2 @@
+# Heart speech service. MuseTalk uses its separate environment.
+-r heart-backend/requirements.txt

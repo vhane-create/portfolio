@@ -29,3 +29,4 @@ run_env python "$SCRIPT_DIR/aria_runtime.py" prepare --root "$ARIA_ROOT"
 PYTORCH_ENABLE_MPS_FALLBACK=1 run_env python "$SCRIPT_DIR/aria_runtime.py" doctor --root "$ARIA_ROOT"
 echo "Environment checks passed. Animation is NOT verified until an ARIA render passes and is visually reviewed."
 echo "Next: zsh \"$SCRIPT_DIR/animate_aria.sh\" /absolute/path/to/driving.mp4"
+

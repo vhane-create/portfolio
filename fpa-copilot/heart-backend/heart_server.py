@@ -131,9 +131,11 @@ class App:
             print('Reply failed:', error, flush=True)
 
     def render(self, identity, wav):
-        usb = Path('/Volumes/NO NAME')
+        usb = Path(os.environ.get('ARIA_USB', '/Volumes/NO NAME'))
         work = self.root / 'MuseTalk-Mac/upstream'
         source = self.root / 'example-animation/aria-approved--d0.mp4'
+        if not source.is_file():
+            source = self.project / 'assets/aria-approved--d0.mp4'
         if not usb.is_mount() or not (work / 'models/musetalkV15/unet.pth').is_file() or not source.is_file():
             raise RuntimeError('Connect the USB with ARIA models and the approved source animation.')
         if shutil.disk_usage(usb).free < 1024**3:
@@ -240,8 +242,8 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--no-browser', action='store_true')
     args = parser.parse_args()
-    root = Path.home() / 'ARIA-LivePortrait'
-    project = Path.home() / 'ARIA-Setup/fpa-copilot'
+    root = Path(os.environ.get('ARIA_ROOT', str(Path.home() / 'ARIA-LivePortrait'))).expanduser()
+    project = Path(os.environ.get('ARIA_PROJECT', str(Path(__file__).resolve().parents[1]))).expanduser()
     for file in [project / 'aria-heart-preview.html', project / 'assets/ARIA_Heart_Introduction.mp4', project / 'liveportrait/aria-approved.png']:
         if not file.is_file():
             raise SystemExit('Missing required project file: ' + str(file))

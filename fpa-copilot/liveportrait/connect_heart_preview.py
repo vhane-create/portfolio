@@ -46,3 +46,4 @@ html=html.replace('</body>',extra+'</body>')
 with output.open('x') as file:
     file.write(html)
 print('DONE: aria-heart-preview.html created. Existing pages kept intact.')
+

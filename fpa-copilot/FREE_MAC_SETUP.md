@@ -41,3 +41,4 @@ Mac compatibility, memory use, rendering speed and the user's custom-avatar prep
 - Company claims have sources and financial responses distinguish sample data.
 - No private keys are committed to GitHub.
 - A public visitor can use the demo without manually pasting a provider URL.
+

@@ -1,0 +1,91 @@
+{
+  "portrait_sha256": "9889d86d17f07437243204107a91ed7ab4a49a5a9d1841ec56c59d117247d958",
+  "voice": "af_heart",
+  "voice_engine": "Kokoro",
+  "sample_rate": 24000,
+  "user_confirmed": [
+    "approved appearance",
+    "Heart voice",
+    "introduction lip sync",
+    "new finance reply lip sync",
+    "variance 20000 and 20 percent"
+  ],
+  "limitations": [
+    "new animated replies require local Python and USB",
+    "rendering takes minutes",
+    "public dynamic backend not deployed",
+    "blinking not separately reviewed"
+  ],
+  "files": {
+    "fpa-copilot/liveportrait/aria-approved.png": {
+      "bytes": 1981765,
+      "sha256": "9889d86d17f07437243204107a91ed7ab4a49a5a9d1841ec56c59d117247d958"
+    },
+    "fpa-copilot/assets/ARIA_Heart_Introduction.mp4": {
+      "bytes": 240357,
+      "sha256": "08da5db4dfe058a6a43cc15fbd3d290bd97a802f77782c8a8465ab1e896af7d1"
+    },
+    "fpa-copilot/assets/aria-heart-intro.wav": {
+      "bytes": 252044,
+      "sha256": "35138b2d63a60b42bb2bfe9b1ac3039e05849d75d8dbe77f017c3d69edb23e87"
+    },
+    "fpa-copilot/assets/aria-approved--d0.mp4": {
+      "bytes": 263178,
+      "sha256": "308ab080d0945bb650f905174e716a8a5beecb9b26ec56590aa1aa8ac72839b7"
+    },
+    "fpa-copilot/aria-heart-preview.html": {
+      "bytes": 25494,
+      "sha256": "aeddb2270e6735fba58823ee16179880248e6497fbd63ddac7fd31407354d805"
+    },
+    "fpa-copilot/heart-backend/heart_server.py": {
+      "bytes": 15294,
+      "sha256": "0587e166e4e7570704844ede5ab79c90b705f501de13f647d514a1ec6c918696"
+    },
+    "fpa-copilot/working-runtime/musetalk/models/unet.py": {
+      "bytes": 1662,
+      "sha256": "ef4619139803cf3cdd24e3a3e63c5a235e9500a29b3a466b9504bbf2a7582759"
+    },
+    "fpa-copilot/working-runtime/musetalk/models/vae.py": {
+      "bytes": 5419,
+      "sha256": "6ecde3f4417178d8a9de5ed6045e2a4832efa65189b10b0672cab68efe529d32"
+    },
+    "fpa-copilot/working-runtime/musetalk/utils/utils.py": {
+      "bytes": 11755,
+      "sha256": "b3cc7058322db18531f91d27047157c4abb3f863a2899a2b0a1d6e5195003858"
+    },
+    "fpa-copilot/assets/ARIA_Variance_Reply.mp4": {
+      "bytes": 684040,
+      "sha256": "2aec9c34d845aada95f4b6e40b2c71f8e4753f2c1f85681138de45ea25a342f0"
+    },
+    "fpa-copilot/assets/ARIA_Variance_Reply.wav": {
+      "bytes": 812444,
+      "sha256": "6645a549ecb9571eec647970c4141fffb2452fb5962cd91a99edcf792c10f3ee"
+    },
+    "fpa-copilot/assets/aria-heart-reply-test.wav": {
+      "bytes": 304844,
+      "sha256": "4f6fb7746acc7a0e404ac9751373ea7b7163281bffc3d449bf2131764c1a7e5e"
+    },
+    "fpa-copilot/heart-backend/README.md": {
+      "bytes": 3500,
+      "sha256": "6b1923e3b537d57f7b8c6696ee85a717e3ba873ebe9c55948c32f0dc091374f4"
+    },
+    "fpa-copilot/heart-backend/requirements.txt": {
+      "bytes": 135,
+      "sha256": "41b040be0335351e6325f68628009fbd92f617082cd67ce2633f190c3659ae49"
+    },
+    "fpa-copilot/heart-backend/test_heart_server.py": {
+      "bytes": 4093,
+      "sha256": "e4068547ccaa53ba6efb49efe7508baafaa65c07c249ba2be77e0828b24390f1"
+    }
+  },
+  "voice_environment_versions": {
+    "kokoro": "0.9.4",
+    "misaki": "0.9.4",
+    "spacy": "3.7.5",
+    "numpy": "1.26.4",
+    "torch": "2.5.1",
+    "transformers": "4.39.2",
+    "huggingface-hub": "0.30.2",
+    "soundfile": "0.12.1"
+  }
+}

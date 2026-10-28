@@ -20,3 +20,4 @@ ARIA is an interactive, browser-based finance and company-research demonstration
 - [ ] Verify the live backend is deployed and configured before describing ARIA as connected to live AI
 
 All demonstration finance figures are illustrative. Do not upload private company or personal financial information to an unverified backend.
+

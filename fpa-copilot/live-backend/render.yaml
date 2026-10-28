@@ -10,3 +10,4 @@ services:
         sync: false
       - key: ALLOWED_ORIGIN
         value: https://vhane-create.github.io
+

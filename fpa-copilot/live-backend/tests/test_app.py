@@ -7,3 +7,4 @@ class TestFinance(unittest.TestCase):
  def test_invalid_input(self):
   with self.assertRaises(ValidationError):AskRequest(question="x")
 if __name__=="__main__":unittest.main()
+

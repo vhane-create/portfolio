@@ -26,3 +26,4 @@ torchaudio==2.3.0
 # Standard macOS universal2 wheel; no obsolete onnxruntime-silicon package.
 onnxruntime==1.20.1
 huggingface_hub==0.36.2
+

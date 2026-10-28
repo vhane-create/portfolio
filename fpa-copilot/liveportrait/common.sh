@@ -9,3 +9,4 @@ require_mac() {
   command -v conda >/dev/null 2>&1 || fail 'Install Apple Silicon Miniforge: https://github.com/conda-forge/miniforge . Reopen Terminal, then rerun.'
 }
 run_env() { conda run --no-capture-output -p "$ARIA_ENV" "$@"; }
+

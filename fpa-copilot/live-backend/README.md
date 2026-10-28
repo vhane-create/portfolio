@@ -29,3 +29,4 @@ For a hosted demo, deploy the Docker service using the included Render configura
 The service checks a constant-time bearer token, caps prompt length and model output, uses a simple five-requests-per-minute-per-IP in-memory limiter, sets a single allowed CORS origin, and uses `store=False` for model requests. **CORS is not authentication.** This is a **private demonstration architecture**, not production security. For public access use a managed API gateway, per-user authentication, distributed rate limiting, abuse monitoring, provider spend caps, observability, secret rotation, and independent security review. Browser speech recognition may use the browser vendor's service; do not enter confidential or personal information.
 
 The backend does not yet support document uploads, persistent conversations, streaming speech, or 3D animation. It does not prove AI correctness. No external service has been deployed by these GitHub commits.
+

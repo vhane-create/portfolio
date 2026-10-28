@@ -96,3 +96,4 @@ Portable regression checks (no ML model download):
 cd fpa-copilot/liveportrait
 python3 -m unittest -v test_runtime
 ```
+

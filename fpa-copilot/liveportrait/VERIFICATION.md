@@ -26,3 +26,4 @@ The tiny render is a technical smoke test, uses an upstream example driver, and 
 5. Review identity, suit/hair/robotic details, teeth, lip timing, blinking, head motion and face/neck seams in QuickTime. A JSON success flag cannot replace this review.
 
 No direct access to the local Mac is available in this session. No Mac installation, MPS render, realistic speech animation, or final video publication is claimed complete. No macOS security settings were changed.
+

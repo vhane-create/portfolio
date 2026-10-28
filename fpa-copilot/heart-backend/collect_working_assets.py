@@ -71,3 +71,4 @@ if failed:
 print('DONE: verified ARIA_Working_Assets.zip saved on Desktop. Originals kept intact.')
 import subprocess
 subprocess.run(['open', '-R', str(output)], check=True)
+

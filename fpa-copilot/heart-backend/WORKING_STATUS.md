@@ -28,3 +28,4 @@ Finance buttons explain modeling, budgeting, forecasts, scenarios and business a
 ## Preservation and packaging
 
 Existing portfolio pages were not replaced. `aria-heart-preview.html` was created separately; the live local page is assembled in memory. `heart-backend` code and preview installer are committed to GitHub. The exact MP4/WAV assets and three local MuseTalk source fixes must be collected from the Mac/USB. A final downloadable deployment ZIP cannot be complete without those assets. Model weights and third-party source retain their own license terms; do not imply all model licenses are the same or that offline redistribution has been approved.
+
