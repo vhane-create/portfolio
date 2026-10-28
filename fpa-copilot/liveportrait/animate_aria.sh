@@ -1,12 +1,8 @@
-#!/bin/zsh
-set -e
-ROOT="$HOME/ARIA-LivePortrait"
-IMAGE="$ROOT/aria-approved.png"
-DRIVER="${1:-$ROOT/driving.mp4}"
-if [[ ! -f "$IMAGE" ]]; then echo "Missing approved ARIA image: $IMAGE"; exit 1; fi
-if [[ ! -f "$DRIVER" ]]; then echo "Missing driving video: $DRIVER"; exit 1; fi
-cd "$ROOT/LivePortrait"
-eval "$(conda shell.zsh hook)"
-conda activate aria-liveportrait
-PYTORCH_ENABLE_MPS_FALLBACK=1 python inference.py -s "$IMAGE" -d "$DRIVER" --flag_crop_driving_video
-echo "Done. Look in $ROOT/LivePortrait/animations for the MP4."
+#!/bin/bash
+set -eu
+SCRIPT_DIR="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
+. "$SCRIPT_DIR/common.sh"
+require_mac
+[ "$#" -le 1 ] || fail 'Usage: zsh animate_aria.sh /absolute/path/to/driving.mp4'
+[ -d "$ARIA_ENV/conda-meta" ] || fail 'Run zsh install_mac.sh first.'
+PYTORCH_ENABLE_MPS_FALLBACK=1 run_env python "$SCRIPT_DIR/aria_runtime.py" animate --root "$ARIA_ROOT" --driving "${1:-$ARIA_ROOT/driving.mp4}"

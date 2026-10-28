@@ -1,0 +1,28 @@
+# CLI inference only. Based on upstream 9b294b3 requirements_base.txt.
+# Gradio is deliberately omitted: these scripts do not run a web server.
+numpy==1.26.4
+pyyaml==6.0.1
+opencv-python==4.10.0.84
+opencv-python-headless==4.10.0.84
+scipy==1.13.1
+imageio==2.34.2
+lmdb==1.4.1
+tqdm==4.66.4
+rich==13.7.1
+ffmpeg-python==0.2.0
+onnx==1.16.1
+scikit-image==0.24.0
+albumentations==1.4.10
+# Newer albucore releases removed APIs required by this albumentations release.
+albucore==0.0.16
+matplotlib==3.9.0
+imageio-ffmpeg==0.5.1
+tyro==0.8.5
+pykalman==0.9.7
+pillow>=10.4,<12
+torch==2.3.0
+torchvision==0.18.0
+torchaudio==2.3.0
+# Standard macOS universal2 wheel; no obsolete onnxruntime-silicon package.
+onnxruntime==1.20.1
+huggingface_hub==0.36.2

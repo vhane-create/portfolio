@@ -1,0 +1,27 @@
+name: ARIA LivePortrait integration checks
+on:
+  push:
+    paths: ['fpa-copilot/liveportrait/**', '.github/workflows/aria-liveportrait-validation.yml']
+  pull_request:
+    paths: ['fpa-copilot/liveportrait/**', '.github/workflows/aria-liveportrait-validation.yml']
+permissions:
+  contents: read
+jobs:
+  portable-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - run: sudo apt-get update && sudo apt-get install -y zsh ffmpeg
+      - name: Shell syntax
+        run: |
+          for script in fpa-copilot/liveportrait/*.sh; do
+            bash -n "$script"
+            zsh -n "$script"
+          done
+      - name: Portrait protection and workflow regressions
+        working-directory: fpa-copilot/liveportrait
+        run: python -m unittest -v test_runtime
+      # This job does not install models or claim M4/MPS verification.
