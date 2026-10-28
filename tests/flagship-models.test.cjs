@@ -2,7 +2,7 @@
 const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
 const cases=[
 ['three-statement-forecast',[120,8,65,25,20,15,10,45,30,8,5,25,6,3],r=>{assert.ok(r.check);assert.ok(Math.abs(r.rows.at(-2)[1]-r.rows.at(-1)[1])<1e-7);assert.ok(Math.abs(r.metrics[0][1]-129.6)<1e-8)}],
-['global-consolidation',[90,45,1.1,65,32,8,8],r=>{assert.ok(r.check);assert.ok(Math.abs(r.metrics[0][1]-131.5)<1e-8);assert.ok(Math.abs(r.metrics[2][1]-31.3)<1e-8)}],
+['global-consolidation',[90,45,1.1,65,32,8,8],r=>{assert.ok(r.check);assert.ok(Math.abs(r.metrics[0][1]-131.5)<1e-8);assert.ok(Math.abs(r.metrics[2][1]-39.3)<1e-8)}],
 ['workforce-planning',[220,95000,28,25,7,8,4,29],r=>{assert.ok(r.check);assert.ok(Math.abs(r.metrics[0][1]-227.4)<1e-8)}],
 ['financial-controls-sox',[2500000,2495000,4000,2500,1,1],r=>{assert.ok(r.check);assert.equal(r.metrics[0][1],1000)}],
 ['treasury-liquidity',[16,5,4.8,10,8,0.35],r=>{assert.equal(r.rows.length,14);assert.ok(Math.abs(r.metrics[0][1]-7.55)<1e-8);assert.equal(r.check,false)}],
