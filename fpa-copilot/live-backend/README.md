@@ -1,15 +1,31 @@
-# Live FP&A Copilot: OpenAI integration scaffold
+# ARIA — live conversational finance AI backend
 
-This project contains the OpenAI Responses API evaluation runner (`evaluate.py`) and a FastAPI service scaffold. The **public /ask endpoint is intentionally disabled** until a trusted authentication gateway, rate limits, and spending controls are in place. Do not describe this as a deployed live model.
+**Status: source code committed; deployment and actual model inference are not yet verified.**
 
-## Local evaluation (real, billable model calls)
+ARIA is a humanlike animated avatar at [ARIA display](https://vhane-create.github.io/portfolio/fpa-copilot/aria.html) with browser speech synthesis, optional speech recognition, and a real OpenAI Responses API backend. This is a **model-powered application**, not a foundation model trained from scratch.
+
+## Run locally
 ```bash
 cd fpa-copilot/live-backend
+python -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
-export OPENAI_API_KEY=YOUR_PRIVATE_SECRET
-python evaluate.py
+export OPENAI_API_KEY="set-this-in-a-private-environment-only"
+export DEMO_ACCESS_TOKEN="generate-a-random-secret-at-least-24-characters"
+export OPENAI_MODEL="gpt-4.1-mini"
+python -m unittest discover -s tests
+uvicorn app:app --host 127.0.0.1 --port 8080
 ```
-The runner sends three actual finance prompts to the OpenAI Responses API and prints responses for **human review**. No fake model scores are generated. `python -m unittest discover -s tests` verifies arithmetic. Never commit your API key or real employer financial data.
+For a hosted demo, deploy the Docker service using the included Render configuration, set `OPENAI_API_KEY` and `DEMO_ACCESS_TOKEN` in the hosting provider's **secret environment variables**, and restrict `ALLOWED_ORIGIN` to the portfolio origin. Never put secrets in GitHub, HTML, or client JavaScript. In ARIA's UI, enter the HTTPS backend URL and demo access code privately; the page does not persist them.
 
-## Deployment
-A Render Docker Blueprint is included as `render.yaml`; deployment is **not complete**. Configure secret management, gateway authentication, rate limiting, cost limits, HTTPS and audit logging before enabling the public /ask endpoint or connecting the GitHub Pages interface. CORS is not authentication. All financial data here are synthetic.
+## What is real?
+- The avatar visibly animates and speaks using browser text-to-speech, without prerecorded dialogue.
+- The microphone uses browser speech recognition when supported and authorized.
+- The authenticated `POST /ask` route makes **real, billable** OpenAI Responses API calls when configured and deployed.
+- The finance context is deterministic and synthetic; output is AI-generated and **not automatically verified**.
+- `evaluate.py` makes additional billable API calls for human review, but does not manufacture scores.
+
+## Security and production limitations
+The service checks a constant-time bearer token, caps prompt length and model output, uses a simple five-requests-per-minute-per-IP in-memory limiter, sets a single allowed CORS origin, and uses `store=False` for model requests. **CORS is not authentication.** This is a **private demonstration architecture**, not production security. For public access use a managed API gateway, per-user authentication, distributed rate limiting, abuse monitoring, provider spend caps, observability, secret rotation, and independent security review. Browser speech recognition may use the browser vendor's service; do not enter confidential or personal information.
+
+The backend does not yet support document uploads, persistent conversations, streaming speech, or 3D animation. It does not prove AI correctness. No external service has been deployed by these GitHub commits.
