@@ -28,4 +28,11 @@ const portrait=document.querySelector("#screen img");
 if(portrait){portrait.decoding="async";portrait.loading="eager";portrait.addEventListener("load",()=>{const missing=$("missing");if(missing)missing.hidden=true;portrait.hidden=false;status("Ready")});}
 const qbox=$("question");if(qbox){qbox.setAttribute("aria-label","Type a question for ARIA");qbox.setAttribute("autocomplete","off");qbox.placeholder="Ask ARIA about finance, or type a full sentence…";}
 const questionHelp=document.createElement("p");questionHelp.className="aria-topic-note";questionHelp.textContent="Press Enter to send. Shift + Enter adds a new line. Select a finance topic below to hear ARIA explain it.";qbox?.parentElement?.append(questionHelp);
+
+// ARIA motion controls: reduced-motion accessible, tied to browser speech events.
+const ariaMotion={enabled:true,level:0};
+function ariaMotionState(next){const screen=$("screen");if(screen)screen.dataset.state=next;ariaMotion.level=next==="speaking"?1:0}
+const ariaMotionStyle=document.createElement("style");
+ariaMotionStyle.textContent=`.screen[data-state="speaking"] .aria-voice-meter{box-shadow:0 0 25px #dca65b44}.screen[data-state="listening"] .aria-voice-meter{border-color:#8fd9d1}.screen img{max-width:100%;object-position:center center}@media(prefers-reduced-motion:reduce){.screen img{transform:none!important}}`;
+document.head.append(ariaMotionStyle);
 </script></body></html>
