@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: fpa-copilot-live
+    runtime: docker
+    dockerfilePath: ./fpa-copilot/live-backend/Dockerfile
+    dockerContext: ./fpa-copilot/live-backend
+    healthCheckPath: /health
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: ALLOWED_ORIGIN
+        value: https://vhane-create.github.io
