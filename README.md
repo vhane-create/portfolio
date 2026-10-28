@@ -43,8 +43,12 @@ Personal simulations with downloadable files, documented assumptions, and review
 
 ### Featured projects
 
+**New Python sample:** [FP&A variance analysis source](python/fpa_variance_analysis.py) · [Documentation and run instructions](python/README.md). This uses the same simulated numbers as the Excel and SQL case studies and asserts the $11,000 unfavorable profit variance.
+
+
 | Project | Business question | Tools | Review |
 | --- | --- | --- | --- |
+| Python FP&A variance analysis | What explains the profit shortfall and do results reconcile? | Python 3 standard library, reusable functions, assertions | [Source](python/fpa_variance_analysis.py) · [How to run](python/README.md) |
 | Excel budget versus actual | Where did operating profit miss budget? | Excel formulas and native chart | [Workbook](Vannetta_Haney_Excel_Budget_Analysis.xlsx) · [Case study](https://vhane-create.github.io/portfolio/finance-projects.html) |
 | SQL financial variance analysis | Do transaction totals reconcile, and which categories drive the shortfall? | SQLite, joins, CTEs, window functions | [SQL and checks](sql/) · [README](sql/README.md) · [ZIP](Vannetta_Haney_SQL_Finance_Project.zip) |
 | Salon Business Dashboard | How do volume and price changes affect profit and break-even? | JavaScript, HTML, CSS, scenario controls, CSV export | [Live dashboard](https://vhane-create.github.io/portfolio/salon-dashboard/) · [Model and tests](salon-dashboard/README.md) |
