@@ -2,7 +2,7 @@
 
 [View portfolio](https://vhane-create.github.io/portfolio/) · [Excel and SQL case study](https://vhane-create.github.io/portfolio/finance-projects.html) · [Scenario dashboard](https://vhane-create.github.io/portfolio/salon-dashboard/)
 
-I focus on strategic finance and FP&A: budgeting, forecasting, variance analysis, scenario modeling, and checking financial information against its source. This repository brings together working financial samples and their documentation.
+Senior FP&A and strategic finance professional focused on financial modeling, budgeting, forecasting, variance analysis, and business performance. My technical toolkit includes **advanced Excel, SQL, Python, Power BI, and Codex-assisted analytical workflows**. I use financial models, reproducible data checks, dashboards, and scenario analysis to support business decisions. This repository contains documented personal simulations and technical work samples; it does not represent confidential employer deliverables.
 
 ## Featured Specializations
 
@@ -21,6 +21,15 @@ My completed Coursera specializations span FP&A, financial modeling, corporate r
 **Professional Certificate:** Google Business Intelligence — Google (2026). **Treasury-related course:** Working Capital and Cash Management Essentials — EDUCBA (2026).
 
 [Review all verified credentials](https://vhane-create.github.io/portfolio/#credentials).
+
+## Senior FP&A and Technical Capabilities
+
+- **Financial leadership:** strategic planning, budget-versus-actual analysis, rolling forecasts, driver-based models, variance interpretation, management reporting, and performance analysis.
+- **Advanced Excel:** financial statements, financial models, formula auditing, scenario analysis, dashboards, and reconciliation.
+- **SQL and Python:** data extraction, transformations, validation, repeatable analysis, and quantitative workflows.
+- **Power BI and business intelligence:** KPI reporting, visualization, dashboard design, and financial storytelling.
+- **Codex and AI-assisted workflows:** coding and analytical assistance with independently verified calculations, assumptions, and outputs.
+- **Corporate finance:** cost accounting, working capital and cash management, financial risk, and strategic decision support.
 
 ## Excel for Business — Featured Capability
 
