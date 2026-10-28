@@ -1,0 +1,21 @@
+name: FP&A Copilot validation
+on:
+  push:
+    paths:
+      - 'fpa-copilot/**'
+      - '.github/workflows/fpa-copilot-validation.yml'
+  pull_request:
+    paths:
+      - 'fpa-copilot/**'
+      - '.github/workflows/fpa-copilot-validation.yml'
+  workflow_dispatch:
+jobs:
+  deterministic-finance-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify finance calculations and grounding safeguards
+        run: node fpa-copilot/test.js
