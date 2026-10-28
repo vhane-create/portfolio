@@ -14,8 +14,8 @@ ARIA is an interactive, browser-based finance and company-research demonstration
 - [x] ARIA HTML application committed to GitHub
 - [x] Portfolio homepage links to the application
 - [x] Application JavaScript parses successfully
-- [ ] Upload the approved ARIA portrait as `fpa-copilot/aria-portrait.webp`
-- [ ] Verify the portrait renders on the published site
+- [x] Embed a compressed version of the approved ARIA portrait directly in `aria-live.html` (no separate image upload required)
+- [ ] Verify the embedded portrait renders on the published site
 - [ ] Perform a real-browser test of speech, microphone permissions, finance answers, and backend fallback
 - [ ] Verify the live backend is deployed and configured before describing ARIA as connected to live AI
 
