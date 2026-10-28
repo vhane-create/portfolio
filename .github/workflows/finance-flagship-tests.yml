@@ -1,0 +1,31 @@
+name: Finance flagship regression tests
+on:
+  push:
+    paths:
+      - 'three-statement-forecast/**'
+      - 'global-consolidation/**'
+      - 'workforce-planning/**'
+      - 'financial-controls-sox/**'
+      - 'treasury-liquidity/**'
+      - 'enterprise-data-pipeline/**'
+      - 'tests/**'
+      - '.github/workflows/finance-flagship-tests.yml'
+  pull_request:
+    paths:
+      - 'three-statement-forecast/**'
+      - 'global-consolidation/**'
+      - 'workforce-planning/**'
+      - 'financial-controls-sox/**'
+      - 'treasury-liquidity/**'
+      - 'enterprise-data-pipeline/**'
+      - 'tests/**'
+jobs:
+  model-regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run six flagship model checks
+        run: node tests/flagship-models.test.cjs
