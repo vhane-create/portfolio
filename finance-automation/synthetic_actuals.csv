@@ -1,0 +1,17 @@
+period,department,account,budget,actual
+2026-Q1,Operations,Payroll,600000,625000
+2026-Q1,Operations,Facilities,90000,85000
+2026-Q1,Technology,Cloud infrastructure,150000,174000
+2026-Q1,Technology,Software licenses,110000,104000
+2026-Q1,Sales,Payroll,400000,413000
+2026-Q1,Sales,Travel,65000,72000
+2026-Q1,Finance,Payroll,230000,226000
+2026-Q1,Finance,Consulting,45000,49000
+2026-Q2,Operations,Payroll,620000,635000
+2026-Q2,Operations,Facilities,95000,93000
+2026-Q2,Technology,Cloud infrastructure,165000,181000
+2026-Q2,Technology,Software licenses,110000,108000
+2026-Q2,Sales,Payroll,420000,428000
+2026-Q2,Sales,Travel,70000,78000
+2026-Q2,Finance,Payroll,240000,237000
+2026-Q2,Finance,Consulting,48000,51000
