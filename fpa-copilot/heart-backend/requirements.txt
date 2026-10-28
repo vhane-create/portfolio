@@ -1,0 +1,8 @@
+kokoro==0.9.4
+misaki[en]==0.9.4
+spacy==3.7.5
+numpy==1.26.4
+torch==2.5.1
+transformers==4.39.2
+huggingface-hub==0.30.2
+soundfile==0.12.1
