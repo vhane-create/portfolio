@@ -6,12 +6,19 @@ I focus on strategic finance and FP&A: budgeting, forecasting, variance analysis
 
 ## Featured Specializations
 
-Four completed specializations support my FP&A experience:
+My completed Coursera specializations span FP&A, financial modeling, corporate risk, leadership, and business intelligence:
 
+- **Financial Engineering and Risk Management** — Columbia University
+- **Strategic Business Leadership** — University of Glasgow
+- **Google Project Management** — Google
+- **Python, Bash and SQL Essentials for Data Engineering** — Duke University
+- **Excel Skills for Business** — Macquarie University
 - **Financial Reporting** — University of Illinois Urbana-Champaign
 - **Cost Accounting** — Technical University of Munich
 - **Financial Planning & Analysis and Performance Management** — John Wiley & Sons
 - **Financial Modeling and Analysis** — Corporate Finance Institute
+
+**Professional Certificate:** Google Business Intelligence — Google (2026). **Treasury-related course:** Working Capital and Cash Management Essentials — EDUCBA (2026).
 
 [Review all verified credentials](https://vhane-create.github.io/portfolio/#credentials).
 
@@ -101,12 +108,20 @@ Completed learning credentials are listed separately from employment and persona
 
 ### Specializations
 
+- **Financial Engineering and Risk Management Specialization — Columbia University**, October 2026.
+- **Strategic Business Leadership Specialization — University of Glasgow**, October 2026.
+- **Google Project Management Specialization — Google**, October 2026.
+- **Python, Bash and SQL Essentials for Data Engineering Specialization — Duke University**, October 2026.
+- **Excel Skills for Business Specialization — Macquarie University**, October 2026.
+
 - **Financial Reporting Specialization — University of Illinois Urbana-Champaign**, October 26, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/specialization/JCRHAUSJIDLP).
 - **Cost Accounting Specialization — Technical University of Munich (TUM)**, October 25, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/specialization/3TIK9IM7G333).
 - **Financial Planning & Analysis and Performance Management — Specialization — John Wiley & Sons**, October 24, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/specialization/GL29W3RGC8PN).
 - **Financial Modeling and Analysis — Specialization — Corporate Finance Institute**, October 24, 2026. [Verify credential](https://www.coursera.org/account/accomplishments/specialization/6SGTM35J92TP).
 
 ### Certifications
+
+- **Google Business Intelligence Professional Certificate — Google**, October 2026.
 
 - **Excel Skills for Business: Intermediate I — Macquarie University**, October 26, 2026. Grade: 97%. [Verify credential](https://www.coursera.org/account/accomplishments/verify/8H9Z7YHEIQM1).
 
