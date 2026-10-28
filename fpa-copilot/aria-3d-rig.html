@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ARIA — Real 3D Avatar Rig Test</title>
+<style>*{box-sizing:border-box}body{margin:0;background:#08090e;color:#f4eadb;font:16px system-ui,sans-serif}main{max-width:1050px;margin:auto;padding:24px}h1{color:#d9b06d;font:32px Georgia,serif}.layout{display:grid;grid-template-columns:minmax(320px,1fr) 340px;gap:20px}#avatar{height:600px;border:1px solid #b38d52;border-radius:18px;background:radial-gradient(ellipse at center,#29211d,#09090c)}.panel{padding:22px;border:1px solid #665034;border-radius:16px;background:#18191d}textarea{width:100%;min-height:140px;background:#0c0e14;border:1px solid #8c714b;border-radius:9px;color:white;padding:12px;font:inherit}button{padding:12px 16px;background:#d3aa69;border:0;border-radius:9px;cursor:pointer;margin:8px 6px 0 0;font-weight:700}.muted{color:#c4b6a6;font-size:14px}#status{color:#ebc68c;min-height:24px}@media(max-width:760px){.layout{grid-template-columns:1fr}#avatar{height:500px}}</style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.186/build/three.module.js/+esm","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.186/examples/jsm/","talkinghead":"https://cdn.jsdelivr.net/gh/met4citizen/TalkingHead@1.8/modules/talkinghead.mjs"}}</script></head><body><main><h1>ARIA — 3D facial rig</h1><p>Business-attire avatar development. This page requires a custom rigged ARIA model with facial blend shapes.</p><div class="layout"><div id="avatar" aria-label="3D avatar viewport"></div><section class="panel"><h2>ARIA's voice test</h2><p id="status" role="status">Loading 3D engine…</p><label for="speech">What should ARIA say?</label><textarea id="speech">Hello, I am ARIA, your intelligent finance assistant. I can help you explore financial modeling, budgeting, forecasting, and strategic planning.</textarea><div><button id="speak" disabled>Speak</button><button id="stop" disabled>Stop</button></div><p class="muted">This page will not replace ARIA with a generic avatar. A custom GLB must be installed at <code>aria-business-rig.glb</code>, including ARKit or Oculus viseme blend shapes and a compatible skeleton. For speech, configure a supported text-to-speech provider or pass synchronized audio and visemes.</p></section></div></main>
+<script type="module">
+const status=document.getElementById("status"),speak=document.getElementById("speak"),stop=document.getElementById("stop");
+try{
+ const {TalkingHead}=await import("talkinghead");
+ const res=await fetch("./aria-business-rig.glb",{method:"HEAD"});
+ if(!res.ok)throw new Error("ARIA's custom 3D model is not installed yet. The correct face, suit, teeth, and rig must be created first.");
+ const head=new TalkingHead(document.getElementById("avatar"),{cameraView:"upper",lipsyncLang:"en",modelFPS:30});
+ await head.showAvatar({url:"./aria-business-rig.glb",body:"F",lipsyncLang:"en"});
+ status.textContent="3D model loaded. Connect a supported TTS provider for synchronized speech.";
+ // Speaking requires a configured TTS service. Do not start unsynchronized browser speech.
+ stop.disabled=false;stop.onclick=()=>{head.stopSpeaking?.();status.textContent="Stopped"};
+ speak.onclick=()=>{status.textContent="Speech needs a configured TTS provider with lip-sync timing."};
+}catch(e){status.textContent=e.message||String(e)}
+</script></body></html>
