@@ -1,0 +1,36 @@
+body.aria-immersive{height:100dvh;overflow:hidden;background:#080807;color:#f8f3eb}
+.aria-immersive [hidden]{display:none!important}
+.aria-immersive header{height:68px;box-sizing:border-box;position:fixed;inset:0 0 auto;z-index:5;padding:12px 24px;background:linear-gradient(#080807f0,#08080788);border:0}
+.aria-immersive header strong{font:26px Georgia,serif;letter-spacing:.22em}
+.aria-immersive header>span{display:none}
+.aria-immersive header nav{display:flex;gap:8px}
+.aria-immersive header nav button{font-size:13px;background:#161511ba;border-color:#524b3f;padding:8px 12px;border-radius:999px}
+.aria-immersive main{max-width:none;padding:0;margin:0}
+.aria-immersive main>h1,.aria-immersive main>.muted,.aria-immersive main>.note,.aria-immersive footer{display:none}
+.aria-immersive .layout{display:block;margin:0}
+.aria-immersive .layout>.panel{padding:0;margin:0;border:0;border-radius:0;box-shadow:none;background:transparent}
+.aria-immersive .layout>.panel>p{display:none}
+.aria-immersive .screen{position:fixed;inset:60px 0 150px;min-height:0;border-radius:0;background:radial-gradient(ellipse at 50% 35%,#30261e,#080807 75%)}
+.aria-immersive .screen img,.aria-immersive #aria-heart-video{height:100%;width:100%;inset:0;object-fit:contain;object-position:center;animation:none!important;transform:none!important}
+.aria-immersive .aria-office-caption{display:none}
+.aria-immersive .overlay{bottom:0;left:50%;right:auto;transform:translateX(-50%);width:max-content;max-width:90%;padding:5px 12px;border:0;background:#080807a6;backdrop-filter:blur(8px);text-align:center}
+.aria-immersive .overlay>strong{display:none}
+.aria-immersive .aria-bottom-dock{position:fixed;z-index:5;bottom:16px;left:50%;transform:translateX(-50%);width:min(960px,calc(100% - 32px));margin:0;padding:10px 14px;background:#171713f0;border:1px solid #514737;border-radius:20px;box-sizing:border-box;box-shadow:0 8px 35px #0005}
+.aria-immersive .aria-type-row{flex-wrap:nowrap;align-items:center;gap:10px}
+.aria-immersive .aria-type-row>label{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.aria-immersive .aria-type-row textarea{flex:1 1 auto;min-width:0;min-height:46px;height:46px;max-height:100px;border:0;background:transparent;padding:10px 0;border-radius:0;font-size:15px}
+.aria-immersive .aria-type-row .actions{flex-wrap:nowrap;gap:6px}
+.aria-immersive .aria-type-row .actions button{font-size:13px;padding:9px 13px;border-radius:999px}
+.aria-immersive #clear{display:none}
+.aria-immersive #aria-caption{position:fixed;z-index:3;bottom:92px;left:50%;transform:translateX(-50%);width:min(800px,calc(100% - 48px));max-height:62px;overflow:auto;box-sizing:border-box;text-align:center;background:#080807b8;border-radius:14px;padding:8px 14px;font-size:14px;color:#f4eadc}
+.aria-immersive .aria-drawer{position:fixed;z-index:10;right:16px;top:78px;bottom:110px;width:min(450px,calc(100% - 32px));overflow:auto;box-sizing:border-box;background:#11130ff7;border:1px solid #5b503e;border-radius:18px;padding:18px;box-shadow:0 20px 80px #0008}
+.aria-immersive .aria-drawer .panel{border:0;padding:12px 0;background:none;box-shadow:none}
+.aria-immersive .aria-drawer .history{height:auto;max-height:48dvh;background:#1b211a}
+.aria-immersive .aria-drawer button{font-size:13px}
+.aria-immersive .aria-drawer input[type=file]{width:100%;font-size:13px}
+.aria-immersive .aria-drawer textarea{min-height:170px}
+.aria-immersive .aria-drawer .aria-topics{grid-template-columns:1fr 1fr}
+@media(max-width:650px){.aria-immersive header{padding:10px 12px;height:60px}.aria-immersive header strong{font-size:21px}.aria-immersive header nav{gap:4px}.aria-immersive header nav button{font-size:11px;padding:7px 8px}.aria-immersive .aria-type-row{flex-wrap:wrap}.aria-immersive .aria-type-row textarea{flex-basis:100%;height:36px;min-height:36px}.aria-immersive .aria-type-row .actions{width:100%;justify-content:flex-end}.aria-immersive #aria-caption{bottom:133px;max-height:42px;font-size:12px}.aria-immersive .screen{bottom:190px}.aria-immersive .aria-drawer{bottom:155px}}
+
+.aria-immersive .overlay{top:16px;bottom:auto;left:24px;right:auto;transform:none;max-width:240px;text-align:left}
+.aria-immersive .overlay .status{font-size:12px}
