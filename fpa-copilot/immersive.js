@@ -25,6 +25,8 @@
  }
  document.addEventListener('keydown', e => { if(e.key==='Escape') drawer.hidden=true; });
  const dock = document.querySelector('.aria-bottom-dock');
+ const sizeDock=()=>document.documentElement.style.setProperty('--aria-dock-height',dock.getBoundingClientRect().height+'px');
+ new ResizeObserver(sizeDock).observe(dock);sizeDock();
  const mic = $('mic'); mic.textContent='Speak once'; voiceControls.append(mic);
  const loopButton=$('aria-talk');
  if(loopButton) dock.querySelector('.actions').prepend(loopButton);

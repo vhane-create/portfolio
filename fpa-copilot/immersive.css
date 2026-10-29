@@ -36,3 +36,8 @@ body.aria-immersive{height:100dvh;overflow:hidden;background:#080807;color:#f8f3
 .aria-immersive .overlay .status{font-size:12px}
 
 .aria-immersive .aria-drawer #clear{display:inline-flex;margin:12px 0}
+
+.aria-immersive .aria-type-row .actions button{white-space:nowrap;flex-shrink:0}
+.aria-immersive .screen{bottom:calc(var(--aria-dock-height,80px) + 112px)}
+.aria-immersive #aria-caption{bottom:calc(var(--aria-dock-height,80px) + 30px)}
+@media(max-width:650px){.aria-immersive .aria-type-row .actions{flex-wrap:wrap;justify-content:center}}
