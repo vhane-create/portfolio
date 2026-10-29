@@ -9,7 +9,7 @@
  const off=document.createElement('button');off.textContent='Use connected AI instead';off.hidden=true;section.append(off);
  const state=document.createElement('p');state.className='muted';state.setAttribute('role','status');state.textContent='Connected AI is selected. Free AI has not been downloaded.';section.append(state);
  panel.prepend(section);
- let engine,worker,ready=false,busy=false,loading=false,session=0;
+ let engine,worker,ready=false,busy=false,loading=false,session=0,boot=0;
  const api={selected:false,
   async ask(question,history,information){
    if(!ready||!api.selected)throw Error('Enable free AI in Voice & controls first.');
@@ -38,21 +38,21 @@
   if(ready){api.selected=true;off.hidden=false;state.textContent='Free on-device AI selected. No paid API requests will be made in this mode.';return;}
   api.selected=true;off.hidden=false;
   if(!navigator.gpu){state.textContent='This browser does not support WebGPU. Try current Chrome on a compatible computer.';return;}
-  loading=true;start.disabled=true;state.textContent='Checking graphics support…';
+  const own=++boot;loading=true;start.disabled=true;state.textContent='Checking graphics support…';
   try{
-   const adapter=await navigator.gpu.requestAdapter();if(!adapter)throw Error('No compatible GPU');
-   const {CreateWebWorkerMLCEngine}=await import('https://esm.sh/@mlc-ai/web-llm@0.2.86');
+   const adapter=await navigator.gpu.requestAdapter();if(own!==boot)return;if(!adapter)throw Error('No compatible GPU');
+   const {CreateWebWorkerMLCEngine}=await import('https://esm.sh/@mlc-ai/web-llm@0.2.86');if(own!==boot)return;
    worker=new Worker('local-ai-worker.js',{type:'module'});
    engine=await CreateWebWorkerMLCEngine(worker,'Qwen2.5-0.5B-Instruct-q4f32_1-MLC',{
-    initProgressCallback:p=>{state.textContent=p.text||('Loading free AI: '+Math.round(p.progress*100)+'%');}
+    initProgressCallback:p=>{if(own===boot)state.textContent='Loading free AI: '+Math.round(p.progress*100)+'%';}
    });
-   ready=true;api.selected=true;start.textContent='Use free AI';off.hidden=false;
+   if(own!==boot)return;ready=true;api.selected=true;start.textContent='Use free AI';off.hidden=false;
    document.getElementById('clear').click();
    state.textContent='Free on-device AI ready. No paid API requests are made in this mode.';
-  }catch{worker?.terminate();worker=null;engine=null;api.selected=true;state.textContent='Free AI could not load on this device. WebGPU, graphics memory or the model download may be unavailable. No paid fallback was used.';}
-  finally{loading=false;start.disabled=false;}
+  }catch{if(own!==boot)return;worker?.terminate();worker=null;engine=null;api.selected=true;state.textContent='Free AI could not load on this device. WebGPU, graphics memory or the model download may be unavailable. No paid fallback was used.';}
+  finally{if(own===boot){loading=false;start.disabled=false;}}
  };
- off.onclick=()=>{api.cancel();api.selected=false;document.getElementById('clear').click();off.hidden=true;state.textContent='Connected AI selected. Its account usage and billing limits apply.';};
+ off.onclick=()=>{api.cancel();if(loading){boot++;worker?.terminate();worker=null;engine=null;ready=false;loading=false;start.disabled=false;}api.selected=false;document.getElementById('clear').click();off.hidden=true;state.textContent='Connected AI selected. Its account usage and billing limits apply.';};
  document.getElementById('clear').addEventListener('click',()=>api.reset());
  document.getElementById('stop').addEventListener('click',()=>api.cancel());
  document.getElementById('aria-remove-information')?.addEventListener('click',()=>api.reset());
