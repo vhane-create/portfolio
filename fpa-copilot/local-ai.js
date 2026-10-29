@@ -38,10 +38,12 @@
   if(ready){api.selected=true;off.hidden=false;state.textContent='Free on-device AI selected. No paid API requests will be made in this mode.';return;}
   api.selected=true;off.hidden=false;
   if(!navigator.gpu){state.textContent='This browser does not support WebGPU. Try current Chrome on a compatible computer.';return;}
-  const own=++boot;loading=true;start.disabled=true;state.textContent='Checking graphics support…';
+  const own=++boot;let stage='graphics';loading=true;start.disabled=true;state.textContent='Checking graphics support…';
   try{
    const adapter=await navigator.gpu.requestAdapter();if(own!==boot)return;if(!adapter)throw Error('No compatible GPU');
+   stage='software';state.textContent='Loading free AI software…';
    const {CreateWebWorkerMLCEngine}=await import('https://esm.sh/@mlc-ai/web-llm@0.2.86');if(own!==boot)return;
+   stage='model';state.textContent='Downloading and preparing the free model…';
    worker=new Worker('local-ai-worker.js',{type:'module'});
    engine=await CreateWebWorkerMLCEngine(worker,'Qwen2.5-0.5B-Instruct-q4f32_1-MLC',{
     initProgressCallback:p=>{if(own===boot)state.textContent='Loading free AI: '+Math.round(p.progress*100)+'%';}
@@ -49,7 +51,10 @@
    if(own!==boot)return;ready=true;api.selected=true;start.textContent='Use free AI';off.hidden=false;
    document.getElementById('clear').click();
    state.textContent='Free on-device AI ready. No paid API requests are made in this mode.';
-  }catch{if(own!==boot)return;worker?.terminate();worker=null;engine=null;api.selected=true;state.textContent='Free AI could not load on this device. WebGPU, graphics memory or the model download may be unavailable. No paid fallback was used.';}
+  }catch{if(own!==boot)return;worker?.terminate();worker=null;engine=null;api.selected=true;
+   const reason=stage==='graphics'?'This browser could not provide a compatible graphics adapter. Free AI has not started.':stage==='software'?'The free AI software could not download. Check your connection and retry.':'The free model could not load. The download, graphics memory or model startup may have failed.';
+   state.textContent=reason+' No paid fallback was used. You can still use ARIA’s existing introduction and finance examples.';
+  }
   finally{if(own===boot){loading=false;start.disabled=false;}}
  };
  off.onclick=()=>{api.cancel();if(loading){boot++;worker?.terminate();worker=null;engine=null;ready=false;loading=false;start.disabled=false;}api.selected=false;document.getElementById('clear').click();off.hidden=true;state.textContent='Connected AI selected. Its account usage and billing limits apply.';};
