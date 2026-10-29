@@ -25,12 +25,12 @@
  document.addEventListener('keydown', e => { if(e.key==='Escape') drawer.hidden=true; });
  const dock = document.querySelector('.aria-bottom-dock');
  const mic = $('mic'); mic.textContent='Speak once'; voiceControls.append(mic);
- const loopButton=[...voiceControls.querySelectorAll('button')].find(b=>b.textContent==='Start voice conversation');
+ const loopButton=$('aria-talk');
  if(loopButton) dock.querySelector('.actions').prepend(loopButton);
- const enable=[...voiceControls.querySelectorAll('button')].find(b=>b.textContent==='Enable Heart voice');
+ const enable=$('aria-enable-heart');
  if(enable) dock.querySelector('.actions').prepend(enable);
  $('send').textContent='Ask ARIA'; $('question').placeholder='Ask ARIA anything…';
- const latest=document.createElement('div');latest.id='aria-caption';latest.setAttribute('role','status');latest.textContent='Here with you. Type a message or open Voice & controls to enable Heart.';document.body.append(latest);
+ const latest=document.createElement('div');latest.id='aria-caption';latest.setAttribute('role','status');latest.textContent='Click Talk to ARIA to speak, or type your question below.';document.body.append(latest);
  new MutationObserver(()=>{
   const messages=$('history').querySelectorAll('.msg');
   const last=[...messages].reverse().find(el=>el.querySelector('small')?.textContent==='ARIA');

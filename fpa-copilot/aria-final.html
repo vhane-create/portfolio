@@ -14,7 +14,7 @@ const conversation=ARIAConversation.create();
 let requestVersion=0, reasoningController=null;
 const reasoningURL=document.querySelector('meta[name="aria-reasoning-url"]')?.content.trim()||'';
 async function ask(){
- const q=$("question").value.trim();if(!q||$("send").disabled)return;
+ const q=$("question").value.trim();if(!q||$("send").disabled)return;window.ARIAHeart?.beginQuestion();
  const own=++requestVersion;add("You",q);$("question").value="";$("send").disabled=true;status("Thinking");
  try{
   let result, remembered=false;
@@ -36,7 +36,7 @@ async function ask(){
   if(own!==requestVersion)return;
   if(!remembered)conversation.remember(q,result.text,'reference');
   add("ARIA",result.text,result.url);say(result.text);
- }catch(e){if(own!==requestVersion)return;add("ARIA",reasoningURL?"I couldn't complete that reply. "+(e.name==='AbortError'?'The request timed out; please retry.':e.message):"I couldn't reach the reference source. Please retry; I won't invent an answer.");status("Reply unavailable");}
+ }catch(e){if(own!==requestVersion)return;window.ARIAHeart?.replyFailed();add("ARIA",reasoningURL?"I couldn't complete that reply. "+(e.name==='AbortError'?'The request timed out; please retry.':e.message):"I couldn't reach the reference source. Please retry; I won't invent an answer.");status("Reply unavailable");}
  finally{if(own===requestVersion){reasoningController=null;$("send").disabled=false;if(!["speaking","generating"].includes($("screen").dataset.state))status("Ready");}}
 }
 $("clear").addEventListener('click',()=>{requestVersion++;reasoningController?.abort();reasoningController=null;conversation.reset();$("send").disabled=false;});
@@ -105,4 +105,4 @@ const note=document.createElement('p');note.className='note muted';note.textCont
  });
  document.getElementById('aria-remove-information').onclick=()=>{readVersion++;input.value='';file.value='';resetContext();note.textContent='Information and earlier conversation context removed.';};
 })();
-</script><script src="voice-loop.js?v=2"></script><script src="immersive.js?v=2"></script></body></html>
+</script><script src="voice-loop.js?v=3"></script><script src="immersive.js?v=3"></script></body></html>
