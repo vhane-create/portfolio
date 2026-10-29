@@ -19,8 +19,11 @@
     }
     function answer(question) {
       const q = question.trim(), lower = q.toLowerCase();
-      if (/^(hi|hello|hey)(\b|[!.])/.test(lower) || /what can you (do|help)|capabilities/.test(lower)) {
-        return remember(q, "Hello, I'm ARIA. I can explain finance concepts, calculate budget variances, and work through revenue scenarios using figures you give me. I remember this conversation until you clear it or close the page. New Heart speech needs the local voice service; broader AI answers need a connected reasoning service.", 'greeting');
+      if (/^(hi|hello|hey)(\b|[!.])/.test(lower)) {
+        return remember(q, "Hello, I'm ARIA. What would you like to talk about or work on together?", 'greeting');
+      }
+      if (/what can you (do|help)|capabilities/.test(lower)) {
+        return remember(q, "You can talk with me, type questions, or add information for us to review. I can explain ideas and calculate supported financial examples. General AI replies depend on the connected reasoning service.", 'capabilities');
       }
       if (/simpl(er|y)|plain (english|language)/.test(lower)) {
         if (!last) return remember(q, 'What would you like me to explain more simply?', 'clarification');
