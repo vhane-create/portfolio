@@ -5,9 +5,10 @@ import os
 from pathlib import Path
 import subprocess
 import sys
+import tempfile
 from urllib.request import Request, urlopen
 
-REVISION = '4172172131214a98bfbe677f16565a177a668a59'
+REVISION = '8b13db6cc48e90222418dc1aac87b90ffbcce427'
 MANIFEST = {
   "aria-final.html": {
     "sha": "2abe869e67ce96c86b0f29e606a9b37304d6e692",
@@ -54,20 +55,20 @@ MANIFEST = {
     "size": 1981765
   },
   "mac-demo/README.md": {
-    "sha": "21022585caf17b4dd4ee7251f520cda2842a6b39",
-    "size": 6411
+    "sha": "4b3d07e5a3c9ebe1bc44eb8f7046996ec3ea835b",
+    "size": 7036
   },
   "mac-demo/Start_ARIA_Mac.command": {
     "sha": "e09f61297f7eeb480e5966f108db76c20a433e90",
     "size": 515
   },
   "mac-demo/face-replies.js": {
-    "sha": "a809f43722c2ff6983d0b1ff93ed6d8eb39323f8",
-    "size": 2835
+    "sha": "c36eb596486136a458bee5b875c4638eede753f6",
+    "size": 4383
   },
   "mac-demo/server.py": {
-    "sha": "fc6822156480aaffcd15cfdd540f4bbae6f88bb9",
-    "size": 14442
+    "sha": "58377f4eba221c7a36031573eb01f86addcc15b8",
+    "size": 17281
   },
   "mac-demo/status.js": {
     "sha": "8cd57277fca63ed241b88a840996ec6594a2f5f3",
@@ -109,9 +110,15 @@ def install(root, manifest=MANIFEST, download=None):
         if len(data) != expected['size'] or git_hash(data) != expected['sha']:
             raise ValueError('Download did not match the reviewed release: ' + name)
         target.parent.mkdir(parents=True, exist_ok=True)
-        # Exclusive creation preserves any file created while the download ran.
-        with target.open('xb') as output:
-            output.write(data)
+        # Publish only a complete file, without replacing a file created meanwhile.
+        temporary = None
+        try:
+            with tempfile.NamedTemporaryFile(dir=target.parent, prefix='.aria-download-', delete=False) as output:
+                temporary = Path(output.name)
+                output.write(data); output.flush(); os.fsync(output.fileno())
+            os.link(temporary, target)
+        finally:
+            if temporary is not None: temporary.unlink(missing_ok=True)
         downloaded += 1
     return downloaded
 
@@ -123,6 +130,7 @@ def main():
         raise ValueError('Release manifest is missing.')
     root = Path.home() / 'ARIA-Mac-Demo' / 'releases' / REVISION / 'fpa-copilot'
     print('ARIA Mac demo — preserving her approved appearance and Heart voice.', flush=True)
+    print('DEVELOPMENT BUILD: real Mac conversation and facial-motion validation is still incomplete.', flush=True)
     print('Downloading about 5.2 MB of demo files. Voice/model downloads are separate.', flush=True)
     install(root)
     launcher = root / 'mac-demo/Start_ARIA_Mac.command'

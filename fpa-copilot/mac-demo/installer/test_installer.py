@@ -1,6 +1,7 @@
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 from install_mac import install, git_hash, MANIFEST
 
 
@@ -34,6 +35,16 @@ class InstallerTests(unittest.TestCase):
             self.assertFalse((Path(folder) / 'file.txt').exists())
             with self.assertRaisesRegex(ValueError, 'Invalid package path'):
                 install(folder, {'../escape':manifest['file.txt']}, lambda *args:data)
+
+    def test_failed_write_leaves_no_partial_installed_file(self):
+        data = b'complete file'
+        manifest = {'file.txt': {'sha':git_hash(data), 'size':len(data)}}
+        with tempfile.TemporaryDirectory() as folder:
+            with patch('install_mac.os.fsync', side_effect=OSError('write failed')):
+                with self.assertRaises(OSError): install(folder, manifest, lambda *args:data)
+            self.assertFalse((Path(folder) / 'file.txt').exists())
+            self.assertEqual(list(Path(folder).iterdir()), [])
+            self.assertEqual(install(folder, manifest, lambda *args:data), 1)
 
 
 if __name__ == '__main__': unittest.main()

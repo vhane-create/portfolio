@@ -1,0 +1,28 @@
+{
+  "source_release": "8b13db6cc48e90222418dc1aac87b90ffbcce427",
+  "real_release_download": "17 files passed pinned size and Git blob checks",
+  "assembled_http_page": "passed",
+  "external_scripts": [
+    "conversation.js?v=4",
+    "voice-loop.js?v=6",
+    "immersive.js?v=5",
+    "mac-demo/status.js",
+    "mac-demo/face-replies.js"
+  ],
+  "javascript_syntax_checks": 9,
+  "included_source_videos_fully_decoded": [
+    "ARIA_Heart_Introduction.mp4",
+    "ARIA_Variance_Reply.mp4",
+    "aria-approved--d0.mp4"
+  ],
+  "local_http_tests": 8,
+  "heart_service_tests_with_synthetic_speech": 8,
+  "installer_tests": 4,
+  "client_pairing_cancellation_and_busy_recovery": "passed",
+  "actual_mac_execution": false,
+  "actual_lm_studio_model_conversation": false,
+  "new_neural_lip_sync_render": false,
+  "natural_blink_and_neck_quality_verified": false,
+  "normal_conversation_latency_verified": false,
+  "release_status": "HOLD_FOR_HARDWARE_VALIDATION"
+}
