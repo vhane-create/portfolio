@@ -25,8 +25,11 @@ assets, finance calculations, microphone input and information entry are retaine
    an alternative launcher once executable. This service uses Python’s standard
    library; it does not install Python, LM Studio or model weights.
 4. The browser opens `http://127.0.0.1:8766`. Keep Terminal and LM Studio running.
-   Open Voice & controls to check local-model status, then enable Heart voice.
-   Type a question or click Talk to ARIA and allow microphone access.
+   Open Voice & controls to check local-model and facial-renderer status.
+   Connect the previously configured ARIA USB. The launcher uses the existing
+   `~/ARIA-LivePortrait/env-heart/bin/python` when available so the local Kokoro
+   dependencies are available. Type `Hello` for a short first render, then test
+   a new question. Click Talk to ARIA and allow microphone access for voice input.
 
 If multiple models are available, select one explicitly:
 
@@ -51,11 +54,23 @@ local environment. Never place credentials in a public page or repository.
 
 ## Animation status
 
-This page still displays the approved full-body portrait for newly generated
-browser Heart replies. It does not implement live full-body animation or walking.
-The existing separate `heart-backend` Mac service can generate new lip-synced
-videos using the previously configured MuseTalk setup and USB models, but renders
-before playback and may take minutes. It is not wired into this launcher.
+The Mac page now connects each new reply to the existing local Kokoro `af_heart`
+and MuseTalk renderer through `/api/reply`, `/api/job/…` and `/api/media/…`. It plays
+the newly rendered video for that answer, then reopens the microphone in voice
+conversation mode. Stop/new questions cancel playback and polling, and old results
+cannot replace the newer answer. A render already running may finish in the
+background; new renders are rejected as busy until it finishes.
+
+Mouth movement is generated for the new Heart audio. Eye and head/neck movement
+comes from the exact approved `aria-approved--d0.mp4` motion source, whose hash is
+checked. This is not a new model for spontaneous eye contact or emotional reactions.
+The facial-source framing is preserved; head-to-toe movement is not implemented.
+It renders before playback and may take minutes. Real-time response speed has not
+been established. Missing local models/USB are reported without substituting a
+still image, unrelated reply video or alternate voice as a successful render.
+
+This integration applies to the local Mac page, not public GitHub Pages. It does
+not implement live full-body animation or walking.
 
 The CUDA body-animation experiment is a separate development candidate, not part
 of this Mac launcher. The researched MLX LongCat port reports 32 GB+ recommendations
@@ -79,14 +94,19 @@ she did not retrieve.
 
 ## Verification
 
-Four local HTTP tests passed against a simulated LM Studio-compatible server:
+Five local HTTP tests passed against simulated LM Studio and animation services:
 local page routing without cloud fallback, history/reference propagation and
 separate sessions, blocked cross-origin/private-file access, and truthful missing
-model errors. Python compilation and launcher shell syntax passed.
+model errors, plus animated reply/job/media pairing. Eight Heart-service tests
+passed with synthetic speech, including lazy initialization with fixed `af_heart`
+and rejection of a changed motion source. JavaScript checks cover stale-video
+rejection, matching playback, replay microphone suppression and reopening the
+microphone after animated playback. Python and JavaScript syntax checks passed.
 
 Not verified here: execution on Netta’s Mac, a real model’s answer quality/latency,
-real microphone transcription, or new animation. Do not describe the test fixture
-as a successful real-model conversation.
+real microphone transcription, or a real new MuseTalk render in this integration.
+Do not describe the test fixtures as successful real-model conversation or visual
+proof of natural blinking, lip sync or head motion.
 
 Official LM Studio references:
 - https://lmstudio.ai/docs/developer/core/server

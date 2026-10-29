@@ -8,7 +8,7 @@
  const replay=button('aria-replay','Play latest spoken reply'); replay.disabled=true;
  const portrait=document.createElement('img'); portrait.src='assets/aria-full-body-approved.png'; portrait.alt=video.getAttribute('aria-label'); portrait.hidden=true; video.after(portrait);
  const audio=new Audio(); audio.id='aria-heart-audio'; audio.hidden=true; document.body.append(audio);
- let worker, enabled=false, loading=false, loop=false, muted=false, version=0, pendingSpeech='', loopNotice='';
+ let worker, enabled=false, loading=false, loop=false, muted=false, version=0, pendingSpeech='', loopNotice='', replyRenderer=null, renderedVersion=null;
  let queue=[], recorded=[], objectURL, playing=false, finished=false, listening=false;
  function feedback(message){status(message);const caption=$('aria-caption');if(caption)caption.textContent=message;}
  function cancelRecognition() {
@@ -17,6 +17,7 @@
  }
  function stopAudio() {
   version++; audio.pause(); playing=false; queue=[]; finished=false;pendingSpeech='';
+  renderedVersion=null;replyRenderer?.cancel();
   worker?.postMessage({type:'cancel'});
   if(objectURL) URL.revokeObjectURL(objectURL); objectURL=null;
   video.pause(); $('screen').dataset.state='idle';
@@ -50,6 +51,7 @@
  audio.onended=()=>{playing=false;$('screen').dataset.state='idle';playNext();};
  audio.onerror=()=>{playing=false;endLoop('Audio could not play. Your text answer is available.');};
  function loadVoice() {
+  if(replyRenderer){enabled=true;feedback('Mac Heart and lip-sync renderer selected');return;}
   if(enabled)return;
   if(loading)return;
   loading=true;enable.disabled=true;enable.textContent='Loading Heart…';
@@ -75,11 +77,23 @@
  }
  enable.onclick=()=>loadVoice();
  window.ARIAHeart={
+  setReplyRenderer(renderer){stopAudio();cancelRecognition();replyRenderer=renderer;enabled=Boolean(renderer);loading=false;worker?.terminate();worker=null;enable.disabled=Boolean(renderer);enable.textContent=renderer?'Mac Heart + lip sync':'Enable Heart voice';if(renderer)note.textContent='Mac facial replies use Heart voice and newly rendered lip movements. Eye and head/neck motion comes from the approved source animation. Each reply renders before playing and may take minutes. Full-body animation is not connected.';},
   beginQuestion(){stopAudio();cancelRecognition();recorded=[];replay.disabled=true;},
   replyFailed(){stopAudio();endLoop('Reply unavailable. See the message in the conversation.');}
  };
  say=function(text){
   stopAudio();cancelRecognition();recorded=[];replay.disabled=true;
+  if(replyRenderer){
+   if(muted){endLoop('Voice is off. Your text answer is available.');return;}
+   const own=version;$('screen').dataset.state='generating';feedback('Preparing Heart and matching lip movements on your Mac…');
+   replyRenderer.speak(text,message=>{if(own===version)feedback(message);}).then(async url=>{
+    if(own!==version)return;renderedVersion=own;video.src=url;video.muted=false;portrait.hidden=true;video.hidden=false;
+    replay.disabled=false;
+    try{await video.play();if(own===version){$('screen').dataset.state='speaking';status('Speaking with Heart and matching lip movements');}}
+    catch{if(own===version)endLoop('Animated reply ready. Click Play latest spoken reply to hear it.');}
+   }).catch(error=>{if(own===version&&error.name!=='AbortError')endLoop('Animated reply unavailable: '+error.message);});
+   return;
+  }
   if(!enabled){pendingSpeech=text;loadVoice();feedback('Your answer is ready. Heart voice is loading before she speaks.');return;}
   if(muted){endLoop('Voice is off. Your text answer is available.');return;}
   $('screen').dataset.state='generating';status('Preparing Heart speech…');worker.postMessage({type:'speak',id:version,text});
@@ -93,7 +107,10 @@
   if(!(window.SpeechRecognition||window.webkitSpeechRecognition)){endLoop('This browser does not support voice input. Open this page in Chrome for microphone input, or type your question.');return;}
   loadVoice();if(loop)listen();
  };
- replay.onclick=()=>{if(!recorded.length)return;stopAudio();cancelRecognition();queue=[...recorded];finished=true;playNext();};
+ replay.onclick=()=>{if(replyRenderer&&renderedVersion!==null){cancelRecognition();video.currentTime=0;video.play().catch(()=>feedback('Click the video playback control to hear this reply.'));return;}if(!recorded.length)return;stopAudio();cancelRecognition();queue=[...recorded];finished=true;playNext();};
+ const previousVideoEnded=video.onended,previousVideoError=video.onerror;
+ video.onended=()=>{previousVideoEnded?.();if(renderedVersion===version){$('screen').dataset.state='idle';status('Ready for your next question');if(loop)setTimeout(listen,250);}};
+ video.onerror=()=>{previousVideoError?.();if(renderedVersion===version)endLoop('The animated reply could not play. Your text answer remains available.');};
  const originalStop=$('stop').onclick;
  $('stop').onclick=()=>{stopAudio();endLoop('Stopped');originalStop?.();};
  $('clear').addEventListener('click',()=>{stopAudio();recorded=[];replay.disabled=true;endLoop('Conversation cleared');});

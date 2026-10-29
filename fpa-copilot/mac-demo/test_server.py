@@ -9,6 +9,17 @@ from urllib.request import Request, urlopen
 from server import create_server, LocalModel
 
 
+class FaceFixture:
+    identity = 'a' * 32
+    def __init__(self, root):
+        self.output = root / 'fixture.mp4';self.output.write_bytes(b'transport fixture, not real video')
+        self.text = None
+    def health(self): return {'status':'configured-unverified','missing':[]}
+    def submit(self, text): self.text = text;return self.identity
+    def job(self, identity):
+        if identity == self.identity: return {'state':'ready','path':str(self.output),'url':'/api/media/'+identity+'.mp4'}
+
+
 class ModelFixture(BaseHTTPRequestHandler):
     requests = []
 
@@ -77,6 +88,19 @@ class MacDemoTests(unittest.TestCase):
         with self.assertRaises(HTTPError) as error: self.request('/health')
         self.assertEqual(error.exception.code, 503)
         self.assertIn('LM Studio is not responding', json.loads(error.exception.read())['detail'])
+
+    def test_facial_reply_is_paired_to_its_text_and_private_path_is_hidden(self):
+        face = FaceFixture(Path(self.temp.name));self.app.face = face
+        with self.request('/api/reply', {'text':'Explain profit versus cash flow.'}) as response:
+            identity = json.load(response)['id']
+        self.assertEqual(face.text, 'Explain profit versus cash flow.')
+        with self.request('/api/job/' + identity) as response: job = json.load(response)
+        self.assertNotIn('path', job)
+        with self.request(job['url']) as response:
+            self.assertEqual(response.headers['Content-Type'], 'video/mp4')
+            self.assertEqual(response.read(), face.output.read_bytes())
+        with self.assertRaises(HTTPError): self.request('/api/media/' + 'b'*32 + '.mp4')
+        with self.assertRaises(HTTPError): self.request('/api/reply', {'text':'test'}, 'https://example.invalid')
 
 
 if __name__ == '__main__': unittest.main()

@@ -75,5 +75,20 @@ class Tests(unittest.TestCase):
     def test_reject_simultaneous_generation(self):
         self.app.jobs['busy']={'state':'rendering'}
         with self.assertRaises(RuntimeError):self.app.submit('Test','audio')
+    def test_rejects_changed_facial_source(self):
+        (self.project/'assets').mkdir()
+        (self.project/'assets/aria-approved--d0.mp4').write_bytes(b'different avatar')
+        with self.assertRaisesRegex(RuntimeError,'approved animation'):
+            self.app.render('test',self.root/'test.wav')
+    def test_lazy_pipeline_still_uses_heart(self):
+        calls=[]
+        self.app.pipeline=None
+        self.app.pipeline_factory=lambda:lambda text,voice:(calls.append((text,voice)) or [(None,None,Array())])
+        identity=self.app.submit('A new answer.','audio')
+        for _ in range(100):
+            if self.app.jobs[identity]['state'] in ('ready','error'):break
+            time.sleep(.02)
+        self.assertEqual(self.app.jobs[identity]['state'],'ready')
+        self.assertEqual(calls,[('A new answer.','af_heart')])
 
 if __name__=='__main__':unittest.main()

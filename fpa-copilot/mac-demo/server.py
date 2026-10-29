@@ -1,5 +1,6 @@
 """Loopback-only ARIA demo: current portfolio UI + local LM Studio reasoning."""
 import argparse
+import importlib.util
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 import json
@@ -7,6 +8,7 @@ import os
 from pathlib import Path
 import re
 import threading
+import sys
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlsplit
 from urllib.request import build_opener, HTTPRedirectHandler, ProxyHandler, Request
@@ -91,6 +93,60 @@ class LocalModel:
             self.lock.release()
 
 
+class FaceRuntime:
+    """Use the existing Mac Heart/MuseTalk installation; never install substitutes."""
+    def __init__(self, project):
+        self.project = Path(project)
+        self.root = Path(os.environ.get('ARIA_ROOT', str(Path.home() / 'ARIA-LivePortrait'))).expanduser()
+        self.usb = Path(os.environ.get('ARIA_USB', '/Volumes/NO NAME'))
+        self.app = None
+        self.lock = threading.Lock()
+
+    def health(self):
+        missing = []
+        if sys.platform != 'darwin': missing.append('This animation route requires the configured Mac.')
+        for name in ['torch', 'kokoro', 'soundfile', 'numpy']:
+            if importlib.util.find_spec(name) is None:
+                missing.append('Python module unavailable: ' + name + '. Launch with the existing env-heart Python.')
+        if not self.usb.is_mount(): missing.append('Connect the ARIA model USB at ' + str(self.usb))
+        work = self.root / 'MuseTalk-Mac/upstream'
+        for file in [self.root / 'env-musetalk/bin/python', self.root / 'env-musetalk/bin/ffmpeg',
+                     self.root / 'env-musetalk/bin/ffprobe', work / 'models/musetalkV15/unet.pth',
+                     work / 'models/musetalkV15/musetalk.json', self.project / 'assets/aria-approved--d0.mp4',
+                     self.project / 'heart-backend/heart_server.py']:
+            if not file.is_file(): missing.append('Missing local component: ' + str(file))
+        if not (work / 'models/whisper').is_dir(): missing.append('MuseTalk Whisper model folder is missing.')
+        return {'status': 'setup-needed' if missing else 'configured-unverified', 'missing': missing,
+                'voice': 'af_heart', 'render_before_playback': True, 'full_body': False}
+
+    def get_app(self):
+        with self.lock:
+            if self.app is None:
+                state = self.health()
+                if state['missing']: raise ValueError(' '.join(state['missing']))
+                spec = importlib.util.spec_from_file_location('aria_mac_heart', self.project / 'heart-backend/heart_server.py')
+                module = importlib.util.module_from_spec(spec)
+                spec.loader.exec_module(module)
+                self.root.mkdir(parents=True, exist_ok=True)
+                def pipeline():
+                    import torch
+                    from kokoro import KPipeline
+                    torch.set_num_threads(2)
+                    return KPipeline(lang_code='a', device='cpu', repo_id='hexgrad/Kokoro-82M')
+                self.app = module.App(self.project, self.root, page=b'', pipeline_factory=pipeline)
+            return self.app
+
+    def submit(self, text):
+        return self.get_app().submit(text, 'video')
+
+    def job(self, identity):
+        if not re.fullmatch('[a-f0-9]{32}', identity): return None
+        return self.app.jobs.get(identity) if self.app else None
+
+    def close(self):
+        if self.app: self.app.pool.shutdown(wait=True)
+
+
 class Handler(SimpleHTTPRequestHandler):
     def allowed(self):
         port = self.server.server_port
@@ -119,7 +175,7 @@ class Handler(SimpleHTTPRequestHandler):
             if count != 1:
                 self.reply(500, {'detail': 'Reasoning configuration changed; no cloud fallback was used.'}); return
             page = page.replace('<script src="local-ai.js?v=3"></script>', '')
-            page = page.replace('</body>', '<script src="mac-demo/status.js"></script></body>')
+            page = page.replace('</body>', '<script src="mac-demo/status.js"></script><script src="mac-demo/face-replies.js"></script></body>')
             self.reply(200, page.encode(), 'text/html; charset=utf-8'); return
         if path == '/health':
             try:
@@ -128,6 +184,22 @@ class Handler(SimpleHTTPRequestHandler):
             except ValueError as error:
                 self.reply(503, {'status': 'setup-needed', 'detail': str(error), 'local_only': True})
             return
+        if path == '/animation-health':
+            self.reply(200, self.server.face.health()); return
+        if path.startswith('/api/job/'):
+            job = self.server.face.job(path.removeprefix('/api/job/'))
+            self.reply(200, {k:v for k,v in job.items() if k != 'path'}) if job else self.reply(404, {'detail':'Unknown animation job.'})
+            return
+        if path.startswith('/api/media/'):
+            name = path.removeprefix('/api/media/')
+            identity = name.split('.')[0]
+            job = self.server.face.job(identity)
+            if not job or job.get('state') != 'ready' or name != identity + '.mp4':
+                self.reply(404, {'detail':'Animation is not ready.'}); return
+            file = Path(job['path'])
+            if file.suffix != '.mp4' or not file.is_file():
+                self.reply(404, {'detail':'Animation output is missing.'}); return
+            self.reply(200, file.read_bytes(), 'video/mp4'); return
         super().do_GET()
 
     def do_HEAD(self):
@@ -144,22 +216,30 @@ class Handler(SimpleHTTPRequestHandler):
     def do_POST(self):
         if not self.allowed():
             self.reply(403, {'detail': 'Local origin required.'}); return
-        if self.path != '/ask':
+        if self.path not in ('/ask', '/api/reply'):
             self.reply(404, {'detail': 'Unknown endpoint.'}); return
         try:
             length = int(self.headers.get('Content-Length', '0'))
             if not 0 < length <= 120000 or self.headers.get_content_type() != 'application/json':
                 raise ValueError('Expected a bounded JSON question.')
-            answer = self.server.model.answer(json.loads(self.rfile.read(length)))
+            data = json.loads(self.rfile.read(length))
+            if self.path == '/api/reply':
+                if not isinstance(data, dict): raise ValueError('Expected a reply object.')
+                identity = self.server.face.submit(data.get('text'))
+                self.reply(202, {'id': identity}); return
+            answer = self.server.model.answer(data)
             self.reply(200, {'answer': answer})
         except (ValueError, TypeError, KeyError, IndexError) as error:
             self.reply(400, {'detail': str(error)})
+        except RuntimeError as error:
+            self.reply(409, {'detail': str(error)})
 
 
 def create_server(project, port=8766, model=None):
     server = ThreadingHTTPServer(('127.0.0.1', port), partial(Handler, directory=str(project)))
     server.project = Path(project)
     server.model = model or LocalModel()
+    server.face = FaceRuntime(project)
     return server
 
 
@@ -184,6 +264,7 @@ def main():
         pass
     finally:
         server.server_close()
+        server.face.close()
 
 
 if __name__ == '__main__':

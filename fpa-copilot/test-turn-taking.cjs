@@ -30,3 +30,19 @@ talk.onclick();c.recognizer.onerror({error:'not-allowed'});assert.match(lastStat
 worker.emit({type:'ready'});assert.match(lastStatus,/denied/);
 c.window.SpeechRecognition=null;talk.onclick();assert.match(lastStatus,/does not support voice input/);assert.equal(c.recognizer,null);
 console.log('PASS: immediate microphone startup, queued first answer, turn taking, cancellation, denied microphone and unsupported browser messages');
+(async()=>{
+ c.window.SpeechRecognition=Recognition;
+ const video=ids['aria-heart-video'];video.plays=0;video.play=()=>{video.plays++;return Promise.resolve();};
+ let complete;
+ c.window.ARIAHeart.setReplyRenderer({cancel(){},speak(){return new Promise(resolve=>{complete=resolve;});}});
+ talk.onclick();
+ c.say('Canceled old answer.');const oldComplete=complete;
+ c.window.ARIAHeart.beginQuestion();oldComplete('/api/media/old.mp4');
+ await Promise.resolve();await Promise.resolve();assert.equal(video.plays,0);
+ c.say('This answer matches this new video.');complete('/api/media/new.mp4');
+ await Promise.resolve();await Promise.resolve();assert.equal(video.plays,1);assert.equal(video.src,'/api/media/new.mp4');
+ const before=starts;video.onended();assert.equal(starts,before+1);
+ controls.children.find(x=>x.id==='aria-replay').onclick();assert.equal(c.recognizer,null);assert.equal(video.currentTime,0);
+ ids.stop.onclick();assert.equal(c.recognizer,null);
+ console.log('PASS: Mac video reply pairing, stale video rejection and microphone reopening after animated playback');
+})().catch(error=>{console.error(error);process.exit(1);});

@@ -5,6 +5,7 @@ from pathlib import Path
 from urllib.parse import unquote, urlsplit
 import argparse
 import io
+import hashlib
 import json
 import mimetypes
 import os
@@ -84,9 +85,10 @@ def make_page(project):
 
 
 class App:
-    def __init__(self, project, root, pipeline=None):
+    def __init__(self, project, root, pipeline=None, page=None, pipeline_factory=None):
         self.project, self.root, self.pipeline = project, root, pipeline
-        self.page = make_page(project)
+        self.pipeline_factory = pipeline_factory
+        self.page = make_page(project) if page is None else page
         self.cache = root / 'heart-replies'
         self.cache.mkdir(exist_ok=True)
         self.jobs = {}
@@ -112,6 +114,10 @@ class App:
                 raise RuntimeError('Less than 4 GB free on the internal drive. Generation stopped.')
             import numpy as np
             import soundfile as sf
+            if self.pipeline is None:
+                if self.pipeline_factory is None:
+                    raise RuntimeError('The local Heart runtime is not configured.')
+                self.pipeline = self.pipeline_factory()
             parts = [a.detach().cpu().numpy() for _, _, a in self.pipeline(text, voice='af_heart')]
             if not parts:
                 raise RuntimeError('Heart generated no audio.')
@@ -133,9 +139,9 @@ class App:
     def render(self, identity, wav):
         usb = Path(os.environ.get('ARIA_USB', '/Volumes/NO NAME'))
         work = self.root / 'MuseTalk-Mac/upstream'
-        source = self.root / 'example-animation/aria-approved--d0.mp4'
-        if not source.is_file():
-            source = self.project / 'assets/aria-approved--d0.mp4'
+        source = self.project / 'assets/aria-approved--d0.mp4'
+        if source.is_file() and hashlib.sha256(source.read_bytes()).hexdigest() != '308ab080d0945bb650f905174e716a8a5beecb9b26ec56590aa1aa8ac72839b7':
+            raise RuntimeError('The facial-motion source differs from ARIA’s approved animation.')
         if not usb.is_mount() or not (work / 'models/musetalkV15/unet.pth').is_file() or not source.is_file():
             raise RuntimeError('Connect the USB with ARIA models and the approved source animation.')
         if shutil.disk_usage(usb).free < 1024**3:
