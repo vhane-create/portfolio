@@ -11,7 +11,8 @@
  const settings = document.createElement('section'); settings.setAttribute('aria-label','Voice and playback controls'); sections.settings = settings;
  const heading = document.createElement('h2'); heading.textContent = 'Voice & playback'; settings.append(heading);
  const voiceControls = document.querySelector('.overlay .actions');
- settings.append(voiceControls);
+ const voiceNote=voiceControls.nextElementSibling;
+ settings.append(voiceControls); if(voiceNote?.tagName==='P') settings.append(voiceNote);
  const topics = document.querySelector('[aria-label="Explore ARIA finance skills"]'); if(topics) settings.append(topics);
  for (const section of Object.values(sections)) if(section) drawer.append(section);
  function show(name) {
@@ -23,9 +24,11 @@
  }
  document.addEventListener('keydown', e => { if(e.key==='Escape') drawer.hidden=true; });
  const dock = document.querySelector('.aria-bottom-dock');
- const mic = $('mic'); mic.textContent='Speak'; dock.querySelector('.actions').prepend(mic);
+ const mic = $('mic'); mic.textContent='Speak once'; voiceControls.append(mic);
  const loopButton=[...voiceControls.querySelectorAll('button')].find(b=>b.textContent==='Start voice conversation');
  if(loopButton) dock.querySelector('.actions').prepend(loopButton);
+ const enable=[...voiceControls.querySelectorAll('button')].find(b=>b.textContent==='Enable Heart voice');
+ if(enable) dock.querySelector('.actions').prepend(enable);
  $('send').textContent='Ask ARIA'; $('question').placeholder='Ask ARIA anything…';
  const latest=document.createElement('div');latest.id='aria-caption';latest.setAttribute('role','status');latest.textContent='Here with you. Type a message or open Voice & controls to enable Heart.';document.body.append(latest);
  new MutationObserver(()=>{
@@ -36,5 +39,6 @@
  const warning=document.createElement('p'); warning.className='muted'; warning.textContent='New Heart speech uses the approved portrait. Natural blinking, new lip sync and body gestures are still in development.'; settings.append(warning);
  // No generated-looking idle motion: hold the actual approved portrait while waiting.
  const v=$('aria-heart-video'); v.poster='assets/aria-full-body-approved.png'; v.preload='none';
- v.removeAttribute('src'); v.load();
+ v.pause(); v.hidden=true;
+ const standing=document.querySelector('#screen img'); if(standing) standing.hidden=false;
 })();

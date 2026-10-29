@@ -37,7 +37,7 @@ async function ask(){
   if(!remembered)conversation.remember(q,result.text,'reference');
   add("ARIA",result.text,result.url);say(result.text);
  }catch(e){if(own!==requestVersion)return;add("ARIA",reasoningURL?"I couldn't complete that reply. "+(e.name==='AbortError'?'The request timed out; please retry.':e.message):"I couldn't reach the reference source. Please retry; I won't invent an answer.");status("Reply unavailable");}
- finally{if(own===requestVersion){reasoningController=null;$("send").disabled=false;if($("screen").dataset.state!=="speaking")status("Ready");}}
+ finally{if(own===requestVersion){reasoningController=null;$("send").disabled=false;if(!["speaking","generating"].includes($("screen").dataset.state))status("Ready");}}
 }
 $("clear").addEventListener('click',()=>{requestVersion++;reasoningController?.abort();reasoningController=null;conversation.reset();$("send").disabled=false;});
 document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{mode=b.dataset.mode;document.querySelectorAll(".tab").forEach(t=>t.setAttribute("aria-pressed",String(t===b)));$("question").placeholder=mode==="finance"?"Calculate variance: actual 120000, budget 100000":"What do you know about Microsoft?"});document.querySelectorAll("[data-q]").forEach(b=>b.onclick=()=>{$("question").value=b.dataset.q;if(b.dataset.q.includes("variance")||b.dataset.q.includes("Variance"))document.querySelector('[data-mode="finance"]').click();else document.querySelector('[data-mode="company"]').click();ask()});

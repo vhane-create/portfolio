@@ -6,7 +6,7 @@
  const talk = document.createElement('button'); talk.textContent = 'Start voice conversation'; talk.disabled = true; controls.append(talk);
  const replay = document.createElement('button'); replay.textContent = 'Play latest spoken reply'; replay.disabled = true; controls.append(replay);
  const portrait = document.createElement('img'); portrait.src = 'assets/aria-full-body-approved.png'; portrait.alt = video.getAttribute('aria-label'); portrait.hidden = true; video.after(portrait);
- const audio = new Audio(); let worker, enabled = false, loop = false, muted = false, version = 0;
+ const audio = new Audio(); audio.id='aria-heart-audio'; audio.hidden=true; document.body.append(audio); let worker, enabled = false, loop = false, muted = false, version = 0;
  let queue = [], recorded = [], objectURL, playing = false, finished = false;
  function stopAudio() {
   version++; audio.pause(); playing = false; queue = []; finished = false;
@@ -58,7 +58,7 @@
   stopAudio(); recognizer?.stop(); recorded = []; replay.disabled = true;
   if (!enabled) { status('Text answer ready — click Enable Heart voice for spoken replies'); return; }
   if (muted) { endLoop('Voice is off. Your text answer is available.'); return; }
-  status('Preparing Heart speech…'); worker.postMessage({type: 'speak', id: version, text});
+  $('screen').dataset.state='generating'; status('Preparing Heart speech…'); worker.postMessage({type: 'speak', id: version, text});
  };
  talk.onclick = () => {
   if (loop) { stopAudio(); endLoop('Voice conversation stopped'); return; }
