@@ -1,0 +1,39 @@
+ARIA Mac demo setup
+
+1. Unzip ARIA_Mac_Demo_Setup.zip on your Mac.
+2. Open Install_ARIA_Mac.command. It uses your existing Python 3 installation.
+   Alternatively, open Terminal, type bash followed by a space, drag that command
+   file into Terminal, and press Return.
+3. The installer downloads about 4.9 MB of pinned ARIA files into a separate
+   ARIA-Mac-Demo folder under your home folder. It keeps your earlier ARIA setup.
+4. In LM Studio, load a chat/instruct model, open Developer, and start its local
+   server on port 1234. The installer opens LM Studio if the app is installed;
+   it does not install LM Studio or choose/download a reasoning model for you.
+5. The ARIA page opens at http://127.0.0.1:8766. Leave Terminal and LM Studio open.
+   Enable Heart voice, then type a question. After that works, test Talk to ARIA
+   and allow microphone access. The first Heart setup requires model downloads.
+
+On later runs, rerun this installer; matching files are reused. Or open the
+Start_ARIA_Mac.command file inside the installed fpa-copilot/mac-demo folder.
+
+What this package does:
+- Installs the current approved full-body image, interface, original media and
+  Heart voice code, with a local LM Studio conversation connection.
+- Keeps OpenAI API costs and paid GPU hosting out of this local conversation path.
+- Verifies file hashes before installing. Modified existing files are kept and
+  setup stops instead of overwriting them.
+
+What is still unfinished:
+- Live full-body animation, walking and lip-sync for new browser speech.
+- A real conversation test on your Mac, including model quality and microphone.
+- Independent employer access to your local model through the public portfolio.
+
+For now, demonstrate the local Mac session to employers through screen sharing.
+The public portfolio remains separate. Do not describe this as a deployed live
+full-body avatar. No public tunnel, subscription or paid hosting is enabled.
+
+The package downloads only web/demo files from Netta's public GitHub repository.
+It does not download animation models or install any third-party software.
+Browser microphone recognition may use an external transcription service.
+
+Source release: 641a211b0a2f79b1160543ea38443b39ec51d8b2
