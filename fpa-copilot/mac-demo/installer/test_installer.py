@@ -7,7 +7,8 @@ from install_mac import install, git_hash, MANIFEST
 class InstallerTests(unittest.TestCase):
     def test_release_contains_approved_identity_voice_and_local_runtime(self):
         for path in ['assets/aria-full-body-approved.png', 'assets/ARIA_Heart_Introduction.mp4',
-                     'voice-loop.js', 'heart-worker.js', 'mac-demo/server.py', 'aria-final.html']:
+                     'voice-loop.js', 'heart-worker.js', 'mac-demo/server.py', 'aria-final.html',
+                     'mac-demo/face-replies.js', 'heart-backend/heart_server.py', 'assets/aria-approved--d0.mp4']:
             self.assertIn(path, MANIFEST)
         self.assertEqual(MANIFEST['assets/aria-full-body-approved.png']['sha'], '31197d446c9fb52b741b8d91f7ceebed7ec35a89')
 

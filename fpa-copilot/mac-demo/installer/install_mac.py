@@ -7,10 +7,10 @@ import subprocess
 import sys
 from urllib.request import Request, urlopen
 
-REVISION = '641a211b0a2f79b1160543ea38443b39ec51d8b2'
+REVISION = '4172172131214a98bfbe677f16565a177a668a59'
 MANIFEST = {
   "aria-final.html": {
-    "sha": "243acb39a302831a1724942ded058376e7098c2a",
+    "sha": "2abe869e67ce96c86b0f29e606a9b37304d6e692",
     "size": 29643
   },
   "assets/ARIA_Heart_Introduction.mp4": {
@@ -21,6 +21,10 @@ MANIFEST = {
     "sha": "0fe418dfae4b10a29e714885c97fa5469cf7ebca",
     "size": 684040
   },
+  "assets/aria-approved--d0.mp4": {
+    "sha": "68d65747926d9b3184009f676e1598e05568f7cb",
+    "size": 263178
+  },
   "assets/aria-full-body-approved.png": {
     "sha": "31197d446c9fb52b741b8d91f7ceebed7ec35a89",
     "size": 1853535
@@ -28,6 +32,10 @@ MANIFEST = {
   "conversation.js": {
     "sha": "342aab465b05f07fc092befdfd00ef42464aad23",
     "size": 6755
+  },
+  "heart-backend/heart_server.py": {
+    "sha": "264c73b9b358af5e626439184c1998f19fefff94",
+    "size": 16025
   },
   "heart-worker.js": {
     "sha": "7c156539b870f28c1d63ad00d497378fe59c19b0",
@@ -46,24 +54,28 @@ MANIFEST = {
     "size": 1981765
   },
   "mac-demo/README.md": {
-    "sha": "838531c7cf60994b5dfd11ed3c57bea1951a2dde",
-    "size": 4956
+    "sha": "21022585caf17b4dd4ee7251f520cda2842a6b39",
+    "size": 6411
   },
   "mac-demo/Start_ARIA_Mac.command": {
-    "sha": "605b2519e82b7b009d54d2c92e71b057d0dd9ac2",
-    "size": 297
+    "sha": "e09f61297f7eeb480e5966f108db76c20a433e90",
+    "size": 515
+  },
+  "mac-demo/face-replies.js": {
+    "sha": "a809f43722c2ff6983d0b1ff93ed6d8eb39323f8",
+    "size": 2835
   },
   "mac-demo/server.py": {
-    "sha": "4d5a6ec02ae2dc0965a753059653949acc5c8606",
-    "size": 10000
+    "sha": "fc6822156480aaffcd15cfdd540f4bbae6f88bb9",
+    "size": 14442
   },
   "mac-demo/status.js": {
-    "sha": "dbd69017ece12e2f0d48dade486411df8e07ff3f",
-    "size": 893
+    "sha": "8cd57277fca63ed241b88a840996ec6594a2f5f3",
+    "size": 915
   },
   "voice-loop.js": {
-    "sha": "e6c4dfa3d63a18c4a0a354c61cc83de6d7c94996",
-    "size": 8643
+    "sha": "bcfc63e1b7de752969e9c101bc7c2101c46d2eb5",
+    "size": 10800
   }
 }
 
@@ -111,7 +123,7 @@ def main():
         raise ValueError('Release manifest is missing.')
     root = Path.home() / 'ARIA-Mac-Demo' / 'releases' / REVISION / 'fpa-copilot'
     print('ARIA Mac demo — preserving her approved appearance and Heart voice.', flush=True)
-    print('Downloading about 4.9 MB of demo files. Voice/model downloads are separate.', flush=True)
+    print('Downloading about 5.2 MB of demo files. Voice/model downloads are separate.', flush=True)
     install(root)
     launcher = root / 'mac-demo/Start_ARIA_Mac.command'
     launcher.chmod(0o700)
@@ -119,7 +131,10 @@ def main():
     print('In LM Studio: load a chat model, then start the local server on port 1234.', flush=True)
     print('No paid hosting, public tunnel, or animation-model download is enabled.', flush=True)
     subprocess.run(['open', '-a', 'LM Studio'], check=False, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    os.execv(sys.executable, [sys.executable, str(root / 'mac-demo/server.py')])
+    heart_python = Path(os.environ.get('ARIA_ROOT', str(Path.home() / 'ARIA-LivePortrait'))) / 'env-heart/bin/python'
+    python = str(heart_python) if heart_python.is_file() and os.access(heart_python, os.X_OK) else sys.executable
+    print('Starting with Python: ' + python, flush=True)
+    os.execv(python, [python, str(root / 'mac-demo/server.py')])
 
 
 if __name__ == '__main__':
