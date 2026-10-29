@@ -11,7 +11,7 @@ const ariaKnowledge=[{"terms":["financial modeling","financial model","three sta
 function ariaFinanceAnswer(q){const lower=q.toLowerCase();for(const item of ariaKnowledge)if(item.terms.some(term=>lower.includes(term)))return item.answer;return null}
 function ariaIsFinance(q){return ariaFinanceAnswer(q)!==null||(q.toLowerCase().includes("actual")&&q.toLowerCase().includes("budget"))}
 const conversation=ARIAConversation.create();
-let requestVersion=0, reasoningController=null, reasoningAccessCode='';
+let requestVersion=0, reasoningController=null;
 const reasoningURL=document.querySelector('meta[name="aria-reasoning-url"]')?.content.trim()||'';
 async function ask(){
  const q=$("question").value.trim();if(!q||$("send").disabled)return;
@@ -23,13 +23,11 @@ async function ask(){
   else if(reasoningURL){
    const url=new URL(reasoningURL,location.href);
    if(url.protocol!=="https:"&&!(url.protocol==="http:"&&["127.0.0.1","localhost"].includes(url.hostname)))throw Error("Conversation service requires HTTPS");
-   if(!reasoningAccessCode)reasoningAccessCode=window.prompt("Enter your ARIA conversation access code (not an OpenAI API key).")||'';
-   if(!reasoningAccessCode)throw Error("Conversation access code required");
    reasoningController=new AbortController();
-   const timeout=setTimeout(()=>reasoningController?.abort(),35000);
+   const timeout=setTimeout(()=>reasoningController?.abort(),100000);
    let response;
-   try{response=await fetch(new URL('ask',url.href.replace(/\/?$/,'/')),{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+reasoningAccessCode},body:JSON.stringify({question:q,mode,history:conversation.messages()}),signal:reasoningController.signal});}finally{clearTimeout(timeout);}
-   if(!response.ok){if(response.status===401)reasoningAccessCode='';throw Error(response.status===503?'Conversation service is not configured':response.status===401?'Access code was not accepted':'Conversation service unavailable; please retry');}
+   try{response=await fetch(new URL('ask',url.href.replace(/\/?$/,'/')),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:q,mode,history:conversation.messages()}),signal:reasoningController.signal});}finally{clearTimeout(timeout);}
+   if(!response.ok){let failure;try{failure=await response.json();}catch{}throw Error(typeof failure?.detail==='string'?failure.detail:'Conversation service unavailable; please retry');}
    const data=await response.json();if(typeof data.answer!=='string'||!data.answer.trim())throw Error('Conversation service returned no answer');result={text:data.answer};
   }else if(mode==="finance"||ariaIsFinance(q)){result={text:finance(q)};}
   else if(/^(explain that|why|what if|and |how about)/i.test(q)){result={text:"I need a connected reasoning service to follow that question further. Please name the topic or provide actual and budget figures."};}
@@ -40,7 +38,7 @@ async function ask(){
  }catch(e){if(own!==requestVersion)return;add("ARIA",reasoningURL?"I couldn't complete that reply. "+(e.name==='AbortError'?'The request timed out; please retry.':e.message):"I couldn't reach the reference source. Please retry; I won't invent an answer.");status("Reply unavailable");}
  finally{if(own===requestVersion){reasoningController=null;$("send").disabled=false;if($("screen").dataset.state!=="speaking")status("Ready");}}
 }
-$("clear").addEventListener('click',()=>{requestVersion++;reasoningController?.abort();reasoningController=null;conversation.reset();reasoningAccessCode='';$("send").disabled=false;});
+$("clear").addEventListener('click',()=>{requestVersion++;reasoningController?.abort();reasoningController=null;conversation.reset();$("send").disabled=false;});
 document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{mode=b.dataset.mode;document.querySelectorAll(".tab").forEach(t=>t.setAttribute("aria-pressed",String(t===b)));$("question").placeholder=mode==="finance"?"Calculate variance: actual 120000, budget 100000":"What do you know about Microsoft?"});document.querySelectorAll("[data-q]").forEach(b=>b.onclick=()=>{$("question").value=b.dataset.q;if(b.dataset.q.includes("variance")||b.dataset.q.includes("Variance"))document.querySelector('[data-mode="finance"]').click();else document.querySelector('[data-mode="company"]').click();ask()});
 $("send").onclick=ask;$("question").onkeydown=e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();ask()}};$("clear").onclick=()=>{$("history").replaceChildren();synth?.cancel();status("Ready")};$("intro").onclick=()=>say("Hello, I'm Aria. I can help you research companies, explore general knowledge, and calculate financial variances. How may I help you today?");$("mute").onclick=()=>{voice=!voice;$("mute").textContent=voice?"Voice: on":"Voice: off";$("mute").setAttribute("aria-pressed",String(!voice));if(!voice)synth?.cancel()};$("stop").onclick=()=>{synth?.cancel();recognizer?.stop();$("screen").dataset.state="idle";status("Stopped")};
 $("mic").onclick=()=>{const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){status("Microphone recognition unavailable in this browser");return}recognizer=new SR();recognizer.lang="en-US";recognizer.interimResults=false;recognizer.onstart=()=>{$("screen").dataset.state="listening";status("Listening")};recognizer.onresult=e=>{$("question").value=e.results[0][0].transcript;ask()};recognizer.onerror=e=>status("Microphone: "+e.error);recognizer.onend=()=>{if($("screen").dataset.state==="listening")$("screen").dataset.state="idle"};recognizer.start()};
