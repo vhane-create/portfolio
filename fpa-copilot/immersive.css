@@ -34,3 +34,5 @@ body.aria-immersive{height:100dvh;overflow:hidden;background:#080807;color:#f8f3
 
 .aria-immersive .overlay{top:16px;bottom:auto;left:24px;right:auto;transform:none;max-width:240px;text-align:left}
 .aria-immersive .overlay .status{font-size:12px}
+
+.aria-immersive .aria-drawer #clear{display:inline-flex;margin:12px 0}

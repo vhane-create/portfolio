@@ -7,6 +7,7 @@
  document.body.append(drawer);
  const sections = {};
  sections.conversation = $('history').closest('.panel');
+ sections.conversation.append($('clear'));
  sections.information = document.querySelector('[aria-label="Information for ARIA"]');
  const settings = document.createElement('section'); settings.setAttribute('aria-label','Voice and playback controls'); sections.settings = settings;
  const heading = document.createElement('h2'); heading.textContent = 'Voice & playback'; settings.append(heading);
