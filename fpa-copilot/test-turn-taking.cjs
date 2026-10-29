@@ -27,5 +27,6 @@ c.window.ARIAHeart.beginQuestion();const previous=audio.plays;
 worker.emit({type:'audio',id,buffer:new ArrayBuffer(48)});assert.equal(audio.plays,previous);
 ids.stop.onclick();assert.equal(talk.textContent,'Talk to ARIA');assert.equal(c.recognizer,null);
 talk.onclick();c.recognizer.onerror({error:'not-allowed'});assert.match(lastStatus,/denied/);assert.equal(c.recognizer,null);
+worker.emit({type:'ready'});assert.match(lastStatus,/denied/);
 c.window.SpeechRecognition=null;talk.onclick();assert.match(lastStatus,/does not support voice input/);assert.equal(c.recognizer,null);
 console.log('PASS: immediate microphone startup, queued first answer, turn taking, cancellation, denied microphone and unsupported browser messages');

@@ -8,7 +8,7 @@
  const replay=button('aria-replay','Play latest spoken reply'); replay.disabled=true;
  const portrait=document.createElement('img'); portrait.src='assets/aria-full-body-approved.png'; portrait.alt=video.getAttribute('aria-label'); portrait.hidden=true; video.after(portrait);
  const audio=new Audio(); audio.id='aria-heart-audio'; audio.hidden=true; document.body.append(audio);
- let worker, enabled=false, loading=false, loop=false, muted=false, version=0, pendingSpeech='';
+ let worker, enabled=false, loading=false, loop=false, muted=false, version=0, pendingSpeech='', loopNotice='';
  let queue=[], recorded=[], objectURL, playing=false, finished=false, listening=false;
  function feedback(message){status(message);const caption=$('aria-caption');if(caption)caption.textContent=message;}
  function cancelRecognition() {
@@ -22,6 +22,7 @@
   video.pause(); $('screen').dataset.state='idle';
  }
  function endLoop(message) {
+  loopNotice=message;
   loop=false; talk.textContent='Talk to ARIA'; talk.setAttribute('aria-pressed','false'); cancelRecognition();
   $('screen').dataset.state='idle'; feedback(message);
  }
@@ -61,7 +62,7 @@
     enabled=true;loading=false;enable.textContent='Heart voice ready';
     if(pendingSpeech){const text=pendingSpeech;pendingSpeech='';say(text);}
     else if(listening)feedback('Listening — speak to ARIA');
-    else feedback('Heart ready — talk to ARIA or type a question');return;
+    else feedback(loopNotice||'Heart ready — talk to ARIA or type a question');return;
    }
    if(data.type==='load-error'){enabled=false;loading=false;enable.disabled=false;enable.textContent='Retry Heart voice';endLoop(data.message);return;}
    if(data.id!==version)return;
@@ -87,7 +88,7 @@
   if(loop){stopAudio();endLoop('Voice conversation stopped');return;}
   // A new microphone turn must not listen to ARIA's own speaker output.
   stopAudio();cancelRecognition();muted=false;audio.muted=false;$('mute').textContent='Voice: on';
-  loop=true;talk.textContent='End voice conversation';talk.setAttribute('aria-pressed','true');
+  loopNotice='';loop=true;talk.textContent='End voice conversation';talk.setAttribute('aria-pressed','true');
   // Start recognition during the click, rather than after an asynchronous model download.
   if(!(window.SpeechRecognition||window.webkitSpeechRecognition)){endLoop('This browser does not support voice input. Open this page in Chrome for microphone input, or type your question.');return;}
   loadVoice();if(loop)listen();
