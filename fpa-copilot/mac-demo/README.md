@@ -1,8 +1,12 @@
 # ARIA Mac demo and employer demonstration
 
+**Development hold:** this is not a finished or Mac-verified release. Complete the
+remote audit before another installation is requested. Actual neural rendering,
+lip timing, eye/head movement and response delay still need the configured Mac.
+
 This local launcher serves the current approved ARIA interface and routes broad
 questions to LM Studio on the same Mac. It needs no OpenAI API key or paid cloud
-GPU. The existing browser Heart generator continues to use `af_heart`; approved
+GPU. The local facial renderer uses Kokoro `af_heart`; approved
 assets, finance calculations, microphone input and information entry are retained.
 
 ## Start on Netta’s Mac
@@ -59,7 +63,8 @@ and MuseTalk renderer through `/api/reply`, `/api/job/…` and `/api/media/…`.
 the newly rendered video for that answer, then reopens the microphone in voice
 conversation mode. Stop/new questions cancel playback and polling, and old results
 cannot replace the newer answer. A render already running may finish in the
-background; new renders are rejected as busy until it finishes.
+background; the client waits for that render to finish before submitting its next
+reply. Its progress message distinguishes this wait from generating the new reply.
 
 Mouth movement is generated for the new Heart audio. Eye and head/neck movement
 comes from the exact approved `aria-approved--d0.mp4` motion source, whose hash is
@@ -94,14 +99,18 @@ she did not retrieve.
 
 ## Verification
 
-Five local HTTP tests passed against simulated LM Studio and animation services:
+Eight local HTTP tests passed against simulated LM Studio and animation services:
 local page routing without cloud fallback, history/reference propagation and
 separate sessions, blocked cross-origin/private-file access, and truthful missing
-model errors, plus animated reply/job/media pairing. Eight Heart-service tests
+model errors, animated reply/job/media pairing, explicit model selection, invalid
+model responses, and byte-range/HEAD video delivery. Eight Heart-service tests
 passed with synthetic speech, including lazy initialization with fixed `af_heart`
 and rejection of a changed motion source. JavaScript checks cover stale-video
 rejection, matching playback, replay microphone suppression and reopening the
 microphone after animated playback. Python and JavaScript syntax checks passed.
+Client tests also verify recovery after a canceled/busy render and rejection of
+external media URLs. Four installer tests cover file integrity, preservation,
+invalid paths and retrying after an interrupted write.
 
 Not verified here: execution on Netta’s Mac, a real model’s answer quality/latency,
 real microphone transcription, or a real new MuseTalk render in this integration.

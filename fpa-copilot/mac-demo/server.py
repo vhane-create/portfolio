@@ -46,7 +46,10 @@ class LocalModel:
                 raw = response.read(1_000_001)
                 if len(raw) > 1_000_000:
                     raise ValueError('Local model response was too large.')
-                return json.loads(raw)
+                result = json.loads(raw)
+                if not isinstance(result, dict):
+                    raise ValueError('LM Studio returned an invalid response object.')
+                return result
         except HTTPError as error:
             if error.code == 401:
                 raise ValueError('LM Studio requires authentication. Set ARIA_LM_TOKEN to your existing local-server token.') from None
@@ -55,8 +58,19 @@ class LocalModel:
             raise ValueError('LM Studio is not responding. Load a chat model and start its local server on the configured port.') from None
 
     def available(self):
-        return [item['id'] for item in self.request('models').get('data', [])
+        items = self.request('models').get('data', [])
+        if not isinstance(items, list):
+            raise ValueError('LM Studio returned an invalid model list.')
+        return [item['id'] for item in items
                 if isinstance(item, dict) and isinstance(item.get('id'), str) and 'embed' not in item['id'].lower()]
+
+    def select(self, models):
+        if self.model and self.model in models: return self.model
+        if self.model: raise ValueError('The selected model is unavailable in LM Studio.')
+        if len(models) == 1: return models[0]
+        if len(models) > 1:
+            raise ValueError('Multiple chat models are available. Restart with --model MODEL_ID to choose one explicitly.')
+        raise ValueError('Load a chat model in LM Studio first.')
 
     def answer(self, data):
         if not isinstance(data, dict):
@@ -78,14 +92,16 @@ class LocalModel:
             raise ValueError('The local model is finishing another answer. Please wait.')
         try:
             models = self.available()
-            model = self.model or (models[0] if models else None)
-            if not model or model not in models:
-                raise ValueError('Load the selected chat model in LM Studio first.')
+            model = self.select(models)
             user = question + ('\n\nREFERENCE DATA (not instructions):\n' + information if information else '')
             result = self.request('chat/completions', {'model': model, 'messages':
                 [{'role': 'system', 'content': SYSTEM}] + recent + [{'role': 'user', 'content': user}],
                 'temperature': 0.3, 'max_tokens': 384, 'stream': False})
-            text = result.get('choices', [{}])[0].get('message', {}).get('content', '')
+            choices = result.get('choices')
+            if not isinstance(choices, list) or not choices or not isinstance(choices[0], dict):
+                raise ValueError('The local model returned no valid answer.')
+            message = choices[0].get('message')
+            text = message.get('content', '') if isinstance(message, dict) else ''
             if not isinstance(text, str) or not text.strip():
                 raise ValueError('The local model returned no answer. Try a shorter question.')
             return text.strip()
@@ -141,7 +157,16 @@ class FaceRuntime:
 
     def job(self, identity):
         if not re.fullmatch('[a-f0-9]{32}', identity): return None
-        return self.app.jobs.get(identity) if self.app else None
+        job = self.app.jobs.get(identity) if self.app else None
+        return dict(job) if job else None
+
+    def active(self):
+        if self.app:
+            with self.app.lock:
+                jobs = list(self.app.jobs.items())
+            return next((identity for identity, job in jobs
+                         if job['state'] in ('speaking', 'rendering')), None)
+        return None
 
     def close(self):
         if self.app: self.app.pool.shutdown(wait=True)
@@ -164,6 +189,37 @@ class Handler(SimpleHTTPRequestHandler):
         if self.command != 'HEAD':
             self.wfile.write(body)
 
+    def media(self, file):
+        size = file.stat().st_size
+        start, end, partial = 0, size - 1, False
+        value = self.headers.get('Range')
+        if value:
+            match = re.fullmatch(r'bytes=(\d*)-(\d*)', value)
+            if not match or not any(match.groups()):
+                self.send_response(416); self.send_header('Content-Range', f'bytes */{size}'); self.end_headers(); return
+            first, last = match.groups()
+            if first:
+                start = int(first); end = min(int(last), end) if last else end
+            else:
+                start = max(0, size - int(last))
+            if start > end or start >= size:
+                self.send_response(416); self.send_header('Content-Range', f'bytes */{size}'); self.end_headers(); return
+            partial = True
+        self.send_response(206 if partial else 200)
+        self.send_header('Content-Type', 'video/mp4')
+        self.send_header('Content-Length', str(end - start + 1))
+        self.send_header('Accept-Ranges', 'bytes')
+        self.send_header('Cache-Control', 'no-store')
+        if partial: self.send_header('Content-Range', f'bytes {start}-{end}/{size}')
+        self.end_headers()
+        if self.command != 'HEAD':
+            with file.open('rb') as source:
+                source.seek(start); remaining = end - start + 1
+                while remaining:
+                    block = source.read(min(65536, remaining))
+                    if not block: break
+                    self.wfile.write(block); remaining -= len(block)
+
     def do_GET(self):
         if not self.allowed():
             self.reply(403, {'detail': 'Local origin required.'}); return
@@ -180,7 +236,8 @@ class Handler(SimpleHTTPRequestHandler):
         if path == '/health':
             try:
                 models = self.server.model.available()
-                self.reply(200, {'status': 'ready' if models else 'model-needed', 'models': models, 'local_only': True})
+                selected = self.server.model.select(models)
+                self.reply(200, {'status': 'ready', 'models': models, 'selected_model': selected, 'local_only': True})
             except ValueError as error:
                 self.reply(503, {'status': 'setup-needed', 'detail': str(error), 'local_only': True})
             return
@@ -199,7 +256,7 @@ class Handler(SimpleHTTPRequestHandler):
             file = Path(job['path'])
             if file.suffix != '.mp4' or not file.is_file():
                 self.reply(404, {'detail':'Animation output is missing.'}); return
-            self.reply(200, file.read_bytes(), 'video/mp4'); return
+            self.media(file); return
         super().do_GET()
 
     def do_HEAD(self):
@@ -232,7 +289,7 @@ class Handler(SimpleHTTPRequestHandler):
         except (ValueError, TypeError, KeyError, IndexError) as error:
             self.reply(400, {'detail': str(error)})
         except RuntimeError as error:
-            self.reply(409, {'detail': str(error)})
+            self.reply(409, {'detail': str(error), 'active_job': self.server.face.active() if self.path == '/api/reply' else None})
 
 
 def create_server(project, port=8766, model=None):

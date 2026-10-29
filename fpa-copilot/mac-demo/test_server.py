@@ -22,17 +22,19 @@ class FaceFixture:
 
 class ModelFixture(BaseHTTPRequestHandler):
     requests = []
+    model_ids = ['test-chat']
+    result = None
 
     def do_GET(self):
         self.send_response(200); self.end_headers()
-        self.wfile.write(b'{"data":[{"id":"test-chat"}]}')
+        self.wfile.write(json.dumps({'data':[{'id':name} for name in self.model_ids]}).encode())
 
     def do_POST(self):
         data = json.loads(self.rfile.read(int(self.headers['Content-Length'])))
         self.requests.append(data)
         answer = 'A test reply grounded in the supplied history.'
         self.send_response(200); self.end_headers()
-        self.wfile.write(json.dumps({'choices':[{'message':{'content':answer}}]}).encode())
+        self.wfile.write(json.dumps(self.result if self.result is not None else {'choices':[{'message':{'content':answer}}]}).encode())
 
     def log_message(self, *args):
         pass
@@ -40,6 +42,7 @@ class ModelFixture(BaseHTTPRequestHandler):
 
 class MacDemoTests(unittest.TestCase):
     def setUp(self):
+        ModelFixture.requests = []; ModelFixture.model_ids = ['test-chat']; ModelFixture.result = None
         self.temp = tempfile.TemporaryDirectory(); self.addCleanup(self.temp.cleanup)
         root = Path(self.temp.name)
         (root / 'aria-final.html').write_text('<meta name="aria-reasoning-url" content="https://example.invalid/"><body><script src="local-ai.js?v=3"></script></body>')
@@ -52,10 +55,10 @@ class MacDemoTests(unittest.TestCase):
             self.addCleanup(service.server_close); self.addCleanup(service.shutdown)
         self.url = f'http://127.0.0.1:{self.app.server_port}'
 
-    def request(self, path, data=None, origin=None):
-        headers = {'Content-Type':'application/json'}
+    def request(self, path, data=None, origin=None, headers=None, method=None):
+        headers = {'Content-Type':'application/json', **(headers or {})}
         if origin: headers['Origin'] = origin
-        req = Request(self.url + path, data=None if data is None else json.dumps(data).encode(), headers=headers)
+        req = Request(self.url + path, data=None if data is None else json.dumps(data).encode(), headers=headers, method=method)
         return urlopen(req, timeout=3)
 
     def test_page_uses_local_reasoning_without_cloud_fallback(self):
@@ -101,6 +104,36 @@ class MacDemoTests(unittest.TestCase):
             self.assertEqual(response.read(), face.output.read_bytes())
         with self.assertRaises(HTTPError): self.request('/api/media/' + 'b'*32 + '.mp4')
         with self.assertRaises(HTTPError): self.request('/api/reply', {'text':'test'}, 'https://example.invalid')
+
+    def test_multiple_models_require_explicit_selection(self):
+        ModelFixture.model_ids = ['small-chat', 'large-chat']
+        with self.assertRaises(HTTPError) as error: self.request('/ask', {'question':'Hello'})
+        self.assertIn('Multiple chat models', json.loads(error.exception.read())['detail'])
+        self.assertEqual(ModelFixture.requests, [])
+        self.app.model.model = 'small-chat'
+        with self.request('/ask', {'question':'Hello'}) as response: response.read()
+        self.assertEqual(ModelFixture.requests[-1]['model'], 'small-chat')
+
+    def test_malformed_model_answer_returns_recoverable_error(self):
+        for result in [{'choices':[]}, {'choices':[None]}, {'choices':[{'message':None}]}]:
+            ModelFixture.result = result
+            with self.assertRaises(HTTPError) as error: self.request('/ask', {'question':'Hello'})
+            self.assertEqual(error.exception.code, 400)
+            self.assertIn('answer', json.loads(error.exception.read())['detail'])
+
+    def test_video_range_head_and_invalid_range(self):
+        face = FaceFixture(Path(self.temp.name));self.app.face = face
+        url = '/api/media/' + face.identity + '.mp4'
+        with self.request(url, headers={'Range':'bytes=0-3'}) as response:
+            self.assertEqual(response.status, 206); self.assertEqual(response.read(), face.output.read_bytes()[:4])
+            self.assertEqual(response.headers['Accept-Ranges'], 'bytes')
+        with self.request(url, headers={'Range':'bytes=-4'}) as response:
+            self.assertEqual(response.read(), face.output.read_bytes()[-4:])
+        with self.request(url, method='HEAD') as response:
+            self.assertEqual(int(response.headers['Content-Length']), face.output.stat().st_size)
+            self.assertEqual(response.read(), b'')
+        with self.assertRaises(HTTPError) as error: self.request(url, headers={'Range':'bytes=99999-'})
+        self.assertEqual(error.exception.code, 416)
 
 
 if __name__ == '__main__': unittest.main()
