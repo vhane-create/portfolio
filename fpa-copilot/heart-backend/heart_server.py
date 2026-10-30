@@ -88,6 +88,7 @@ class App:
     def __init__(self, project, root, pipeline=None, page=None, pipeline_factory=None):
         self.project, self.root, self.pipeline = project, root, pipeline
         self.pipeline_factory = pipeline_factory
+        self.cached_renderer = None
         self.page = make_page(project) if page is None else page
         self.cache = root / 'heart-replies'
         self.cache.mkdir(exist_ok=True)
@@ -160,15 +161,33 @@ class App:
         env = os.environ.copy()
         binary = self.root / 'env-musetalk/bin'
         env.update(PYTORCH_ENABLE_MPS_FALLBACK='1', PYTORCH_MPS_HIGH_WATERMARK_RATIO='0.7', PYTORCH_MPS_LOW_WATERMARK_RATIO='0.5', PATH=str(binary) + os.pathsep + env.get('PATH', ''))
-        args = [str(binary / 'python'), '-m', 'scripts.inference', '--inference_config', './aria-live-configs/' + config.name,
-                '--result_dir', './aria-live-results/' + identity, '--unet_model_path', './models/musetalkV15/unet.pth',
-                '--unet_config', './models/musetalkV15/musetalk.json', '--whisper_dir', './models/whisper',
-                '--version', 'v15', '--batch_size', '1', '--use_float16']
-        log = self.cache / (identity + '.log')
-        with log.open('x') as handle:
-            run = subprocess.run(args, cwd=work, env=env, stdout=handle, stderr=subprocess.STDOUT, timeout=3600)
-        output = destination / identity / 'v15' / (identity + '.mp4')
-        if run.returncode != 0 or not output.is_file() or not output.stat().st_size:
+        if os.environ.get('ARIA_CACHED_RENDERER') == '1':
+            # Opt-in until this runtime has completed an actual warm Mac test.
+            if self.cached_renderer is None:
+                import importlib.util
+                backend = Path(__file__).resolve().parent
+                spec = importlib.util.spec_from_file_location('aria_cached_renderer', backend / 'cached_renderer.py')
+                module = importlib.util.module_from_spec(spec)
+                spec.loader.exec_module(module)
+                command = [str(binary / 'python'), '-u', str(backend / 'render_worker.py'),
+                           '--upstream', str(work.resolve()), '--source', str(source.resolve()),
+                           '--audio-dir', str(self.cache.resolve()), '--output-dir', str(destination.resolve())]
+                self.cached_renderer = module.CachedRenderer(command, work, env, self.cache / 'cached-renderer.log')
+            self.cached_renderer.render(identity)
+            output = destination / (identity + '.mp4')
+            log = self.cache / 'cached-renderer.log'
+            successful = True
+        else:
+            args = [str(binary / 'python'), '-m', 'scripts.inference', '--inference_config', './aria-live-configs/' + config.name,
+                    '--result_dir', './aria-live-results/' + identity, '--unet_model_path', './models/musetalkV15/unet.pth',
+                    '--unet_config', './models/musetalkV15/musetalk.json', '--whisper_dir', './models/whisper',
+                    '--version', 'v15', '--batch_size', '1', '--use_float16']
+            log = self.cache / (identity + '.log')
+            with log.open('x') as handle:
+                run = subprocess.run(args, cwd=work, env=env, stdout=handle, stderr=subprocess.STDOUT, timeout=3600)
+            output = destination / identity / 'v15' / (identity + '.mp4')
+            successful = run.returncode == 0
+        if not successful or not output.is_file() or not output.stat().st_size:
             raise RuntimeError('Animation did not complete. Diagnostic log: ' + str(log))
         probe = subprocess.run([str(binary / 'ffprobe'), '-v', 'error', '-show_streams', '-of', 'json', str(output)], capture_output=True, text=True, check=True)
         streams = json.loads(probe.stdout)['streams']

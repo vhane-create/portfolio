@@ -6,6 +6,7 @@ import tempfile
 import threading
 import time
 import unittest
+from types import SimpleNamespace
 from unittest.mock import patch
 from http.server import ThreadingHTTPServer
 import numpy as np
@@ -90,5 +91,27 @@ class Tests(unittest.TestCase):
             time.sleep(.02)
         self.assertEqual(self.app.jobs[identity]['state'],'ready')
         self.assertEqual(calls,[('A new answer.','af_heart')])
+
+    def test_cached_route_reuses_client_and_keeps_media_validation(self):
+        usb=self.root/'usb';usb.mkdir()
+        work=self.root/'MuseTalk-Mac/upstream'
+        (work/'models/musetalkV15').mkdir(parents=True)
+        (work/'models/musetalkV15/unet.pth').write_bytes(b'fixture')
+        (self.project/'assets').mkdir()
+        approved=Path(__file__).resolve().parents[1]/'assets/aria-approved--d0.mp4'
+        (self.project/'assets/aria-approved--d0.mp4').write_bytes(approved.read_bytes())
+        calls=[]
+        class Client:
+            def render(inner,identity):
+                calls.append(identity)
+                (usb/'ARIA-Live-Replies'/(identity+'.mp4')).write_bytes(b'fixture video')
+        self.app.cached_renderer=Client()
+        result=SimpleNamespace(returncode=0,stdout=json.dumps({'streams':[{'codec_type':'audio'},{'codec_type':'video'}]}))
+        with patch.dict(module.os.environ,{'ARIA_USB':str(usb),'ARIA_CACHED_RENDERER':'1'}),patch.object(Path,'is_mount',return_value=True),patch.object(module.subprocess,'run',return_value=result) as run:
+            for identity in ('a'*32,'b'*32):
+                self.assertEqual(self.app.render(identity,self.root/'test.wav').name,identity+'.mp4')
+        self.assertEqual(calls,['a'*32,'b'*32])
+        self.assertEqual(run.call_count,4)
+        self.assertTrue(all(call.args[0][0].endswith(('ffprobe','ffmpeg')) for call in run.call_args_list))
 
 if __name__=='__main__':unittest.main()

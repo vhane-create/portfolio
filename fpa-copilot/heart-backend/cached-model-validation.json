@@ -1,0 +1,20 @@
+{
+  "setup_seconds": 7.701915281000765,
+  "same_models_reused": true,
+  "same_avatar_reused": true,
+  "renders": [
+    {
+      "input": "one",
+      "seconds": 28.52791094999884,
+      "bytes": 99803,
+      "sha256": "16296cbd40320f5b2ab9f15cb84372a84367166ace5619a2f66f538ae8e1270d"
+    },
+    {
+      "input": "two",
+      "seconds": 25.680037382999217,
+      "bytes": 100151,
+      "sha256": "85b04841b8f19828a9a3be6e87b057a483dd29266ecc9d6d57e16322437b4ab0"
+    }
+  ],
+  "scope": "Real full-size models on CPU, two 0.24-second audio segments and one source PNG derived from the approved clip. Not a conversation, full moving-source benchmark, speech generation, or Mac test."
+}
