@@ -1,0 +1,44 @@
+{
+  "result": "rendered_and_decoded",
+  "audio": "First 3 seconds of included Heart introduction, not newly synthesized speech",
+  "elapsed_seconds": 588.49,
+  "peak_rss_kib": 5382888,
+  "limitations": [
+    "Existing Heart introduction audio, not newly synthesized speech.",
+    "Linux CPU, not Mac performance.",
+    "Not a live conversation or microphone test.",
+    "Source glances remain; natural gaze and blink scheduling are not implemented.",
+    "Mac installer remains on release hold."
+  ],
+  "inspection": {
+    "decoded_video_frames": 75,
+    "audio_correlation_with_supplied_Heart_segment": 0.9987531373192647,
+    "mean_eye_region_pixel_difference": 3.163136251402918,
+    "mean_mouth_region_pixel_difference": 24.065010182088443,
+    "video_sha256": "ac9c8c813f11da80605391206b6fe7c2aaef86b379d59fe2efd9aa34991b5d33",
+    "note": "Pixel comparisons are diagnostics, not a perceptual lip-sync score. Audio is the existing introduction segment."
+  },
+  "source_motion": {
+    "source_sha256": "308ab080d0945bb650f905174e716a8a5beecb9b26ec56590aa1aa8ac72839b7",
+    "frame_rate": 25,
+    "frames": 78,
+    "blink_observation": {
+      "method": "Visual inspection of all 78 eye crops and enlarged frame 66",
+      "frame": 66,
+      "seconds": 2.64,
+      "observation": "Both eyelids visibly closed. Source also includes lateral gaze."
+    },
+    "scope": "Approved source only. Not proof of generated output, spontaneous blinking, or live conversation."
+  },
+  "visual_review": [
+    "Generated mouth shapes differ across sampled frames.",
+    "Approved source blink remains visibly closed at frame 66.",
+    "Lower face is visibly softened; perceptual lip-sync timing has not been scored."
+  ],
+  "render_profile": {
+    "audio_ms": 14667,
+    "unet_vae_ms": 323910,
+    "frames": 75,
+    "total_ms": 341173
+  }
+}
