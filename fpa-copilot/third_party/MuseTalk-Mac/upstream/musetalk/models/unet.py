@@ -8,6 +8,27 @@ import sys
 import time
 import numpy as np
 import os
+import zipfile
+
+
+def load_inference_weights(model_factory, config, model_path):
+    """Avoid allocating initialized parameters alongside the full checkpoint.
+
+    ZIP checkpoints can stay file-backed until used. Legacy checkpoints still
+    load safely with weights_only, but cannot use PyTorch's mmap option.
+    No partially loaded model is returned if strict validation fails.
+    """
+    with torch.device("meta"):
+        model = model_factory(**config)
+    weights = torch.load(
+        model_path, map_location="cpu", weights_only=True,
+        mmap=zipfile.is_zipfile(model_path),
+    )
+    model.load_state_dict(weights, strict=True, assign=True)
+    del weights
+    if any(t.is_meta for t in list(model.parameters()) + list(model.buffers())):
+        raise RuntimeError("Animation checkpoint left model tensors uninitialized.")
+    return model.eval().requires_grad_(False)
 
 class PositionalEncoding(nn.Module):
     def __init__(self, d_model=384, max_len=5000):
@@ -35,15 +56,12 @@ class UNet():
         ):
         with open(unet_config, 'r') as f:
             unet_config = json.load(f)
-        self.model = UNet2DConditionModel(**unet_config)
+        self.model = load_inference_weights(UNet2DConditionModel, unet_config, model_path)
         self.pe = PositionalEncoding(d_model=384)
         if device != None:
             self.device = device
         else:
             self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        weights = torch.load(model_path, map_location="cpu", weights_only=True)
-        self.model.load_state_dict(weights)
-        del weights
         if use_float16:
             self.model = self.model.half()
         self.model.to(self.device)
