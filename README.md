@@ -1,3 +1,5 @@
+<p align="center"><img src="assets/brand/vannetta-haney-precision.png" width="620" alt="Vannetta Haney — Strategy, Analytics, AI"></p>
+
 # Vannetta Haney | FP&A and Financial Analysis Portfolio
 
 [View portfolio](https://vhane-create.github.io/portfolio/) · [Excel and SQL case study](https://vhane-create.github.io/portfolio/finance-projects.html) · [Scenario dashboard](https://vhane-create.github.io/portfolio/salon-dashboard/)
