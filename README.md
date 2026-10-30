@@ -203,12 +203,10 @@ The website uses GitHub Pages. Static pages can be opened in a browser; the fina
 
 
 
-## Current résumés
+## Current résumé
 
-Approved two-page versions, updated October 30, 2026:
+Approved two-page Senior FP&A version, updated October 30, 2026. Use this résumé for all profiles and applications, including Mercor and LinkedIn.
 
 - [Senior FP&A résumé (PDF)](resumes/Vannetta_Haney_Senior_FPA_Analyst_Resume.pdf)
-- [FP&A résumé (PDF)](resumes/Vannetta_Haney_FPA_Analyst_Resume.pdf)
-- [Both résumés with editable Word files (ZIP)](resumes/Vannetta_Haney_Resumes_2page.zip)
-
-Use the FP&A version for Mercor and regular analyst roles; use the Senior FP&A version for senior-role applications.
+- [Editable Senior FP&A résumé (Word)](resumes/Vannetta_Haney_Senior_FPA_Analyst_Resume.docx)
+- [Senior FP&A PDF and Word package (ZIP)](resumes/Vannetta_Haney_Senior_FPA_Resume_Package.zip)
