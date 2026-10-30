@@ -46,6 +46,9 @@ def initialize(upstream, source):
     model=model.to(device);vae.vae=vae.vae.to(device);pe=pe.to(device)
     whisper=WhisperModel.from_pretrained('./models/whisper',local_files_only=True).to(device=device,dtype=model.dtype).eval().requires_grad_(False)
     state.update(device=device,unet=SimpleNamespace(model=model),vae=vae,pe=pe,whisper=whisper,audio_processor=AudioProcessor('./models/whisper'),weight_dtype=model.dtype,timesteps=torch.tensor([0],device=device),fp=FaceParsing(left_cheek_width=90,right_cheek_width=90))
+    if os.environ.get('ARIA_DETAIL_BLEND') == '1':
+        from mouth_detail import DetailBlender
+        state['detail_blender']=DetailBlender()
     with torch.inference_mode(): return prepare_avatar(source.read_bytes())
 
 
@@ -218,6 +221,8 @@ def run_lipsync(avatar: dict, audio_bytes: bytes, batch_size: int = 16) -> bytes
                 ori, rs, [x1, y1, x2, y2],
                 mask_cycle[idx], crop_box_cycle[idx],
             )
+            if state.get('detail_blender') is not None:
+                combined, _ = state['detail_blender'].blend(ori, combined, idx)
             blend_ms += int((time.time() - _t2) * 1000)
             _t3 = time.time()
             ff_proc.stdin.write(np.ascontiguousarray(combined).tobytes())

@@ -1,0 +1,11 @@
+{
+  "frames": 75,
+  "outside_mouth_support_exact_before_encoding": true,
+  "mean_frame_fraction_affected": 0.006341989436619718,
+  "scope": "Compositing pass on completed render using existing Heart audio. Not new speech or a live conversation. Subjective seams and lip timing need review.",
+  "audio_packets_preserved": true,
+  "video_sha256": "a45538f6aaabec0fdc3ccf2c976dcc6eb7b5accf6eadc65b4f3a319a9ea1a9fd",
+  "visual_review": "Reviewed source/render/detail crops at frames 0, 12, 25, 38, 50, 66 and 74. Surrounding facial detail is retained and frame 66 blink is visible. Generated lips remain soft; natural appearance and synchronization are not accepted as finished.",
+  "unit_tests_passed": 19,
+  "enabled_by_default": false
+}
