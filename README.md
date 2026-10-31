@@ -6,6 +6,12 @@
 
 Senior FP&A and strategic finance professional focused on financial modeling, budgeting, forecasting, variance analysis, and business performance. My technical toolkit includes **advanced Excel, SQL, Python, Power BI, and Codex-assisted analytical workflows**. I use financial models, reproducible data checks, dashboards, and scenario analysis to support business decisions. This repository contains documented personal simulations and technical work samples; it does not represent confidential employer deliverables.
 
+## Portfolio opening: meet ARIA
+
+[ARIA welcome page](https://vhane-create.github.io/portfolio/) · [Full portfolio](https://vhane-create.github.io/portfolio/portfolio.html) · [Narrated tour](https://vhane-create.github.io/portfolio/fpa-copilot/employer-tour/)
+
+ARIA is the first page visitors see. Her approved portrait and existing Heart introduction lead into the narrated portfolio tour. The complete portfolio, credentials and projects are preserved in `portfolio.html`; the welcome page also links directly to the NPV and IRR flagship. Existing root section links route to the preserved full portfolio. This is recorded welcome/tour media, not a claim of unrestricted live conversation.
+
 ## Featured Specializations
 
 My completed Coursera specializations span FP&A, financial modeling, corporate risk, leadership, and business intelligence:
@@ -216,4 +222,5 @@ Approved two-page Senior FP&A version, updated October 30, 2026. Use this résum
 - [Senior FP&A résumé (PDF)](resumes/Vannetta_Haney_Senior_FPA_Analyst_Resume.pdf)
 - [Editable Senior FP&A résumé (Word)](resumes/Vannetta_Haney_Senior_FPA_Analyst_Resume.docx)
 - [Senior FP&A PDF and Word package (ZIP)](resumes/Vannetta_Haney_Senior_FPA_Resume_Package.zip)
+
 
