@@ -84,11 +84,15 @@ async def ask(req:AskRequest,request:Request):
         response=await asyncio.wait_for(AsyncOpenAI(api_key=key).responses.create(
             **kwargs),timeout=30)
     except AuthenticationError:raise HTTPException(503,"The server AI key was rejected; the owner needs to update it")
-    except RateLimitError:raise HTTPException(429,"The AI provider reached its usage or billing limit; please try later")
+    except RateLimitError as error:
+        if getattr(error,"code",None)=="insufficient_quota":
+            raise HTTPException(503,"ARIA's AI allowance is exhausted. The owner needs to check API billing.",headers={"X-ARIA-Error":"ai_quota_exhausted"})
+        raise HTTPException(429,"ARIA's AI service is temporarily rate-limited. Please try again later.",headers={"X-ARIA-Error":"ai_rate_limited","Retry-After":"60"})
     except asyncio.TimeoutError:raise HTTPException(504,"Model request timed out")
     except Exception:raise HTTPException(502,"Model provider temporarily unavailable")
     answer=(response.output_text or "").strip()
     if not answer:raise HTTPException(502,"Model returned no text")
     return {"answer":answer,"model":os.getenv("OPENAI_MODEL","gpt-4.1-mini"),"mode":req.mode,"synthetic_finance_data_only":False,"human_review_required":True}
+
 
 

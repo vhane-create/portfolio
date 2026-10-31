@@ -1,34 +1,36 @@
-# ARIA — live conversational finance AI backend
+# ARIA public reasoning backend
 
-**Status: source code committed; deployment and actual model inference are not yet verified.**
+This service supplies text answers through the OpenAI Responses API. It does not generate Heart audio, facial animation, or full-body movement. Those are separate integrations.
 
-ARIA's final portfolio page is `../aria-final.html`, and her local Heart page is `../aria-heart-preview.html`. This optional backend supplies text reasoning through the OpenAI Responses API. Her approved Kokoro Heart voice and MuseTalk animation remain separate services. See `../CONVERSATION_UPDATE.md` for the connection and verified checks.
+The public `/ask` endpoint does not require a visitor access code. The OpenAI key stays in the server environment. Browser pages must never contain an API key.
 
-## Run locally
-```bash
-cd fpa-copilot/live-backend
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt -r requirements-test.txt
-export OPENAI_API_KEY="set-this-in-a-private-environment-only"
-export DEMO_ACCESS_TOKEN="generate-a-random-secret-at-least-24-characters"
-export OPENAI_MODEL="gpt-4.1-mini"
-python -m unittest discover -s tests
-uvicorn app:app --host 127.0.0.1 --port 8080
-```
-For a hosted demo, deploy the Docker service using the included Render configuration, set `OPENAI_API_KEY` and `DEMO_ACCESS_TOKEN` in the hosting provider's **secret environment variables**, and restrict `ALLOWED_ORIGIN` to the portfolio origin. Set the page's `aria-reasoning-url` meta tag to the HTTPS backend base URL; leave it empty to keep model requests disabled. The page prompts for a restricted demo access code when needed, retaining it in memory until Clear or reload. Never put provider API keys in GitHub, HTML, or client JavaScript.
+Configuration:
 
-## What is real?
-- The final portfolio page uses included Heart videos for its introduction and exact recorded example. New speech requires the local Heart service; this backend does not generate speech or animation.
-- The microphone uses browser speech recognition when supported and authorized.
-- The authenticated `POST /ask` route makes **real, billable** OpenAI Responses API calls when configured and deployed.
-- Supported browser calculations are deterministic. The model can explain user-supplied figures or the explicitly requested synthetic department example; model output is **not automatically verified**.
-- Each request includes at most 20 client-held history messages for follow-ups. The service stores no shared conversational history.
-- `evaluate.py` makes additional billable API calls for human review, but does not manufacture scores.
+- `OPENAI_API_KEY`: required, stored as a Render secret environment variable.
+- `OPENAI_MODEL`: defaults to `gpt-4.1-mini`.
+- `ALLOWED_ORIGIN`: defaults to `https://vhane-create.github.io`.
+- `ENABLE_WEB_SEARCH`: optional; enables the existing company-mode search path.
 
-## Security and production limitations
-The service checks a constant-time bearer token, caps prompt length and model output, uses a simple five-requests-per-minute-per-IP in-memory limiter, sets a single allowed CORS origin, and uses `store=False` for model requests. **CORS is not authentication.** This is a **private demonstration architecture**, not production security. For public access use a managed API gateway, per-user authentication, distributed rate limiting, abuse monitoring, provider spend caps, observability, secret rotation, and independent security review. Browser speech recognition may use the browser vendor's service; do not enter confidential or personal information.
+Run locally with the existing requirements and `uvicorn app:app --host 127.0.0.1 --port 8080`. Deployment configuration is in `render.yaml` and `Dockerfile`.
 
-The backend does not yet support document uploads, persistent conversations, streaming speech, or 3D animation. It does not prove AI correctness. No external service has been deployed by these GitHub commits.
+## Availability and provider errors
 
+`GET /health` reports whether a key is configured. It does not prove that the key has available allowance or that an actual answer succeeds.
 
+- `503` with `X-ARIA-Error: ai_quota_exhausted`: the provider reported `insufficient_quota`; the owner needs to review API billing or allowance.
+- `429` with `X-ARIA-Error: ai_rate_limited` and `Retry-After: 60`: the provider reported another rate-limit error; wait before retrying.
+- Provider messages, keys, account details, and exception strings are not exposed in the response.
+
+Existing application limits remain five questions per minute per client and sixty requests per hour across this single instance. These in-memory limits are for the portfolio demo and reset when the process restarts.
+
+## Conversation and the five-minute conclusion
+
+Each request contains bounded client-held history of at most twenty user/assistant messages. The service does not use shared conversation IDs, and model requests use `store=False`. Reference information is treated as untrusted data.
+
+The prepared conclusion controller in `../employer-tour/qa-session.mjs` has a maximum 300-second session and cancels microphone capture, requests, speech and gestures at expiration. It is not connected to this service or to a live avatar renderer yet. A future streaming provider must also enforce a 300-second maximum session duration.
+
+## Validation
+
+Run `PYTHONPATH=fpa-copilot/live-backend python -m unittest discover -s fpa-copilot/live-backend/tests -v` from repository root after installing `requirements.txt` and `requirements-test.txt`.
+
+Provider tests use a mocked model. They verify session isolation, input validation, public access, origin rejection, and distinct quota/rate-limit messages. Actual model responses, microphone input, Heart speech and lip synchronization require separate end-to-end verification.

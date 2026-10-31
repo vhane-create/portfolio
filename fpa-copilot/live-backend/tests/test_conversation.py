@@ -3,6 +3,8 @@ import unittest
 from types import SimpleNamespace
 from unittest.mock import AsyncMock, patch
 from fastapi.testclient import TestClient
+from openai import RateLimitError
+import httpx
 from app import app, visits
 
 class TestConversation(unittest.TestCase):
@@ -34,13 +36,29 @@ class TestConversation(unittest.TestCase):
             response=self.client.post('/ask',headers=self.headers,json={'question':'Explain profit.','history':history})
             self.assertEqual(response.status_code,422)
 
-    def test_missing_key_unauthorized_and_provider_failure(self):
+    def test_missing_key_disallowed_origin_and_provider_failure(self):
         with patch.dict(os.environ,{'OPENAI_API_KEY':''}):
             self.assertEqual(self.client.post('/ask',headers=self.headers,json={'question':'Explain profit.'}).status_code,503)
-        self.assertEqual(self.client.post('/ask',json={'question':'Explain profit.'}).status_code,401)
+        self.assertEqual(self.client.post('/ask',headers={'Origin':'https://untrusted.example'},json={'question':'Explain profit.'}).status_code,403)
         with patch('app.AsyncOpenAI',return_value=SimpleNamespace(responses=SimpleNamespace(create=AsyncMock(side_effect=RuntimeError('private detail'))))):
             result=self.client.post('/ask',headers=self.headers,json={'question':'Explain profit.'})
             self.assertEqual(result.status_code,502)
             self.assertNotIn('private detail',result.text)
 
+    def test_public_question_does_not_require_an_access_code(self):
+        create=AsyncMock(return_value=SimpleNamespace(output_text='Hello. What would you like to explore?'))
+        with patch('app.AsyncOpenAI',return_value=SimpleNamespace(responses=SimpleNamespace(create=create))):
+            self.assertEqual(self.client.post('/ask',json={'question':'Hello'}).status_code,200)
+
+    def test_provider_quota_is_distinct_from_temporary_rate_limit(self):
+        for code,status,public_code in [('insufficient_quota',503,'ai_quota_exhausted'),('rate_limit_exceeded',429,'ai_rate_limited')]:
+            error=RateLimitError('Private provider message',response=httpx.Response(429,request=httpx.Request('POST','https://api.openai.com/v1/responses')),body={'code':code,'message':'Private account details'})
+            with patch('app.AsyncOpenAI',return_value=SimpleNamespace(responses=SimpleNamespace(create=AsyncMock(side_effect=error)))):
+                result=self.client.post('/ask',json={'question':'Hello'})
+                self.assertEqual(result.status_code,status)
+                self.assertEqual(result.headers['x-aria-error'],public_code)
+                self.assertNotIn('Private',result.text)
+                if status==429:self.assertEqual(result.headers['retry-after'],'60')
+
 if __name__=='__main__': unittest.main()
+
