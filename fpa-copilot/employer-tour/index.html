@@ -43,4 +43,16 @@ if('serviceWorker' in navigator){
   const ready=await navigator.serviceWorker.ready;ready.active?.postMessage('OFFLINE_STATUS');
  }).catch(()=>{offlineStatus.textContent='Offline saving is unavailable. The tour still works online.'});
 }else offlineStatus.textContent='This browser does not support saving the tour for offline playback.';
+
+v.addEventListener('ended',()=>{
+ if(rec){listening=false;rec.stop();}
+ document.querySelector('#board').replaceChildren();
+ v.hidden=true;
+ const room=document.createElement('iframe');room.id='aria-questions';room.title='Ask ARIA questions';room.src='../aria-final.html?after-tour=1';room.allow='microphone; autoplay';room.style='position:absolute;inset:0;width:100%;height:100%;border:0;background:#07111b';
+ document.querySelector('#stage').append(room);
+ document.querySelector('#stage').style.minHeight='750px';
+ status.textContent='The tour has finished. Talk with ARIA below. Allow microphone access when your browser asks. Live conversation requires internet.';
+ room.focus();
+},{once:true});
+
 </script></html>

@@ -106,4 +106,10 @@ const note=document.createElement('p');note.className='note muted';note.textCont
  });
  document.getElementById('aria-remove-information').onclick=()=>{readVersion++;input.value='';file.value='';resetContext();note.textContent='Information and earlier conversation context removed.';};
 })();
-</script><script src="voice-loop.js?v=7"></script><script src="immersive.js?v=6"></script><script src="local-ai.js?v=3"></script></body></html>
+</script><script src="voice-loop.js?v=7"></script><script src="immersive.js?v=6"></script><script src="local-ai.js?v=3"></script><script>
+if(new URLSearchParams(location.search).get('after-tour')==='1'){
+ const startConversation=()=>{const talk=document.getElementById('aria-talk');if(talk&&talk.getAttribute('aria-pressed')!=='true')talk.click();};
+ // Speech recognition requests microphone permission normally; denial retains text input and retry.
+ (async()=>{try{await navigator.permissions.query({name:'microphone'});}catch{}startConversation();})();
+}
+</script></body></html>
