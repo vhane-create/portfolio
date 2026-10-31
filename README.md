@@ -39,6 +39,12 @@ My completed Coursera specializations span FP&A, financial modeling, corporate r
 
 Start with the [Excel budget-versus-actual case study](https://vhane-create.github.io/portfolio/finance-projects.html): review the working formulas, chart, and an $11,000 unfavorable operating-profit variance. The companion SQL project independently reconciles the same simulated inputs. This course credential is separate from my completed specializations; the workbook is a personal simulation.
 
+## Flagship: Financial Modeling with NPV and IRR
+
+[Explore the live investment model](https://vhane-create.github.io/portfolio/npv-irr-model/) · [Download Excel](npv-irr-model/Vannetta_Haney_NPV_IRR_Financial_Model.xlsx) · [Methods, assumptions and tests](npv-irr-model/README.md)
+
+A simulated five-year operating investment connects revenue, margin, taxes, capex and working capital to NPV, IRR, year-end payback and a profitability index. The Excel workbook includes a native two-input sensitivity table. The base case produces $63,697 NPV and 14.8% IRR at a 12% hurdle; the downside produces negative NPV. Interactive assumptions, cash flow charts and CSV export let reviewers inspect the logic. Personal portfolio simulation using fictional inputs, with Codex assistance.
+
 ## Technical Projects
 
 Personal simulations with downloadable files, documented assumptions, and reviewable calculations.
@@ -210,3 +216,4 @@ Approved two-page Senior FP&A version, updated October 30, 2026. Use this résum
 - [Senior FP&A résumé (PDF)](resumes/Vannetta_Haney_Senior_FPA_Analyst_Resume.pdf)
 - [Editable Senior FP&A résumé (Word)](resumes/Vannetta_Haney_Senior_FPA_Analyst_Resume.docx)
 - [Senior FP&A PDF and Word package (ZIP)](resumes/Vannetta_Haney_Senior_FPA_Resume_Package.zip)
+

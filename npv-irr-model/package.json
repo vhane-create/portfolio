@@ -1,0 +1,1 @@
+{"name":"npv-irr-investment-model","private":true,"type":"module","scripts":{"test":"node --test model.test.js"}}
