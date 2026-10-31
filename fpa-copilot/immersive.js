@@ -33,7 +33,7 @@
  const enable=$('aria-enable-heart');
  if(enable) dock.querySelector('.actions').prepend(enable);
  $('send').textContent='Ask ARIA'; $('question').placeholder='Ask ARIA anything…';
- const latest=document.createElement('div');latest.id='aria-caption';latest.setAttribute('role','status');latest.textContent='Click Talk to ARIA to speak, or type your question below.';document.body.append(latest);
+ const latest=document.createElement('div');latest.id='aria-caption';latest.setAttribute('role','status');latest.textContent='Start hands-free listening once and allow microphone access. Then speak naturally. Ask “Can you hear me?” for an acknowledgment.';document.body.append(latest);
  new MutationObserver(()=>{
   const messages=$('history').querySelectorAll('.msg');
   const last=[...messages].reverse().find(el=>el.querySelector('small')?.textContent==='ARIA');

@@ -4,14 +4,16 @@
  const controls = document.querySelector('.overlay .actions');
  function button(id, title) { const b = document.createElement('button'); b.id=id; b.textContent=title; controls.append(b); return b; }
  const enable=button('aria-enable-heart','Enable Heart voice');
- const talk=button('aria-talk','Talk to ARIA');
+ const talk=button('aria-talk','Start hands-free listening');
  const replay=button('aria-replay','Play latest spoken reply'); replay.disabled=true;
  const portrait=document.createElement('img'); portrait.src='assets/aria-full-body-approved.png'; portrait.alt=video.getAttribute('aria-label'); portrait.hidden=true; video.after(portrait);
  const audio=new Audio(); audio.id='aria-heart-audio'; audio.hidden=true; document.body.append(audio);
  let worker, enabled=false, loading=false, loop=false, muted=false, version=0, pendingSpeech='', loopNotice='', replyRenderer=null, renderedVersion=null;
+ let restartTimer=null;
  let queue=[], recorded=[], objectURL, playing=false, finished=false, listening=false;
  function feedback(message){status(message);const caption=$('aria-caption');if(caption)caption.textContent=message;}
  function cancelRecognition() {
+  clearTimeout(restartTimer);restartTimer=null;
   const r=recognizer; recognizer=null; listening=false;
   if(r) { r.onstart=r.onresult=r.onerror=r.onend=null; try { r.abort(); } catch {} }
  }
@@ -24,18 +26,28 @@
  }
  function endLoop(message) {
   loopNotice=message;
-  loop=false; talk.textContent='Talk to ARIA'; talk.setAttribute('aria-pressed','false'); cancelRecognition();
+  try{localStorage.removeItem('aria-handsfree');}catch{}
+  loop=false; talk.textContent='Start hands-free listening'; talk.setAttribute('aria-pressed','false'); cancelRecognition();
   $('screen').dataset.state='idle'; feedback(message);
  }
+ function resumeListening() {
+  clearTimeout(restartTimer);
+  if(loop) restartTimer=setTimeout(listen,500);
+ }
  function listen() {
-  if(!loop||muted||$('send').disabled||listening) return;
+  if(!loop||muted||listening||playing||pendingSpeech||!audio.paused||!video.paused||['speaking','generating'].includes($('screen').dataset.state)) return;
+  if($('send').disabled){resumeListening();return;}
   const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
   if(!SR) { endLoop('This browser does not support voice input. Open this page in Chrome for microphone input, or type your question.'); return; }
   const r=new SR(); recognizer=r; r.lang='en-US'; r.interimResults=false; r.continuous=false;
   r.onstart=()=>{if(recognizer===r){listening=true;$('screen').dataset.state='listening';feedback('Listening — speak to ARIA'+(!enabled?' · Heart voice is loading.':''));}};
-  r.onresult=e=>{if(recognizer!==r)return; const text=e.results[0][0].transcript.trim(); cancelRecognition(); if(text){$('question').value=text;ask();}else endLoop('No words detected. Click Talk to ARIA to retry.');};
-  r.onerror=e=>{if(recognizer!==r)return;const messages={'not-allowed':'Microphone access was denied. Allow microphone access for this page in your browser settings, then retry.','service-not-allowed':'Voice recognition is blocked in this browser. Open this page in Chrome or type your question.','audio-capture':'No working microphone was found. Check your microphone connection and browser input settings.','network':'Speech recognition could not connect. Check your connection or type your question.','no-speech':'No speech was detected. Click Talk to ARIA and speak after Listening appears.'};endLoop(messages[e.error]||'Microphone stopped. Click Talk to ARIA to retry.');};
-  r.onend=()=>{if(recognizer===r)endLoop('Microphone paused. Click Talk to ARIA when ready.');};
+  r.onresult=e=>{if(recognizer!==r)return; const text=e.results[0][0].transcript.trim(); cancelRecognition(); if(text){
+   if(/^(?:aria[, ]*)?(?:can you hear me|do you hear me|are you listening|let me know you can hear me|say i hear you)[?.!]*$/i.test(text)){
+    add('You',text);add('ARIA','I hear you.');say('I hear you.');
+   }else{$('question').value=text;ask();}
+  }else resumeListening();};
+  r.onerror=e=>{if(recognizer!==r)return;if(e.error==='no-speech'){cancelRecognition();feedback('Listening — speak when you are ready');resumeListening();return;}const messages={'not-allowed':'Microphone access was denied. Allow microphone access for this page in your browser settings, then retry.','service-not-allowed':'Voice recognition is blocked in this browser. Open this page in Chrome or type your question.','audio-capture':'No working microphone was found. Check your microphone connection and browser input settings.','network':'Speech recognition could not connect. Check your connection or type your question.','no-speech':'No speech was detected. Click Talk to ARIA and speak after Listening appears.'};endLoop(messages[e.error]||'Microphone stopped. Click Talk to ARIA to retry.');};
+  r.onend=()=>{if(recognizer===r){cancelRecognition();resumeListening();}};
   try{r.start();}catch{endLoop('Microphone could not start. Please retry.');}
  }
  async function playNext() {
@@ -102,6 +114,7 @@
   if(loop){stopAudio();endLoop('Voice conversation stopped');return;}
   // A new microphone turn must not listen to ARIA's own speaker output.
   stopAudio();cancelRecognition();muted=false;audio.muted=false;$('mute').textContent='Voice: on';
+  try{localStorage.setItem('aria-handsfree','on');}catch{}
   loopNotice='';loop=true;talk.textContent='End voice conversation';talk.setAttribute('aria-pressed','true');
   // Start recognition during the click, rather than after an asynchronous model download.
   if(!(window.SpeechRecognition||window.webkitSpeechRecognition)){endLoop('This browser does not support voice input. Open this page in Chrome for microphone input, or type your question.');return;}
@@ -120,5 +133,15 @@
  $('intro').onclick=()=>{stopAudio();endLoop('Playing introduction');portrait.hidden=true;video.hidden=false;originalIntro();};
  const sample=[...controls.querySelectorAll('button')].find(b=>b.textContent==='Play verified finance reply');
  if(sample){const playSample=sample.onclick;sample.onclick=()=>{stopAudio();endLoop('Playing saved finance reply');portrait.hidden=true;video.hidden=false;playSample();};}
- const note=document.createElement('p');note.className='muted';note.textContent='Talk to ARIA starts microphone input immediately and loads Heart in parallel. Speak after Listening appears. The first spoken answer waits for the Heart download. Live lip and body animation are not connected.';controls.after(note);
+ const note=document.createElement('p');note.className='muted';note.textContent='Start hands-free listening once and allow microphone access. ARIA resumes listening after silence and after each reply. Ask “Can you hear me?” and she says “I hear you.” Stop or mute ends listening. The first spoken answer waits for the Heart download. Live lip and body animation are not connected.';controls.after(note);
+ // Only restore listening after an explicit previous opt-in and granted permission.
+ // Browsers that require a new gesture still expose the start control.
+ async function restoreListening(){
+  try{
+   if(localStorage.getItem('aria-handsfree')!=='on')return;
+   const permission=await navigator.permissions.query({name:'microphone'});
+   if(permission.state==='granted')talk.click();
+  }catch{}
+ }
+ restoreListening();
 })();
