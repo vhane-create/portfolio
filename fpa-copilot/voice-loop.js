@@ -1,5 +1,6 @@
 /* New speech always uses af_heart. Original media remains available in playback controls. */
 (() => {
+ const allowed=()=>!window.ARIAQA||window.ARIAQA.canContinue();
  const $ = id => document.getElementById(id), video = $('aria-heart-video');
  const controls = document.querySelector('.overlay .actions');
  function button(id, title) { const b = document.createElement('button'); b.id=id; b.textContent=title; controls.append(b); return b; }
@@ -35,6 +36,7 @@
   if(loop) restartTimer=setTimeout(listen,500);
  }
  function listen() {
+  if(!allowed())return;
   if(!loop||muted||listening||playing||pendingSpeech||!audio.paused||!video.paused||['speaking','generating'].includes($('screen').dataset.state)) return;
   if($('send').disabled){resumeListening();return;}
   const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
@@ -51,6 +53,7 @@
   try{r.start();}catch{endLoop('Microphone could not start. Please retry.');}
  }
  async function playNext() {
+  if(!allowed())return;
   if(playing)return;
   if(!queue.length){if(finished){$('screen').dataset.state='idle';status('Ready for your next question');if(loop)setTimeout(listen,250);}return;}
   const own=version;playing=true;
@@ -63,6 +66,7 @@
  audio.onended=()=>{playing=false;$('screen').dataset.state='idle';playNext();};
  audio.onerror=()=>{playing=false;endLoop('Audio could not play. Your text answer is available.');};
  function loadVoice() {
+  if(!allowed())return;
   if(replyRenderer){enabled=true;feedback('Mac Heart and lip-sync renderer selected');return;}
   if(enabled)return;
   if(loading)return;
@@ -71,6 +75,7 @@
   try{worker=new Worker('heart-worker.js?v=3',{type:'module'});}catch{loading=false;enable.disabled=false;enable.textContent='Retry Heart voice';endLoop('This browser could not start Heart voice. Type your question for a text answer.');return;}
   feedback('Loading Heart — first setup may take a few minutes');
   worker.onmessage=({data})=>{
+   if(!allowed())return;
    if(data.type==='progress'){if(loading)status('Loading Heart: '+data.progress+'%');return;}
    if(data.type==='ready'){
     enabled=true;loading=false;enable.textContent='Heart voice ready';
@@ -94,12 +99,13 @@
   replyFailed(){stopAudio();endLoop('Reply unavailable. See the message in the conversation.');}
  };
  say=function(text){
+  if(!allowed())return;
   stopAudio();cancelRecognition();recorded=[];replay.disabled=true;
   if(replyRenderer){
    if(muted){endLoop('Voice is off. Your text answer is available.');return;}
    const own=version;$('screen').dataset.state='generating';feedback('Preparing Heart and matching lip movements on your Mac…');
    replyRenderer.speak(text,message=>{if(own===version)feedback(message);}).then(async url=>{
-    if(own!==version)return;renderedVersion=own;video.src=url;video.muted=false;portrait.hidden=true;video.hidden=false;
+    if(own!==version||!allowed())return;renderedVersion=own;video.src=url;video.muted=false;portrait.hidden=true;video.hidden=false;
     replay.disabled=false;
     try{await video.play();if(own===version){$('screen').dataset.state='speaking';status('Speaking with Heart and matching lip movements');}}
     catch{if(own===version)endLoop('Animated reply ready. Click Play latest spoken reply to hear it.');}
@@ -111,6 +117,7 @@
   $('screen').dataset.state='generating';status('Preparing Heart speech…');worker.postMessage({type:'speak',id:version,text});
  };
  talk.onclick=()=>{
+  if(!allowed())return;
   if(loop){stopAudio();endLoop('Voice conversation stopped');return;}
   // A new microphone turn must not listen to ARIA's own speaker output.
   stopAudio();cancelRecognition();muted=false;audio.muted=false;$('mute').textContent='Voice: on';

@@ -14,6 +14,7 @@ const conversation=ARIAConversation.create();
 let requestVersion=0, reasoningController=null;
 const reasoningURL=document.querySelector('meta[name="aria-reasoning-url"]')?.content.trim()||'';
 async function ask(){
+ if(window.ARIAQA&&!window.ARIAQA.canContinue())return;
  const q=$("question").value.trim();if(!q||$("send").disabled)return;window.ARIAHeart?.beginQuestion();
  const own=++requestVersion;add("You",q);$("question").value="";$("send").disabled=true;status("Thinking");
  try{
@@ -43,7 +44,7 @@ async function ask(){
 $("clear").addEventListener('click',()=>{requestVersion++;reasoningController?.abort();reasoningController=null;window.ARIALocalAI?.reset();conversation.reset();$("send").disabled=false;});
 document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{mode=b.dataset.mode;document.querySelectorAll(".tab").forEach(t=>t.setAttribute("aria-pressed",String(t===b)));$("question").placeholder=mode==="finance"?"Calculate variance: actual 120000, budget 100000":"What do you know about Microsoft?"});document.querySelectorAll("[data-q]").forEach(b=>b.onclick=()=>{$("question").value=b.dataset.q;if(b.dataset.q.includes("variance")||b.dataset.q.includes("Variance"))document.querySelector('[data-mode="finance"]').click();else document.querySelector('[data-mode="company"]').click();ask()});
 $("send").onclick=ask;$("question").onkeydown=e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();ask()}};$("clear").onclick=()=>{$("history").replaceChildren();synth?.cancel();status("Ready")};$("intro").onclick=()=>say("Hello, I'm Aria. I can help you research companies, explore general knowledge, and calculate financial variances. How may I help you today?");$("mute").onclick=()=>{voice=!voice;$("mute").textContent=voice?"Voice: on":"Voice: off";$("mute").setAttribute("aria-pressed",String(!voice));if(!voice)synth?.cancel()};$("stop").onclick=()=>{synth?.cancel();recognizer?.stop();$("screen").dataset.state="idle";status("Stopped")};
-$("mic").onclick=()=>{const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){status("Microphone recognition unavailable in this browser");return}recognizer=new SR();recognizer.lang="en-US";recognizer.interimResults=false;recognizer.onstart=()=>{$("screen").dataset.state="listening";status("Listening")};recognizer.onresult=e=>{$("question").value=e.results[0][0].transcript;ask()};recognizer.onerror=e=>status("Microphone: "+e.error);recognizer.onend=()=>{if($("screen").dataset.state==="listening")$("screen").dataset.state="idle"};recognizer.start()};
+$("mic").onclick=()=>{if(window.ARIAQA&&!window.ARIAQA.canContinue())return;const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){status("Microphone recognition unavailable in this browser");return}recognizer=new SR();recognizer.lang="en-US";recognizer.interimResults=false;recognizer.onstart=()=>{$("screen").dataset.state="listening";status("Listening")};recognizer.onresult=e=>{$("question").value=e.results[0][0].transcript;ask()};recognizer.onerror=e=>status("Microphone: "+e.error);recognizer.onend=()=>{if($("screen").dataset.state==="listening")$("screen").dataset.state="idle"};recognizer.start()};
 
 const ariaTopics={modeling:"Financial modeling connects business assumptions to revenue, costs, cash flow, and valuation. Start with documented inputs, test formulas, and explain the drivers behind each forecast.",budgeting:"Budgeting establishes a financial plan. Forecasting updates expectations as actual performance and business conditions change. I recommend tracking variances, owners, and the next action.",analysis:"Data analysis turns transaction and operating data into decisions. Validate sources, clean data, reconcile totals, identify trends, and communicate what changed and why.",planning:"Strategic planning connects long-term business objectives to measurable financial goals. Evaluate growth opportunities, investment needs, resource allocation, and risks.",scenarios:"Scenario analysis compares plausible outcomes using explicit assumptions. Test a base case, an upside case, and a downside case to understand sensitivity and liquidity risk.",education:"Finance education starts with core concepts such as revenue, margin, cash flow, budgeting, and forecasting. Choose a topic or ask me to calculate an actual-versus-budget variance."};
 document.querySelectorAll("[data-aria-topic]").forEach(button=>button.addEventListener("click",()=>{if($("send").disabled)return;const names={modeling:"financial modeling",budgeting:"budgeting and forecasting",analysis:"data analysis",planning:"strategic planning",scenarios:"scenario analysis",education:"finance basics"};$("question").value="Explain "+names[button.dataset.ariaTopic]+" in simple terms.";document.querySelector('[data-mode="general"]').click();ask();}));
@@ -106,9 +107,27 @@ const note=document.createElement('p');note.className='note muted';note.textCont
  });
  document.getElementById('aria-remove-information').onclick=()=>{readVersion++;input.value='';file.value='';resetContext();note.textContent='Information and earlier conversation context removed.';};
 })();
-</script><script src="voice-loop.js?v=7"></script><script src="immersive.js?v=6"></script><script src="local-ai.js?v=3"></script><script>
+</script><script src="qa-window.js?v=1"></script><script>
 if(new URLSearchParams(location.search).get('after-tour')==='1'){
- const startConversation=()=>{const talk=document.getElementById('aria-talk');if(talk&&talk.getAttribute('aria-pressed')!=='true')talk.click();};
+ const banner=document.createElement('p');banner.id='aria-qa-time';banner.setAttribute('role','timer');banner.setAttribute('aria-label','Question time remaining');document.querySelector('main').prepend(banner);
+ let countdown;
+ const expire=()=>{
+  requestVersion++;reasoningController?.abort();reasoningController=null;
+  document.getElementById('stop').click();
+  for(const id of ['send','mic','aria-talk','aria-enable-heart','aria-replay','intro','question']){const el=document.getElementById(id);if(el)el.disabled=true;}
+  banner.textContent='Question time has ended. Thank you for visiting Netta’s portfolio.';
+  clearInterval(countdown);status('Five-minute question session ended');
+ };
+ window.ARIAQA=ARIAQuestionWindow.create({onExpire:expire});
+ const update=()=>{if(!window.ARIAQA.canContinue())return;const n=Math.ceil(window.ARIAQA.remainingMs()/1000);banner.textContent='Questions & answers · '+Math.floor(n/60)+':'+String(n%60).padStart(2,'0')+' remaining';};
+ update();countdown=setInterval(update,1000);
+ document.addEventListener('click',e=>{if(e.target.closest('#stop'))return;if(!window.ARIAQA.canContinue()&&e.target.closest('button,textarea,input')){e.preventDefault();e.stopImmediatePropagation();}},true);
+ document.addEventListener('keydown',e=>{if(!window.ARIAQA.canContinue()&&e.target.closest('textarea,input')){e.preventDefault();e.stopImmediatePropagation();}},true);
+ window.addEventListener('pagehide',()=>window.ARIAQA.stop('closed'));
+}
+</script><script src="voice-loop.js?v=8"></script><script src="immersive.js?v=6"></script><script src="local-ai.js?v=3"></script><script>
+if(new URLSearchParams(location.search).get('after-tour')==='1'){
+ const startConversation=()=>{if(!window.ARIAQA?.canContinue())return;const talk=document.getElementById('aria-talk');if(talk&&talk.getAttribute('aria-pressed')!=='true')talk.click();};
  // Speech recognition requests microphone permission normally; denial retains text input and retry.
  (async()=>{try{await navigator.permissions.query({name:'microphone'});}catch{}startConversation();})();
 }
