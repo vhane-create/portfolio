@@ -1,0 +1,14 @@
+{
+  "seconds": 10.041666666666666,
+  "frames": 241,
+  "source_frames_preserved": 241,
+  "width": 480,
+  "height": 720,
+  "fps": 24,
+  "heart_audio_unchanged": true,
+  "expression_intensity": 1,
+  "motion_task": "2cda1abd-5e27-4c0f-90bb-5c75746f3744",
+  "full_decode_passed": true,
+  "live_conversation": false,
+  "rigged_3d_model": false
+}

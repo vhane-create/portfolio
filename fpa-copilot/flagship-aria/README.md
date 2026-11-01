@@ -1,0 +1,15 @@
+# Flagship ARIA Complete Creation
+
+Concept and vision: Vannetta Haney (Netta). Development horizon: 5-10 years. Early 2027 is a target for a working conversational prototype, subject to integration and testing.
+
+This independent full-screen page presents the complete approved 10.041667-second full-body showcase with its paired Heart narration. Empty horizontal background was cropped from the source. Speaking sections were processed with facial expressiveness 1 for a restrained review candidate; the original body movement, outfit, full duration and Heart audio were retained. No new facial identity was intentionally designed. It plays once and stays at the natural end. No loop or artificial extension is used. Controls appear on pointer or keyboard activity. Browser autoplay and fullscreen restrictions remain in force.
+
+The original approved standing appearance is the baseline. The project scope includes coherent individuality, multiple suits and casual outfits, occasional hairstyles, home/outdoor/park environments, her own virtual car, and eventually hours of conversation. These are planned capabilities, not demonstrated by this recorded page.
+
+The current public reasoning endpoint returns HTTP 429 provider usage/billing limit. Live microphone-to-Heart lip-synchronized conversation is not finished. The tour's post-tour question page has a separate maximum five-minute client window; extended flagship sessions are a future track.
+
+Source: scene 03, Full-body showcase, from ARIA_Tour_Heart_Review_All_Scenes.zip version 7. Cropping: 480x720 at x=400,y=0 from 1280x720. Source 241 frames at 24fps; complete audio retained.
+
+The portfolio introduction and tour remain separate and are preserved. The long-term flagship targets a rigged 3D character and interactive environment rendered on a monitor; this current video preview is not a 3D simulation.
+
+Natural-expression review task: 2cda1abd-5e27-4c0f-90bb-5c75746f3744. Provider task metadata confirms expression_intensity=1. The new facial treatment remains subject to Netta's review.
