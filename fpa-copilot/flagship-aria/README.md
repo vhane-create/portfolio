@@ -1,3 +1,11 @@
+# Active preview: approved hallway reference
+
+The studio/black standing backdrop and altered blink treatment were rejected. The active full-screen page now uses the complete 30.041667-second hallway scene (scene 12) from the saved tour review, with its paired Heart narration. No new eye/mouth animation was generated for this change. The video has been re-encoded for playback; audio was copied. Natural blinking, relaxed eyes, friendly delivery and subtle lip motion remain the acceptance criteria for future new performances.
+
+The introduction, tour and all earlier assets remain intact. standing_fullscreen.mp4, standing_poster.jpg and VALIDATION.json describe the previous standing review and are retained, not active. This hallway replacement is an existing-footage reference, not proof of completed live conversation or a rigged 3D model.
+
+## Earlier standing milestone (preserved history)
+
 # Flagship ARIA Complete Creation
 
 Concept and vision: Vannetta Haney (Netta). Development horizon: 5-10 years. Early 2027 is a target for a working conversational prototype, subject to integration and testing.
