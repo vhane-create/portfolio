@@ -34,7 +34,7 @@ test('the actual post-tour wiring stops media, aborts pending reasoning and bloc
  const element=id=>{if(!elements.has(id))elements.set(id,{id,disabled:false,closest(selector){return selector==='#stop'?(id==='stop'?this:null):this;}});return elements.get(id);};
  element('stop').click=()=>{let blocked=false;handlers.click?.({target:element('stop'),preventDefault(){blocked=true;},stopImmediatePropagation(){blocked=true;}});if(!blocked)stopped++;};
  const context={URLSearchParams,location:{search:'?after-tour=1'},window:{addEventListener(){}},
-  document:{createElement:()=>({setAttribute(){}}),querySelector:()=>({prepend(){}}),getElementById:element,addEventListener:(name,fn)=>handlers[name]=fn},
+  document:{createElement:()=>({style:{},setAttribute(){}}),querySelector:()=>({prepend(){}}),getElementById:element,addEventListener:(name,fn)=>handlers[name]=fn},
   ARIAQuestionWindow:{create:options=>create({...options,now:()=>time,monotonic:()=>time,schedule:()=>1,cancel(){}})},
   requestVersion:0,reasoningController:{abort:()=>aborted++},status(){},setInterval:fn=>(interval=fn,1),clearInterval(){}};
  vm.runInNewContext(script,context);assert.equal(context.window.ARIAQA.canContinue(),true);

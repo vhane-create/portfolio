@@ -109,7 +109,7 @@ const note=document.createElement('p');note.className='note muted';note.textCont
 })();
 </script><script src="qa-window.js?v=1"></script><script>
 if(new URLSearchParams(location.search).get('after-tour')==='1'){
- const banner=document.createElement('p');banner.id='aria-qa-time';banner.setAttribute('role','timer');banner.setAttribute('aria-label','Question time remaining');document.querySelector('main').prepend(banner);
+ const banner=document.createElement('p');banner.id='aria-qa-time';banner.style.cssText='position:fixed;top:76px;right:18px;z-index:10;max-width:min(330px,85vw);margin:0;padding:10px 14px;border:1px solid #ae8955;border-radius:10px;background:#07111fee;color:#f1cb8b;font-size:14px';banner.setAttribute('role','timer');banner.setAttribute('aria-label','Question time remaining');document.querySelector('main').prepend(banner);
  let countdown;
  const expire=()=>{
   requestVersion++;reasoningController?.abort();reasoningController=null;
