@@ -224,3 +224,7 @@ Approved two-page Senior FP&A version, updated October 30, 2026. Use this résum
 - [Senior FP&A PDF and Word package (ZIP)](resumes/Vannetta_Haney_Senior_FPA_Resume_Package.zip)
 
 
+
+## Current credentials
+
+[Specializations & Certifications](credentials/README.md) — 16 completed specializations, five professional certificates and 152 course certificates, updated November 2, 2026. [Browse the credential directory](https://vhane-create.github.io/portfolio/credentials/).
