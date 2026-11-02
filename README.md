@@ -228,3 +228,7 @@ Approved two-page Senior FP&A version, updated October 30, 2026. Use this résum
 ## Current credentials
 
 [Specializations & Certifications](credentials/README.md) — 16 completed specializations, five professional certificates and 152 course certificates, updated November 2, 2026. [Browse the credential directory](https://vhane-create.github.io/portfolio/credentials/).
+
+## Accounting Close & Financial Reporting flagship
+
+[Open the interactive accounting case](https://vhane-create.github.io/portfolio/accounting-close/) — journal entries, month-end adjustments, trial balances, bank reconciliation, linked financial statements, manufacturing costs, an editable Excel workbook and an accounting memo. All data is simulated. [Review methods and tests](accounting-close/README.md).
