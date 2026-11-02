@@ -1,7 +1,7 @@
-const CACHE='aria-guided-tour-offline-v1';
+const CACHE='aria-guided-tour-offline-v2';
 const ROOT=new URL('./',self.location.href).pathname;
 const TOUR=ROOT+'fpa-copilot/employer-tour/';
-const FILES=[ROOT,ROOT+'aria/',TOUR,...[0,1,2,3].map(i=>TOUR+'media/tour-v4.part'+i)];
+const FILES=[ROOT,ROOT+'aria/',TOUR,TOUR+'captions-en.vtt',...[0,1,2,3].map(i=>TOUR+'media/tour-v4.part'+i)];
 self.addEventListener('install',event=>event.waitUntil((async()=>{const cache=await caches.open(CACHE);await cache.addAll(FILES);await self.skipWaiting()})()));
 self.addEventListener('activate',event=>event.waitUntil(self.clients.claim()));
 self.addEventListener('message',event=>{if(event.data==='OFFLINE_STATUS')event.source.postMessage({type:'ARIA_OFFLINE_READY'})});
