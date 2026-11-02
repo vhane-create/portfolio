@@ -1,0 +1,122 @@
+{
+  "schema": "fpa-expense-bridge-v1",
+  "synthetic": true,
+  "rows": [
+    {
+      "period": "2026-Q1",
+      "department": "Operations",
+      "account": "Payroll",
+      "budget": 600000.0,
+      "actual": 625000.0
+    },
+    {
+      "period": "2026-Q1",
+      "department": "Operations",
+      "account": "Facilities",
+      "budget": 90000.0,
+      "actual": 85000.0
+    },
+    {
+      "period": "2026-Q1",
+      "department": "Technology",
+      "account": "Cloud infrastructure",
+      "budget": 150000.0,
+      "actual": 174000.0
+    },
+    {
+      "period": "2026-Q1",
+      "department": "Technology",
+      "account": "Software licenses",
+      "budget": 110000.0,
+      "actual": 104000.0
+    },
+    {
+      "period": "2026-Q1",
+      "department": "Sales",
+      "account": "Payroll",
+      "budget": 400000.0,
+      "actual": 413000.0
+    },
+    {
+      "period": "2026-Q1",
+      "department": "Sales",
+      "account": "Travel",
+      "budget": 65000.0,
+      "actual": 72000.0
+    },
+    {
+      "period": "2026-Q1",
+      "department": "Finance",
+      "account": "Payroll",
+      "budget": 230000.0,
+      "actual": 226000.0
+    },
+    {
+      "period": "2026-Q1",
+      "department": "Finance",
+      "account": "Consulting",
+      "budget": 45000.0,
+      "actual": 49000.0
+    },
+    {
+      "period": "2026-Q2",
+      "department": "Operations",
+      "account": "Payroll",
+      "budget": 620000.0,
+      "actual": 635000.0
+    },
+    {
+      "period": "2026-Q2",
+      "department": "Operations",
+      "account": "Facilities",
+      "budget": 95000.0,
+      "actual": 93000.0
+    },
+    {
+      "period": "2026-Q2",
+      "department": "Technology",
+      "account": "Cloud infrastructure",
+      "budget": 165000.0,
+      "actual": 181000.0
+    },
+    {
+      "period": "2026-Q2",
+      "department": "Technology",
+      "account": "Software licenses",
+      "budget": 110000.0,
+      "actual": 108000.0
+    },
+    {
+      "period": "2026-Q2",
+      "department": "Sales",
+      "account": "Payroll",
+      "budget": 420000.0,
+      "actual": 428000.0
+    },
+    {
+      "period": "2026-Q2",
+      "department": "Sales",
+      "account": "Travel",
+      "budget": 70000.0,
+      "actual": 78000.0
+    },
+    {
+      "period": "2026-Q2",
+      "department": "Finance",
+      "account": "Payroll",
+      "budget": 240000.0,
+      "actual": 237000.0
+    },
+    {
+      "period": "2026-Q2",
+      "department": "Finance",
+      "account": "Consulting",
+      "budget": 48000.0,
+      "actual": 51000.0
+    }
+  ],
+  "totals": {
+    "budget": 3458000.0,
+    "actual": 3559000.0
+  }
+}
