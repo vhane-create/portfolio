@@ -1,33 +1,31 @@
-# Enterprise FP&A Command Center — Flagship 07
+# Enterprise FP&A Command Center
+Financial Planning, Performance Analysis & Executive Decision Support
 
-An integrated **synthetic** finance management demonstration covering revenue, variable costs, fixed costs, loaded workforce expense, EBITDA, cash taxes, capital spending, debt service, working-capital investment, free cash flow, quarterly cash roll-forward, and management liquidity limits.
+Primary hiring-manager entry point: `enterprise-fpa-command-center/`. The `enterprise-fpa/` model remains supporting work. The ARIA employer tour links to this flagship and the featured **Financial Modeling with NPV and IRR** Excel project.
 
-**Live page:** https://vhane-create.github.io/portfolio/enterprise-fpa-command-center/
+## Reviewer walkthrough
+1. Load the January-hiring business case: demand -12%, salaries +8%, 20 hires, $3m additional investment funded in April.
+2. Load the connected expense sample or run `python finance-automation/report.py` and import its generated `output/forecast_bridge.json`.
+3. Inspect the executive bridge, monthly seasonality, quarter totals and minimum month-end cash.
+4. Compare October hiring. Review payroll savings alongside the capacity/service tradeoff.
+5. Read the five-year investment valuation and management recommendation. Export the executive CSV or print the report.
 
-## Try it
-1. Change volume, pricing, cost ratio, headcount or other assumptions.
-2. Inspect the scenario-versus-plan bridge and quarterly operating outlook.
-3. Check whether cash stays above the management floor in each quarter.
-4. Export the executive CSV, reset the baseline or print the report.
+All data is synthetic. This case is a demonstration of analysis, not a claimed employer result.
 
-## Calculation notes
-- Revenue = baseline revenue × (1 + demand %) × (1 + price %).
-- Variable expense = scenario revenue × variable cost ratio.
-- Payroll = average FTE × salary × (1 + benefits %) / 1,000,000.
-- EBITDA = revenue − variable expense − fixed expense − payroll.
-- Cash tax = max(0, EBITDA) × cash tax rate. **Simplification:** this is not a corporate income tax forecast.
-- Free cash flow (illustrative) = EBITDA − cash tax − capex − debt service − revenue × working-capital investment %.
-- Quarter-ending cash = opening cash + cumulative one-quarter shares of annual free cash flow.
+## Model and assumptions
+- Annual revenue = plan × demand multiplier × price multiplier; monthly shares Jan–Dec: 6,6,7,7,8,8,8,8,9,10,11,12 percent.
+- Starting FTE plus new hires from the selected month; loaded salary = salary × (1 + benefits).
+- Variable costs flex with revenue. Fixed costs, recurring capex and debt service spread evenly.
+- Operating WC is a month-end balance equal to monthly revenue × WC ratio, with an explicit opening balance. Cash absorbs the change, not the entire balance every month.
+- Monthly cash tax = max(EBITDA,0) × rate; simplified proxy without depreciation or loss carryforwards. Net cash flow is after debt service.
+- Additional investment plus its initial project WC is funded in the chosen month. Valuation imports the existing NPV/IRR project's five-year model, scales revenue/costs/maintenance/salvage to investment size, adjusts project revenue for demand and price, and retains a 12% hurdle. Project returns begin after this operating forecast year; no return is double counted.
+- Imported expenses represent a subset of already-planned costs. Only actual-minus-budget variance is applied, once, at its quarter close. Imports must contain one reporting year, unique period/department/account keys and reconciled finite nonnegative values. This is a file handoff, not a live ERP connection. No forward extrapolation of imported variance is assumed.
 
-All figures in USD millions except FTE, salary and percentages. Annual flows are allocated evenly by quarter. This is **not** a full three-statement forecast, GAAP reconciliation, employee-level payroll model, debt schedule, or real-time ERP integration. No actual client or employer information is used.
-
-## Controls
-- Required, finite and bounded input validation.
-- Invalid input clears report outputs to avoid stale figures.
-- Annual-to-quarterly arithmetic reconciliation.
-- Quarter-level liquidity floor check.
-- Nonnegative EBITDA check.
-- CSV includes both scenario outputs and assumptions for reproducibility.
-
-## Verification still needed
-Run interactive cross-browser checks and independent model formula review before describing as production ready.
+## Reproduce and verify
+```
+python finance-automation/report.py
+node enterprise-fpa-command-center/model.test.mjs
+node tests/flagship-models.test.cjs
+python -m unittest discover -s finance-automation -p 'test_*.py'
+```
+Baseline: $120m revenue, $23.648m EBITDA, $28.9184m ending cash. January-hiring case before imported costs: $9.95328m EBITDA; investment NPV approximately -$239,260 and IRR 9.30%, below the 12% hurdle. These are synthetic outputs, not audited financial statements or a full three-statement forecast.

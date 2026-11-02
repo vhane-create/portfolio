@@ -19,5 +19,5 @@ This creates `finance-automation/output/variance_report.csv` and `executive_summ
 - Distinguishes **unfavorable** cost variance (actual minus budget) from favorable underspend.
 - All data is simulated; no employer data.
 
-## Portfolio connection
-This is a separate, executable automation workflow complementing the interactive [Enterprise Finance Decision Lab](../decision-lab/) and [integrated Excel forecast](../integrated-forecast/). It is **not yet** a single connected application with the web decision lab.
+## Connected portfolio workflow
+The report also produces `output/forecast_bridge.json`. Open the [Enterprise FP&A Command Center](../enterprise-fpa-command-center/), load the connected sample or import that JSON, and inspect the updated forecast and executive brief. The browser validates schema, a single reporting year, unique expense keys, finite nonnegative amounts and totals. Only expense variance is applied to the forecast at quarter close, because the sample is a subset of planned costs. This is a reproducible file handoff; it does not connect to a live ERP. The Decision Lab remains a separate supporting tool.

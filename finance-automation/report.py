@@ -5,6 +5,8 @@ No employer or customer information is used.
 """
 from pathlib import Path
 import csv
+import json
+import math
 from collections import defaultdict
 
 ROOT = Path(__file__).resolve().parent
@@ -21,7 +23,7 @@ def load():
         rows = []
         for row in reader:
             budget, actual = float(row["budget"]), float(row["actual"])
-            if budget < 0 or actual < 0:
+            if not math.isfinite(budget) or not math.isfinite(actual) or budget < 0 or actual < 0:
                 raise ValueError("Expected nonnegative expense data")
             rows.append({**row, "budget": budget, "actual": actual,
                          "variance": actual-budget,
@@ -51,6 +53,10 @@ def main():
     (OUT/"executive_summary.txt").write_text("\n".join(lines)+"\n",encoding="utf-8")
     assert abs(sum(v[0] for v in totals.values())-total_budget)<.01
     assert abs(sum(v[1] for v in totals.values())-total_actual)<.01
+    bridge={"schema":"fpa-expense-bridge-v1","synthetic":True,
+            "rows":[{k:r[k] for k in ["period","department","account","budget","actual"]} for r in rows],
+            "totals":{"budget":total_budget,"actual":total_actual}}
+    (OUT/"forecast_bridge.json").write_text(json.dumps(bridge,indent=2)+"\n",encoding="utf-8")
     print("\n".join(lines))
 
 if __name__=="__main__": main()
