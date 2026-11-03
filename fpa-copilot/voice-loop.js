@@ -7,6 +7,7 @@
  const enable=button('aria-enable-heart','Enable Heart voice');
  const talk=button('aria-talk','Start hands-free listening');
  const replay=button('aria-replay','Play latest spoken reply'); replay.disabled=true;
+ const transcript=document.createElement('p');transcript.id='aria-mic-transcript';transcript.className='muted';transcript.textContent='Microphone off';transcript.setAttribute('role','status');controls.after(transcript);
  const portrait=document.createElement('img'); portrait.src='assets/aria-full-body-approved.png'; portrait.alt=video.getAttribute('aria-label'); portrait.hidden=true; video.after(portrait);
  const audio=new Audio(); audio.id='aria-heart-audio'; audio.hidden=true; document.body.append(audio);
  let worker, enabled=false, loading=false, loop=false, muted=false, version=0, pendingSpeech='', loopNotice='', replyRenderer=null, renderedVersion=null;
@@ -29,6 +30,8 @@
   loopNotice=message;
   try{localStorage.removeItem('aria-handsfree');}catch{}
   loop=false; talk.textContent='Start hands-free listening'; talk.setAttribute('aria-pressed','false'); cancelRecognition();
+  if($('mic')){$('mic').textContent='🎙 Speak';$('mic').setAttribute('aria-pressed','false');}
+  transcript.textContent='Microphone off';
   $('screen').dataset.state='idle'; feedback(message);
  }
  function resumeListening() {
@@ -37,13 +40,14 @@
  }
  function listen() {
   if(!allowed())return;
-  if(!loop||muted||listening||playing||pendingSpeech||!audio.paused||!video.paused||['speaking','generating'].includes($('screen').dataset.state)) return;
+  if(document.hidden||!loop||muted||recognizer||listening||playing||pendingSpeech||!audio.paused||!video.paused||['speaking','generating'].includes($('screen').dataset.state)) return;
   if($('send').disabled){resumeListening();return;}
   const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
   if(!SR) { endLoop('This browser does not support voice input. Open this page in Chrome for microphone input, or type your question.'); return; }
-  const r=new SR(); recognizer=r; r.lang='en-US'; r.interimResults=false; r.continuous=false;
+  const r=new SR(); recognizer=r; r.lang='en-US'; r.interimResults=true; r.continuous=false;
   r.onstart=()=>{if(recognizer===r){listening=true;$('screen').dataset.state='listening';feedback('Listening — speak to ARIA'+(!enabled?' · Heart voice is loading.':''));}};
-  r.onresult=e=>{if(recognizer!==r)return; const text=e.results[0][0].transcript.trim(); cancelRecognition(); if(text){
+  r.onresult=e=>{if(recognizer!==r)return; const results=Array.from(e.results);const text=results.map(result=>result[0].transcript).join(' ').trim();transcript.textContent=text?'Hearing: '+text:'Listening…';if(!results.every(result=>result.isFinal!==false))return;cancelRecognition(); if(text){
+   transcript.textContent='You said: '+text;
    if(/^(?:aria[, ]*)?(?:can you hear me|do you hear me|are you listening|let me know you can hear me|say i hear you)[?.!]*$/i.test(text)){
     add('You',text);add('ARIA','I hear you.');say('I hear you.');
    }else{$('question').value=text;ask();}
@@ -123,10 +127,16 @@
   stopAudio();cancelRecognition();muted=false;audio.muted=false;$('mute').textContent='Voice: on';
   try{localStorage.setItem('aria-handsfree','on');}catch{}
   loopNotice='';loop=true;talk.textContent='End voice conversation';talk.setAttribute('aria-pressed','true');
+  if($('mic')){$('mic').textContent='Stop listening';$('mic').setAttribute('aria-pressed','true');}
+  transcript.textContent='Starting microphone…';
   // Start recognition during the click, rather than after an asynchronous model download.
   if(!(window.SpeechRecognition||window.webkitSpeechRecognition)){endLoop('This browser does not support voice input. Open this page in Chrome for microphone input, or type your question.');return;}
   loadVoice();if(loop)listen();
  };
+ // Both microphone controls use the same owner and cancellation path.
+ if($('mic'))$('mic').onclick=()=>talk.onclick();
+ document.addEventListener('visibilitychange',()=>{if(document.hidden)endLoop('Microphone paused while this page is hidden. Select Speak to resume.');});
+ window.addEventListener('pagehide',()=>{stopAudio();endLoop('Microphone off');});
  replay.onclick=()=>{if(replyRenderer&&renderedVersion!==null){cancelRecognition();video.currentTime=0;video.play().catch(()=>feedback('Click the video playback control to hear this reply.'));return;}if(!recorded.length)return;stopAudio();cancelRecognition();queue=[...recorded];finished=true;playNext();};
  const previousVideoEnded=video.onended,previousVideoError=video.onerror;
  video.onended=()=>{previousVideoEnded?.();if(renderedVersion===version){$('screen').dataset.state='idle';status('Ready for your next question');if(loop)setTimeout(listen,250);}};
@@ -152,3 +162,4 @@
  }
  restoreListening();
 })();
+
