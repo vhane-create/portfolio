@@ -4,13 +4,14 @@ class Element{
  append(x){this.children.push(x);}after(){}setAttribute(k,v){this[k]=v;}getAttribute(){return 'Approved ARIA';}
  addEventListener(k,f){(this.handlers[k]??=[]).push(f);}querySelectorAll(){return this.children;}pause(){this.paused=true;}
 }
-const ids={};for(const id of ['screen','aria-heart-video','send','question','stop','clear','mute','intro'])ids[id]=new Element();
+const ids={};for(const id of ['screen','aria-heart-video','send','question','stop','clear','mute','intro','mic'])ids[id]=new Element();
 ids.intro.onclick=()=>{};const controls=new Element(), sample=new Element();sample.textContent='Play verified finance reply';sample.onclick=()=>{};controls.append(sample);
 let audio,worker,starts=0,asks=0,lastStatus='';
 class Audio extends Element{constructor(){super();audio=this;}play(){this.paused=false;this.plays=(this.plays||0)+1;return Promise.resolve();}}
 class Worker{constructor(){worker=this;this.messages=[];}postMessage(m){this.messages.push(m);}terminate(){}emit(data){this.onmessage({data});}}
 class Recognition{start(){starts++;this.onstart?.();}abort(){this.onerror?.({error:'aborted'});}stop(){this.onerror?.({error:'aborted'});}}
-const c={window:{SpeechRecognition:Recognition},document:{body:new Element(),getElementById:id=>ids[id]||controls.children.find(x=>x.id===id),querySelector:()=>controls,createElement:()=>new Element()},Audio,Worker,recognizer:null,console,Blob,URL:{createObjectURL:()=> 'blob:test',revokeObjectURL(){}},status:s=>lastStatus=s,setTimeout:f=>f(),ask:()=>{asks++;c.window.ARIAHeart.beginQuestion();}};
+const events={},windowEvents={};
+const c={window:{SpeechRecognition:Recognition,addEventListener:(k,f)=>windowEvents[k]=f},document:{addEventListener:(k,f)=>events[k]=f,body:new Element(),getElementById:id=>ids[id]||controls.children.find(x=>x.id===id),querySelector:()=>controls,createElement:()=>new Element()},Audio,Worker,recognizer:null,console,Blob,URL:{createObjectURL:()=> 'blob:test',revokeObjectURL(){}},status:s=>lastStatus=s,clearTimeout:()=>{},setTimeout:f=>f(),ask:()=>{asks++;c.window.ARIAHeart.beginQuestion();}};
 vm.createContext(c);vm.runInContext(fs.readFileSync(__dirname+'/voice-loop.js','utf8'),c);
 const talk=controls.children.find(x=>x.id==='aria-talk');talk.onclick();
 assert(worker.messages.some(m=>m.type==='init'));assert.equal(starts,1);
@@ -22,13 +23,16 @@ const r=c.recognizer;r.onresult({results:[[{transcript:'What is a forecast?'}]]}
 c.say('An updated expectation.');const id=worker.messages.findLast(m=>m.type==='speak').id;
 worker.emit({type:'audio',id:id-1,buffer:new ArrayBuffer(48)});assert(!audio.plays);
 worker.emit({type:'audio',id,buffer:new ArrayBuffer(48)});worker.emit({type:'done',id});
-assert.equal(audio.plays,1);audio.onended();assert.equal(starts,3);
+assert.equal(audio.plays,1);audio.paused=true;audio.onended();assert.equal(starts,3);
 c.window.ARIAHeart.beginQuestion();const previous=audio.plays;
 worker.emit({type:'audio',id,buffer:new ArrayBuffer(48)});assert.equal(audio.plays,previous);
-ids.stop.onclick();assert.equal(talk.textContent,'Talk to ARIA');assert.equal(c.recognizer,null);
+ids.stop.onclick();assert.equal(talk.textContent,'Start hands-free listening');assert.equal(c.recognizer,null);
 talk.onclick();c.recognizer.onerror({error:'not-allowed'});assert.match(lastStatus,/denied/);assert.equal(c.recognizer,null);
 worker.emit({type:'ready'});assert.match(lastStatus,/denied/);
 c.window.SpeechRecognition=null;talk.onclick();assert.match(lastStatus,/does not support voice input/);assert.equal(c.recognizer,null);
+c.window.SpeechRecognition=Recognition;ids.mic.onclick();assert(c.recognizer);const partial=[{transcript:'Tell me'}];partial.isFinal=false;const current=c.recognizer;current.onresult({results:[partial]});assert.equal(c.recognizer,current);assert.equal(asks,1);assert.equal(controls.children.length>0,true);
+c.document.hidden=true;events.visibilitychange();assert.equal(c.recognizer,null);assert.equal(ids.mic.textContent,'🎙 Speak');c.document.hidden=false;
+console.log('PASS: unified Speak button, interim results and tab-hide release');
 console.log('PASS: immediate microphone startup, queued first answer, turn taking, cancellation, denied microphone and unsupported browser messages');
 (async()=>{
  c.window.SpeechRecognition=Recognition;
@@ -46,3 +50,4 @@ console.log('PASS: immediate microphone startup, queued first answer, turn takin
  ids.stop.onclick();assert.equal(c.recognizer,null);
  console.log('PASS: Mac video reply pairing, stale video rejection and microphone reopening after animated playback');
 })().catch(error=>{console.error(error);process.exit(1);});
+
