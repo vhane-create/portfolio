@@ -1,5 +1,14 @@
 <p align="center"><img src="assets/brand/vannetta-haney-precision.png" width="620" alt="Vannetta Haney — Strategy, Analytics, AI"></p>
 
+## Selected Accounting & Finance Training
+
+Completed **Financial Reporting Specialization — University of Illinois Urbana-Champaign** and **Cost Accounting Specialization — Technical University of Munich**, October 2026, complement my FP&A and business experience.
+
+Accounting Analysis I and II are completed **courses**, not separate verified specializations. [Review the full credential verification register](https://vhane-create.github.io/portfolio/credentials/).
+
+Apply the training in the [Accounting Close & Financial Reporting flagship](https://vhane-create.github.io/portfolio/accounting-close/): inspect journal entries, adjustments, bank reconciliation, financial statements and FIFO costing. This is a simulated portfolio case, separate from professional assignments.
+
+
 # Vannetta Haney | FP&A and Financial Analysis Portfolio
 
 [View portfolio](https://vhane-create.github.io/portfolio/) · [Excel and SQL case study](https://vhane-create.github.io/portfolio/finance-projects.html) · [Scenario dashboard](https://vhane-create.github.io/portfolio/salon-dashboard/)
@@ -113,7 +122,7 @@ node salon-dashboard/model.test.js
 
 ## Professional Experience
 
-- **Uber — Strategic Finance, Revenue Planning & FP&A | 2021–2025:** forecasting, budgeting, variance analysis, financial models, and management reporting.
+- **Uber AI Solutions — Contract Financial Analyst (Independent Contractor) | Approx. May 2021–June 2025:** project-based forecast review, financial analysis, variance analysis, and documented findings.
 - **Handshake — Contract Data Evaluation & Quality Assurance | 2026–Present:** structured evaluation, source verification, and error documentation.
 - **Mercor — Contract FP&A Analyst (Independent Contractor) | August–October 2026:** financial calculation and forecast review.
 - **Beautiunlimited Salon and Spa LLC — Owner / Hairstylist | 2020–Present:** business operations across two locations.
@@ -124,7 +133,7 @@ node salon-dashboard/model.test.js
 
 ## Education
 
-- **DeVry University:** Bachelor’s Degree, Business & Finance, 2003–2007.
+- **DeVry University:** Business & Finance coursework, 2003–2005.
 - **Lincoln Land Community College:** Associate of Biology, 2010–2012.
 - **University of Illinois Springfield:** BS in Biology, in progress; Pre-Medical Studies, 2025–Present.
 - **University of Spa & Cosmetology Arts:** Cosmetology Diploma, September 2023; 1,500 instructional hours.
@@ -227,8 +236,9 @@ Approved two-page Senior FP&A version, updated October 30, 2026. Use this résum
 
 ## Current credentials
 
-[Specializations & Certifications](credentials/README.md) — 16 completed specializations, five professional certificates and 152 course certificates, updated November 2, 2026. [Browse the credential directory](https://vhane-create.github.io/portfolio/credentials/).
+[Specializations & Certifications](credentials/README.md) — selected completed credentials with issuer names, credential IDs, verification links and QR codes. [Browse the full verification register](https://vhane-create.github.io/portfolio/credentials/).
 
 ## Accounting Close & Financial Reporting flagship
 
 [Open the interactive accounting case](https://vhane-create.github.io/portfolio/accounting-close/) — journal entries, month-end adjustments, trial balances, bank reconciliation, linked financial statements, manufacturing costs, an editable Excel workbook and an accounting memo. All data is simulated. [Review methods and tests](accounting-close/README.md).
+
