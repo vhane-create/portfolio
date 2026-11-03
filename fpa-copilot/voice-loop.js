@@ -98,6 +98,10 @@
  }
  enable.onclick=()=>loadVoice();
  window.ARIAHeart={
+  reactToGesture(text){
+   if(!allowed()||muted||$('send').disabled||playing||pendingSpeech||!audio.paused||!video.paused||['speaking','generating'].includes($('screen').dataset.state))return false;
+   add('ARIA',text);say(text);return true;
+  },
   setReplyRenderer(renderer){stopAudio();cancelRecognition();replyRenderer=renderer;enabled=Boolean(renderer);loading=false;worker?.terminate();worker=null;enable.disabled=Boolean(renderer);enable.textContent=renderer?'Mac Heart + lip sync':'Enable Heart voice';if(renderer)note.textContent='Mac facial replies use Heart voice and newly rendered lip movements. Eye and head/neck motion comes from the approved source animation. Each reply renders before playing and may take minutes. Full-body animation is not connected.';},
   beginQuestion(){stopAudio();cancelRecognition();recorded=[];replay.disabled=true;},
   replyFailed(){stopAudio();endLoop('Reply unavailable. See the message in the conversation.');}
