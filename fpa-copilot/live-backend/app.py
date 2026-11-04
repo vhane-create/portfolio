@@ -7,7 +7,12 @@ from pydantic import BaseModel, Field
 from typing import Literal
 from openai import AsyncOpenAI, AuthenticationError, RateLimitError
 app=FastAPI(title="ARIA Finance AI")
-app.add_middleware(CORSMiddleware,allow_origins=[os.getenv("ALLOWED_ORIGIN","https://vhane-create.github.io")],allow_methods=["GET","POST"],allow_headers=["Content-Type","Authorization"])
+# Exact origins only: retain the original portfolio and the approved private ARIA review.
+ALLOWED_ORIGINS = list(dict.fromkeys([
+    os.getenv("ALLOWED_ORIGIN", "https://vhane-create.github.io"),
+    "https://aria-mic-approach-review.jovialcurry10.chatgpt.site",
+]))
+app.add_middleware(CORSMiddleware,allow_origins=ALLOWED_ORIGINS,allow_methods=["GET","POST"],allow_headers=["Content-Type","Authorization"])
 DATA=[("Operations",690000,710000),("Technology",260000,278000),("Sales",465000,485000),("Finance",275000,275000)]
 visits=defaultdict(deque)
 public_requests=deque()
@@ -34,7 +39,7 @@ async def ask(req:AskRequest,request:Request):
     if not req.question.strip():raise HTTPException(422,"Please enter a question")
     # Public demo: one-instance global cap plus per-client throttle, no browser secret.
     origin=request.headers.get("origin")
-    if origin and origin!=os.getenv("ALLOWED_ORIGIN","https://vhane-create.github.io"):
+    if origin and origin not in ALLOWED_ORIGINS:
         raise HTTPException(403,"Origin not allowed")
     client=request.client.host if request.client else "unknown"
     now=time.monotonic()
