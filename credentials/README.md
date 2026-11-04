@@ -1,15 +1,19 @@
 # Specializations & Certifications
 
-Vannetta Haney · Updated November 2, 2026
+Vannetta Haney · Updated November 4, 2026
 
-16 specializations · 5 professional certificates · 152 course certificates. Program credentials and their component courses are counted separately.
+21 specializations · 6 professional certificates · 192 course certificates · 219 total. Program credentials and their component courses are counted separately.
 
-Source: current credential verification record, version 6. Individual verification links are provided below.
+Source: verified credential record and signed-in completion account. Each credential includes an official verification link and a locally served QR code.
 
 ## Specializations
 
 | Credential | Issuer | Completed | Credential ID |
 | --- | --- | --- | --- |
+| [Financial Analysis - Skills for Success Specialization](https://www.coursera.org/account/accomplishments/specialization/RRAEEFDCPJK8) | University of Illinois Urbana-Champaign | November 2026 | RRAEEFDCPJK8 |
+| [Risk Management and Financial Analysis Specialization](https://www.coursera.org/account/accomplishments/specialization/YTEWQVTCKJ8D) | EDUCBA | November 2026 | YTEWQVTCKJ8D |
+| [Financial Analysis, Reporting & Decision Making Specialization](https://www.coursera.org/account/accomplishments/specialization/Y1B21RLC2AF1) | EDUCBA | November 2026 | Y1B21RLC2AF1 |
+| [User Retention Analytics Specialization](https://www.coursera.org/account/accomplishments/specialization/ISQT774XPBWD) | Coursera | November 2026 | ISQT774XPBWD |
 | [Data Visualization & Business Intelligence Specialization](https://www.coursera.org/account/accomplishments/specialization/4IC9SA90386Q) | Coursera | November 2026 | 4IC9SA90386Q |
 | [Strategic Leadership and Management Specialization](https://www.coursera.org/account/accomplishments/specialization/O9EEIB8BG0LX) | University of Illinois Urbana-Champaign | November 2026 | O9EEIB8BG0LX |
 | [Financial Analysis in Practice Specialization](https://www.coursera.org/account/accomplishments/specialization/QMGY98GJ7Z0L) | Coursera | October 2026 | QMGY98GJ7Z0L |
@@ -26,11 +30,13 @@ Source: current credential verification record, version 6. Individual verificati
 | [Cost Accounting Specialization](https://www.coursera.org/account/accomplishments/specialization/3TIK9IM7G333) | Technical University of Munich (TUM) | October 2026 | 3TIK9IM7G333 |
 | [Financial Planning & Analysis and Performance Management Specialization](https://www.coursera.org/account/accomplishments/specialization/GL29W3RGC8PN) | John Wiley & Sons | October 2026 | GL29W3RGC8PN |
 | [Financial Modeling and Analysis Specialization](https://www.coursera.org/account/accomplishments/specialization/6SGTM35J92TP) | Corporate Finance Institute | October 2026 | 6SGTM35J92TP |
+| [Blender 3D Modeling & Rendering for Games & Animation Specialization](https://www.coursera.org/account/accomplishments/specialization/4L5NNRBIP4WL) | EDUCBA | November 2026 | 4L5NNRBIP4WL |
 
 ## Professional certificates
 
 | Credential | Issuer | Completed | Credential ID |
 | --- | --- | --- | --- |
+| [IBM Financial Planning and Analysis (FP&A) with AI Skills Professional Certificate](https://www.coursera.org/account/accomplishments/specialization/GS2PRFP1YFUF) | IBM | November 2026 | GS2PRFP1YFUF |
 | [Google AI Professional Certificate](https://www.coursera.org/account/accomplishments/specialization/ETKIVEQXW1UV) | Google | November 2026 | ETKIVEQXW1UV |
 | [SAP Business Analyst Professional Certificate](https://www.coursera.org/account/accomplishments/specialization/F1SIJ5XNLV9U) | SAP | November 2026 | F1SIJ5XNLV9U |
 | [Financial Analyst: AI, Excel, and Power BI Skills Professional Certificate](https://www.coursera.org/account/accomplishments/specialization/IWQFHEW5OVI2) | Coursera | November 2026 | IWQFHEW5OVI2 |
@@ -48,20 +54,30 @@ Source: current credential verification record, version 6. Individual verificati
 | [Term-Structure and Credit Derivatives](https://www.coursera.org/account/accomplishments/verify/NZ88HDR008VL) | Columbia University | October 2026 | NZ88HDR008VL |
 | [Corporate & Business Strategy](https://www.coursera.org/account/accomplishments/verify/4AGHY0CAQM7L) | Corporate Finance Institute | October 2026 | 4AGHY0CAQM7L |
 | [Financial Analysis Fundamentals](https://www.coursera.org/account/accomplishments/verify/6XS7MXROJK38) | Corporate Finance Institute | October 2026 | 6XS7MXROJK38 |
+| [Financial Statements in Power BI](https://www.coursera.org/account/accomplishments/verify/LHLERJKRY1V5) | Corporate Finance Institute | November 2026 | LHLERJKRY1V5 |
+| [Intermediate DAX & Time Intelligence](https://www.coursera.org/account/accomplishments/verify/HACM3U6UG8NG) | Corporate Finance Institute | November 2026 | HACM3U6UG8NG |
 | [Operational Modeling](https://www.coursera.org/account/accomplishments/verify/N3WXVFCPBXUX) | Corporate Finance Institute | October 2026 | N3WXVFCPBXUX |
+| [Power BI Fundamentals](https://www.coursera.org/account/accomplishments/verify/FWBQE7KPI7CE) | Corporate Finance Institute | November 2026 | FWBQE7KPI7CE |
 | [Reading Financial Statements](https://www.coursera.org/account/accomplishments/verify/UH4WOC2M0JOD) | Corporate Finance Institute | October 2026 | UH4WOC2M0JOD |
 | [AI-Driven Financial Planning, Forecasting, and Automation](https://www.coursera.org/account/accomplishments/verify/XO01T6Y8I4DT) | Coursera | October 2026 | XO01T6Y8I4DT |
 | [Analysis, Budgeting, and Risk Management](https://www.coursera.org/account/accomplishments/verify/2FT7VCZ62JLR) | Coursera | November 2026 | 2FT7VCZ62JLR |
+| [Analyze Activation to Boost Retention](https://www.coursera.org/account/accomplishments/verify/9H1O0YG7C8GN) | Coursera | November 2026 | 9H1O0YG7C8GN |
 | [Analyze and Guide Capital Investments](https://www.coursera.org/account/accomplishments/verify/BSLUCEF1Y1IZ) | Coursera | November 2026 | BSLUCEF1Y1IZ |
 | [Analyze and Highlight Cost Variances Effectively](https://www.coursera.org/account/accomplishments/verify/6RNBETPDYN7F) | Coursera | October 2026 | 6RNBETPDYN7F |
+| [Analyze and Optimize User Retention](https://www.coursera.org/account/accomplishments/verify/NFOJLJ8Z9LZG) | Coursera | November 2026 | NFOJLJ8Z9LZG |
+| [Analyze Data: Visualize, Summarize, and R](https://www.coursera.org/account/accomplishments/verify/GSO2CGI37XTA) | Coursera | November 2026 | GSO2CGI37XTA |
 | [Analyze Financial Data: Reconciliation Fast](https://www.coursera.org/account/accomplishments/verify/B8T22U4JE6IY) | Coursera | October 2026 | B8T22U4JE6IY |
 | [Analyze Financials: Spot Audit Triggers](https://www.coursera.org/account/accomplishments/verify/D7S7ZH9I2V4K) | Coursera | November 2026 | D7S7ZH9I2V4K |
 | [Analyze Users & Optimize Product Retention](https://www.coursera.org/account/accomplishments/verify/VFER2GEZ5RQU) | Coursera | October 2026 | VFER2GEZ5RQU |
+| [Assess Financial Deals & Manage Risk](https://www.coursera.org/account/accomplishments/verify/HEHBANOYPLTL) | Coursera | November 2026 | HEHBANOYPLTL |
+| [Automate Excel Data with Power Query and Lookups](https://www.coursera.org/account/accomplishments/verify/WGN3DFBMKK4T) | Coursera | November 2026 | WGN3DFBMKK4T |
 | [Automate Financial Analysis with AI Pipelines](https://www.coursera.org/account/accomplishments/verify/Y7PQ9Q33KBZP) | Coursera | November 2026 | Y7PQ9Q33KBZP |
 | [Boost FP&A Variance Analysis with Copilot](https://www.coursera.org/account/accomplishments/verify/YPJLWFDFPIYN) | Coursera | October 2026 | YPJLWFDFPIYN |
 | [Budgeting: Analyze & Control Costs](https://www.coursera.org/account/accomplishments/verify/S57H5463UL6R) | Coursera | October 2026 | S57H5463UL6R |
 | [Budgeting: Apply Inflation & Approaches](https://www.coursera.org/account/accomplishments/verify/FSX2YZFA4WYH) | Coursera | November 2026 | FSX2YZFA4WYH |
 | [Build and Evaluate Robust Financial Models](https://www.coursera.org/account/accomplishments/verify/7QDC8GG1BO7H) | Coursera | October 2026 | 7QDC8GG1BO7H |
+| [Build Interactive Dashboards for Meaningful Insights](https://www.coursera.org/account/accomplishments/verify/7OXPPDXJ0RRH) | Coursera | November 2026 | 7OXPPDXJ0RRH |
+| [Calculate VaR: Market Risk Measurement](https://www.coursera.org/account/accomplishments/verify/D9ZZ55X61T9U) | Coursera | November 2026 | D9ZZ55X61T9U |
 | [Calculate WACC: Capital Costs](https://www.coursera.org/account/accomplishments/verify/6MRM6LRTB2G8) | Coursera | October 2026 | 6MRM6LRTB2G8 |
 | [Charts: Visualize Data Like a Pro](https://www.coursera.org/account/accomplishments/verify/T4YLS2F7ZEQ2) | Coursera | November 2026 | T4YLS2F7ZEQ2 |
 | [Classify Financial Services: Apply Your Skills](https://www.coursera.org/account/accomplishments/verify/VZ38OGOC95BQ) | Coursera | November 2026 | VZ38OGOC95BQ |
@@ -69,13 +85,16 @@ Source: current credential verification record, version 6. Individual verificati
 | [Controls: Explain and Apply Segregation](https://www.coursera.org/account/accomplishments/verify/A0T20Q78SB3X) | Coursera | November 2026 | A0T20Q78SB3X |
 | [Create a Financial Statement using Microsoft Excel](https://www.coursera.org/account/accomplishments/verify/KHBT5PT2DULE) | Coursera | October 2026 | KHBT5PT2DULE |
 | [Create Charts and Dashboards Using Microsoft Excel](https://www.coursera.org/account/accomplishments/verify/2S916JBQ7560) | Coursera | October 2026 | 2S916JBQ7560 |
+| [Data Cleaning with Python for Finance](https://www.coursera.org/account/accomplishments/verify/RIB6M7NX4I0G) | Coursera | November 2026 | RIB6M7NX4I0G |
 | [Define SMART KPIs: Measure Business Success](https://www.coursera.org/account/accomplishments/verify/MPF3NO4KGEQI) | Coursera | November 2026 | MPF3NO4KGEQI |
 | [Design A/B Tests for Financial Impact](https://www.coursera.org/account/accomplishments/verify/MNGWK7RUK2IP) | Coursera | November 2026 | MNGWK7RUK2IP |
+| [Design and Optimize User Funnels](https://www.coursera.org/account/accomplishments/verify/R2ZP3KKNLZ8D) | Coursera | November 2026 | R2ZP3KKNLZ8D |
 | [Design Impactful Dashboards: Visualize and Evaluate Data](https://www.coursera.org/account/accomplishments/verify/5ZUW01QCR7GC) | Coursera | November 2026 | 5ZUW01QCR7GC |
 | [Design, Analyze, and Explain Financial Performance](https://www.coursera.org/account/accomplishments/verify/IHM9XU12PAYB) | Coursera | November 2026 | IHM9XU12PAYB |
 | [DMAIC: Optimize Financial Processes Fast](https://www.coursera.org/account/accomplishments/verify/MNCLLNIPKNSQ) | Coursera | November 2026 | MNCLLNIPKNSQ |
 | [Double-Entry: Balance Your Books Fast](https://www.coursera.org/account/accomplishments/verify/MWZQHBVPQQ0E) | Coursera | November 2026 | MWZQHBVPQQ0E |
 | [Dynamic Dashboards: Report and Visualize Data](https://www.coursera.org/account/accomplishments/verify/V8PG6WIO18PL) | Coursera | November 2026 | V8PG6WIO18PL |
+| [Evaluate and Explain Retention Curves](https://www.coursera.org/account/accomplishments/verify/VJWEGZQPIT38) | Coursera | November 2026 | VJWEGZQPIT38 |
 | [Excel: Build Financial Budgets Fast](https://www.coursera.org/account/accomplishments/verify/JXC2A4Q8IGWX) | Coursera | October 2026 | JXC2A4Q8IGWX |
 | [Financial Data Analysis with Excel, Python and Power BI](https://www.coursera.org/account/accomplishments/verify/NNGB021E94M1) | Coursera | November 2026 | NNGB021E94M1 |
 | [Financial Modeling: Statements, Costs & Forecasts](https://www.coursera.org/account/accomplishments/verify/Y8R99F2YTE2I) | Coursera | October 2026 | Y8R99F2YTE2I |
@@ -100,18 +119,31 @@ Source: current credential verification record, version 6. Individual verificati
 | [Project and Stress-Test Financial Plans](https://www.coursera.org/account/accomplishments/verify/UHTYEDOV79MG) | Coursera | October 2026 | UHTYEDOV79MG |
 | [Regression: Identify Assumptions & Apply Models](https://www.coursera.org/account/accomplishments/verify/HCOHNXFV9S39) | Coursera | November 2026 | HCOHNXFV9S39 |
 | [Statistical and Predictive Modeling for Finance](https://www.coursera.org/account/accomplishments/verify/XD5J6WQLBJS1) | Coursera | November 2026 | XD5J6WQLBJS1 |
+| [Transform Data: SQL & Pandas Mastery](https://www.coursera.org/account/accomplishments/verify/KONVJKFN61W6) | Coursera | November 2026 | KONVJKFN61W6 |
+| [Transform Financial Data: Recall & Import](https://www.coursera.org/account/accomplishments/verify/8124Q7BP8O50) | Coursera | November 2026 | 8124Q7BP8O50 |
 | [Uncover Data's True Story: Statistics Unveiled](https://www.coursera.org/account/accomplishments/verify/JUD4P1QMKGQ4) | Coursera | November 2026 | JUD4P1QMKGQ4 |
 | [Unravel Financial Statements: Modeling Concepts](https://www.coursera.org/account/accomplishments/verify/LD1NB4I7AGXA) | Coursera | October 2026 | LD1NB4I7AGXA |
+| [Visualize Retention: Heatmaps & Clarity Unlocked](https://www.coursera.org/account/accomplishments/verify/SMP79E6UZFCL) | Coursera | November 2026 | SMP79E6UZFCL |
 | [FinTech Law and Policy](https://www.coursera.org/account/accomplishments/verify/85Z820Z3JO6N) | Duke University | October 2026 | 85Z820Z3JO6N |
 | [Linux and Bash for Data Engineering](https://www.coursera.org/account/accomplishments/verify/4PB9UVKQA100) | Duke University | October 2026 | 4PB9UVKQA100 |
 | [Python and Pandas for Data Engineering](https://www.coursera.org/account/accomplishments/verify/ANZNDAV0FRV6) | Duke University | October 2026 | ANZNDAV0FRV6 |
 | [Scripting with Python and SQL for Data Engineering](https://www.coursera.org/account/accomplishments/verify/5PW21I41FQU4) | Duke University | October 2026 | 5PW21I41FQU4 |
 | [Web Applications and Command-Line Tools for Data Engineering](https://www.coursera.org/account/accomplishments/verify/352U7BMTR84C) | Duke University | October 2026 | 352U7BMTR84C |
+| [3D Design in Blender: Learn, Create & Build](https://www.coursera.org/account/accomplishments/verify/Q733H8CIGSHP) | EDUCBA | November 2026 | Q733H8CIGSHP |
+| [Blender Car Modeling & Rendering: Build & Export](https://www.coursera.org/account/accomplishments/verify/L157C1BNS28X) | EDUCBA | November 2026 | L157C1BNS28X |
+| [Blender Modeling & Export: From Props to Unreal](https://www.coursera.org/account/accomplishments/verify/05YD3I4D84IM) | EDUCBA | November 2026 | 05YD3I4D84IM |
 | [Financial Modeling with NPV and IRR](https://www.coursera.org/account/accomplishments/verify/N30AA7H03E0E) | EDUCBA | October 2026 | N30AA7H03E0E |
+| [Financial Risk Management with VaR Techniques](https://www.coursera.org/account/accomplishments/verify/1IVYYIO6DANM) | EDUCBA | November 2026 | 1IVYYIO6DANM |
 | [Fundamentals of Risk Management & Financial Analysis](https://www.coursera.org/account/accomplishments/verify/BXHCHCWSUEOT) | EDUCBA | October 2026 | BXHCHCWSUEOT |
+| [Master Audit Risk & Internal Control Systems](https://www.coursera.org/account/accomplishments/verify/DTEFJ7PRFHHC) | EDUCBA | November 2026 | DTEFJ7PRFHHC |
+| [Master Cost Accounting & Performance Optimization](https://www.coursera.org/account/accomplishments/verify/DGAZ0AP2XZAC) | EDUCBA | November 2026 | DGAZ0AP2XZAC |
 | [Master Financial Analysis & Reporting Techniques](https://www.coursera.org/account/accomplishments/verify/4EFKCK5QEZ18) | EDUCBA | October 2026 | 4EFKCK5QEZ18 |
 | [Master Financial Budgeting and Forecasting](https://www.coursera.org/account/accomplishments/verify/R1LKRIJCA3J2) | EDUCBA | October 2026 | R1LKRIJCA3J2 |
+| [Master Financial Reporting & Performance Metrics](https://www.coursera.org/account/accomplishments/verify/W42ALC9SGG4V) | EDUCBA | November 2026 | W42ALC9SGG4V |
+| [Master Financial Systems & Data Analytics](https://www.coursera.org/account/accomplishments/verify/03MPBVY6SGPK) | EDUCBA | November 2026 | 03MPBVY6SGPK |
+| [Risk Analysis for Business and Financial Decisions](https://www.coursera.org/account/accomplishments/verify/YF4GAQ5JJDVL) | EDUCBA | November 2026 | YF4GAQ5JJDVL |
 | [SOX Compliance and Corporate Governance](https://www.coursera.org/account/accomplishments/verify/00J90TJZ299M) | EDUCBA | October 2026 | 00J90TJZ299M |
+| [Value at Risk (VaR) Modeling in Excel Masterclass](https://www.coursera.org/account/accomplishments/verify/9K8BE3B1VRIW) | EDUCBA | November 2026 | 9K8BE3B1VRIW |
 | [Working Capital and Cash Management Essentials](https://www.coursera.org/account/accomplishments/verify/ETR2BYCHOL04) | EDUCBA | October 2026 | ETR2BYCHOL04 |
 | [Accelerate Your Job Search with AI](https://www.coursera.org/account/accomplishments/verify/X0UM77CQQAJO) | Google | October 2026 | X0UM77CQQAJO |
 | [Agile Project Management](https://www.coursera.org/account/accomplishments/verify/O6SGQPLK3TD6) | Google | October 2026 | O6SGQPLK3TD6 |
@@ -131,13 +163,18 @@ Source: current credential verification record, version 6. Individual verificati
 | [Project Initiation: Starting a Successful Project](https://www.coursera.org/account/accomplishments/verify/E5POSLYK30HQ) | Google | October 2026 | E5POSLYK30HQ |
 | [Project Planning: Putting It All Together](https://www.coursera.org/account/accomplishments/verify/HQIM9ELARNUG) | Google | October 2026 | HQIM9ELARNUG |
 | [The Path to Insights: Data Models and Pipelines](https://www.coursera.org/account/accomplishments/verify/SVI6OS0NOTV1) | Google | October 2026 | SVI6OS0NOTV1 |
+| [AI for FP&A Automation & Modeling](https://www.coursera.org/account/accomplishments/verify/D7GQKMIWE020) | IBM | November 2026 | D7GQKMIWE020 |
+| [Budgeting & Driver-Based Planning](https://www.coursera.org/account/accomplishments/verify/K0JKZZ5OZWQJ) | IBM | November 2026 | K0JKZZ5OZWQJ |
 | [Business Strategy: Creating Competitive Advantage](https://www.coursera.org/account/accomplishments/verify/6WHT3L5Y2ZC6) | IBM | October 2026 | 6WHT3L5Y2ZC6 |
 | [Capstone: Integrated Management Consulting Project](https://www.coursera.org/account/accomplishments/verify/9E826TK63DOZ) | IBM | October 2026 | 9E826TK63DOZ |
 | [Data Visualization and Dashboards with Excel and Cognos](https://www.coursera.org/account/accomplishments/verify/VM9Z53MCYZEH) | IBM | October 2026 | VM9Z53MCYZEH |
 | [Excel for Data Analysis: Essential Skills & Techniques](https://www.coursera.org/account/accomplishments/verify/9FKHEGLWBHCT) | IBM | October 2026 | 9FKHEGLWBHCT |
+| [Executive Storytelling & Governance](https://www.coursera.org/account/accomplishments/verify/AMSHV400D90B) | IBM | November 2026 | AMSHV400D90B |
 | [Financial Analysis and Modeling](https://www.coursera.org/account/accomplishments/verify/NB6TD7RUFS86) | IBM | October 2026 | NB6TD7RUFS86 |
 | [Financial Planning & Analysis (FP&A): Foundations](https://www.coursera.org/account/accomplishments/verify/2RFBQ5DUJR1N) | IBM | October 2026 | 2RFBQ5DUJR1N |
+| [Forecasting & Scenario Development with AI](https://www.coursera.org/account/accomplishments/verify/6AW6O2JNARG5) | IBM | November 2026 | 6AW6O2JNARG5 |
 | [FP&A Modeling: Variance Analysis & Forecasting](https://www.coursera.org/account/accomplishments/verify/5N2ODALI7T2H) | IBM | October 2026 | 5N2ODALI7T2H |
+| [FP&A with AI: Capstone Project](https://www.coursera.org/account/accomplishments/verify/VZJSAD09FPQF) | IBM | November 2026 | VZJSAD09FPQF |
 | [Generative AI: Transform Your Management Consulting](https://www.coursera.org/account/accomplishments/verify/772K0DM7RUVQ) | IBM | October 2026 | 772K0DM7RUVQ |
 | [Introduction to Business Analysis](https://www.coursera.org/account/accomplishments/verify/VNAMXSKO05Q1) | IBM | October 2026 | VNAMXSKO05Q1 |
 | [Introduction to Management Consulting](https://www.coursera.org/account/accomplishments/verify/H9GN0HI8O3GA) | IBM | October 2026 | H9GN0HI8O3GA |
@@ -185,11 +222,20 @@ Source: current credential verification record, version 6. Individual verificati
 | [Designing the Organization](https://www.coursera.org/account/accomplishments/verify/APJOPVI5IE9F) | University of Illinois Urbana-Champaign | November 2026 | APJOPVI5IE9F |
 | [Financial Accounting: Advanced Topics](https://www.coursera.org/account/accomplishments/verify/GBLSG1XQDXZE) | University of Illinois Urbana-Champaign | October 2026 | GBLSG1XQDXZE |
 | [Financial Accounting: Foundations](https://www.coursera.org/account/accomplishments/verify/PWLVTCYGUEI9) | University of Illinois Urbana-Champaign | October 2026 | PWLVTCYGUEI9 |
+| [Financial Analysis of Organizations](https://www.coursera.org/account/accomplishments/verify/NHDYX72SFVF8) | University of Illinois Urbana-Champaign | November 2026 | NHDYX72SFVF8 |
+| [Financial Analysis of Scenarios and Decisions](https://www.coursera.org/account/accomplishments/verify/CJD3RPZD2FTD) | University of Illinois Urbana-Champaign | November 2026 | CJD3RPZD2FTD |
+| [Introduction to Financial Analysis - The "Why?"](https://www.coursera.org/account/accomplishments/verify/5L7H7YE4FQGL) | University of Illinois Urbana-Champaign | November 2026 | 5L7H7YE4FQGL |
 | [Investments I: Fundamentals of Performance Evaluation](https://www.coursera.org/account/accomplishments/verify/O3BSCMXMQ7OY) | University of Illinois Urbana-Champaign | October 2026 | O3BSCMXMQ7OY |
 | [Investments II: Lessons and Applications for Investors](https://www.coursera.org/account/accomplishments/verify/73X5KPIYUDQE) | University of Illinois Urbana-Champaign | October 2026 | 73X5KPIYUDQE |
 | [Leading Teams: Building Effective Team Cultures](https://www.coursera.org/account/accomplishments/verify/KSEGUYVNQWYD) | University of Illinois Urbana-Champaign | November 2026 | KSEGUYVNQWYD |
 | [Leading Teams: Developing as a Leader](https://www.coursera.org/account/accomplishments/verify/X0RGAWFWHG83) | University of Illinois Urbana-Champaign | November 2026 | X0RGAWFWHG83 |
 | [Managing the Organization](https://www.coursera.org/account/accomplishments/verify/SHANBM7JIHYF) | University of Illinois Urbana-Champaign | November 2026 | SHANBM7JIHYF |
 | [Strategic Leadership and Management Capstone](https://www.coursera.org/account/accomplishments/verify/51ALZE1URGHN) | University of Illinois Urbana-Champaign | November 2026 | 51ALZE1URGHN |
+| [AI in Digital Marketing](https://www.coursera.org/account/accomplishments/verify/YKWMXDRAGUD0) | University of Maryland, College Park | November 2026 | YKWMXDRAGUD0 |
+| [Customer Value, Acquisition, and Retention](https://www.coursera.org/account/accomplishments/verify/CQTJ02VPYFQV) | University of Maryland, College Park | November 2026 | CQTJ02VPYFQV |
 | [Fundamentals of Quantitative Modeling](https://www.coursera.org/account/accomplishments/verify/PVXB3VOVO4EK) | University of Pennsylvania | October 2026 | PVXB3VOVO4EK |
 | [Financial Markets](https://www.coursera.org/account/accomplishments/verify/7THDQFV7J51T) | Yale University | October 2026 | 7THDQFV7J51T |
+| [Voice AI: Introduction to Building Voice Applications](https://www.coursera.org/account/accomplishments/verify/DGKVWSX43QV3) | Coursera | November 4, 2026 | DGKVWSX43QV3 |
+| [3D Character Rigging in Blender](https://www.coursera.org/account/accomplishments/verify/VCG8V9S80OHZ) | Packt | November 4, 2026 | VCG8V9S80OHZ |
+| [Introduction to FastAPI and Backend Development Fundamentals](https://www.coursera.org/account/accomplishments/verify/5Q8901ORRCMI) | Packt | November 4, 2026 | 5Q8901ORRCMI |
+| [Intermediate Backend Development with FastAPI](https://www.coursera.org/account/accomplishments/verify/CU1M71QWKLYT) | Packt | November 4, 2026 | CU1M71QWKLYT |
