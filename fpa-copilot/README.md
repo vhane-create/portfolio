@@ -1,5 +1,7 @@
 # ARIA — run and GitHub Pages deployment guide
 
+**Amara Renée Imani Alexandria — ARIA for short.** Her nickname comes from her initials: **A**mara **R**enée **I**mani **A**lexandria. She is an AI model prototype created by **Vannetta Haney**.
+
 ARIA preserves the exact approved Black female android portrait, long wavy black hair, black executive business suit and subtle robotic details. Her selected voice is **Kokoro Heart, `af_heart`**. The portrait, introduction and a generated finance reply are included. The user confirmed Heart's voice and matching lip movements for both speaking videos.
 
 ## Start here

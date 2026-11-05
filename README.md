@@ -17,6 +17,8 @@ Senior FP&A and strategic finance professional focused on financial modeling, bu
 
 ## Portfolio opening: meet ARIA
 
+**Amara Renée Imani Alexandria — ARIA for short.** Her nickname comes from her initials: **A**mara **R**enée **I**mani **A**lexandria. She is an AI model prototype created by **Vannetta Haney**.
+
 [ARIA welcome page](https://vhane-create.github.io/portfolio/) · [Full portfolio](https://vhane-create.github.io/portfolio/portfolio.html) · [Narrated tour](https://vhane-create.github.io/portfolio/fpa-copilot/employer-tour/)
 
 ARIA is the first page visitors see. Her approved portrait and existing Heart introduction lead into the narrated portfolio tour. The complete portfolio, credentials and projects are preserved in `portfolio.html`; the welcome page also links directly to the NPV and IRR flagship. Existing root section links route to the preserved full portfolio. This is recorded welcome/tour media, not a claim of unrestricted live conversation.
