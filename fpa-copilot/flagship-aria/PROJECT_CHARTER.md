@@ -1,6 +1,8 @@
 # Flagship ARIA Complete Creation
 
-Creator and vision: Vannetta Haney (Netta). ARIA means Artificial Reasoning Intelligence Assistant.
+**Amara Renée Imani Alexandria — ARIA for short.** Her nickname comes from her initials: **A**mara **R**enée **I**mani **A**lexandria. She is an AI model prototype created by **Vannetta Haney**.
+
+Creator and vision: Vannetta Haney (Netta).
 
 ## Separate project, preserved introduction
 

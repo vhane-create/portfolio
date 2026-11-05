@@ -1,5 +1,7 @@
 # ARIA welcome page
 
+**Amara Renée Imani Alexandria — ARIA for short.** Her nickname comes from her initials: **A**mara **R**enée **I**mani **A**lexandria. She is an AI model prototype created by **Vannetta Haney**.
+
 Primary entry point: https://vhane-create.github.io/portfolio/
 
 Full portfolio: https://vhane-create.github.io/portfolio/portfolio.html

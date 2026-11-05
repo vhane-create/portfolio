@@ -1,5 +1,7 @@
 # ARIA — Finance & Research Assistant
 
+**Amara Renée Imani Alexandria — ARIA for short.** Her nickname comes from her initials: **A**mara **R**enée **I**mani **A**lexandria. She is an AI model prototype created by **Vannetta Haney**.
+
 Launch: https://vhane-create.github.io/portfolio/fpa-copilot/aria-live.html
 
 ARIA is an interactive, browser-based finance and company-research demonstration. The source is `aria-live.html`; the portfolio homepage already links to it.
