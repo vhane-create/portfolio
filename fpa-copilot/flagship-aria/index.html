@@ -2,12 +2,28 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="description" content="Flagship ARIA Complete Creation. Meet Amara Renée Imani Alexandria (ARIA), Vannetta Haney's long-term AI model prototype project."><title>Flagship ARIA Complete Creation</title>
 <style>
 *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#000;color:#fff;font:15px system-ui}main{position:fixed;inset:0;background:#000}video,#idle{display:block;width:100%;height:100%;height:100svh;position:absolute;left:50%;transform:translateX(-50%);width:100vw;object-fit:contain;object-position:center;background:#000}nav{position:fixed;z-index:2;bottom:max(18px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);display:flex;gap:8px;align-items:center;max-width:96vw;opacity:0;transition:opacity .2s;pointer-events:none}body.controls nav,nav:focus-within{opacity:1;pointer-events:auto}button,a{font:inherit;color:#f8e7c7;background:#090b0ee8;border:1px solid #aa8754;border-radius:24px;padding:10px 15px;text-decoration:none;white-space:nowrap;cursor:pointer}button:focus-visible,a:focus-visible{outline:3px solid #fff;outline-offset:3px}#sound{position:fixed;z-index:3;bottom:80px;left:50%;transform:translateX(-50%)}[hidden]{display:none!important}dialog{max-width:560px;max-height:85svh;overflow:auto;color:#eee;background:#0d1118;border:1px solid #aa8754;border-radius:18px;padding:28px;line-height:1.6}dialog::backdrop{background:#000b}dialog h1{font-size:24px;color:#e4bc7a}dialog a{display:inline-block;margin:5px 0}#message{position:fixed;bottom:140px;left:50%;transform:translateX(-50%);max-width:90vw;background:#111c;padding:10px;border-radius:8px;text-align:center} @media(max-width:600px){nav{flex-wrap:wrap;justify-content:center}button,a{font-size:13px;padding:9px 12px}}
+#sneak-open{position:fixed;z-index:3;top:1rem;right:1rem}#sneak-dialog{width:min(90vw,960px);max-height:90vh}#sneak-dialog video{position:static;transform:none;width:100%;height:auto;max-height:68vh}#sneak-dialog form{margin-top:1rem}
 </style></head><body>
 <main aria-label="ARIA in the approved hallway environment"><video id="aria" autoplay playsinline preload="auto" poster="hallway_reference.jpg" aria-label="ARIA's complete hallway reference scene with Heart narration"><source src="hallway_reference.mp4" type="video/mp4"></video><img id="idle" src="hallway_reference.jpg" alt="ARIA in her approved hallway scene" hidden></main>
 <button id="sound" hidden>Turn Heart sound on</button><p id="message" role="status" hidden></p>
 <nav aria-label="ARIA preview controls"><button id="replay">Replay</button><button id="fullscreen">Full screen</button><button id="about">About ARIA</button></nav>
 <dialog id="details"><h1>Flagship ARIA Complete Creation</h1><p class="aria-identity"><strong>Amara Renée Imani Alexandria</strong> — ARIA for short.<br>A = Amara · R = Renée · I = Imani · A = Alexandria.<br>An AI model prototype created by Vannetta Haney.</p><p>This is ARIA's own full-screen space. The complete 30-second hallway reference plays once with its paired Heart narration. The studio background and altered standing-blink treatment are no longer the active preview. This reuses existing footage; it is not a newly perfected facial performance. It is a recorded preview; it does not provide live conversation or hours of generated interaction.</p><p>The development horizon is 5-10 years. The next priority is a presentable tour and a maximum five-minute question session. A conversational prototype is the early-2027 target, subject to integration and testing.</p><p>Planned: a consistent personality, multiple suits and casual outfits, occasional hairstyle changes, home and outdoor settings, park walks, her own car, and longer conversations. Her approved facial identity and Heart voice remain the baseline. The long-term goal is a rigged 3D simulation with interactive environments, viewed through a monitor. Existing video assets remain part of the introduction and visual reference archive.</p><p><a href="../../portfolio.html#flagship-aria">Portfolio project</a> <a href="../employer-tour/">Portfolio tour</a></p><form method="dialog"><button>Return to ARIA</button></form></dialog>
+<button id="sneak-open" type="button">Watch the 40-second sneak peek</button>
+<dialog id="sneak-dialog" aria-labelledby="sneak-title">
+<h2 id="sneak-title">ARIA Flagship Sneak Peek</h2>
+<p>A silent, captioned concept preview using illustrative finance data.</p>
+<video id="sneak-video" controls playsinline preload="none" aria-label="ARIA’s 40-second sneak peek"><source src="aria-flagship-sneak-peek.mp4" type="video/mp4"></video>
+<form method="dialog"><button type="submit">Close preview</button></form>
+</dialog>
 <script>
+const sneakDialog=document.getElementById('sneak-dialog');
+const sneakVideo=document.getElementById('sneak-video');
+document.getElementById('sneak-open').onclick=()=>{
+  document.getElementById('aria').pause();
+  sneakDialog.showModal();
+  sneakVideo.play().catch(()=>{});
+};
+sneakDialog.addEventListener('close',()=>sneakVideo.pause());
 const v=document.getElementById('aria'),idle=document.getElementById('idle'),sound=document.getElementById('sound'),message=document.getElementById('message');let hide;
 function showControls(){document.body.classList.add('controls');clearTimeout(hide);hide=setTimeout(()=>document.body.classList.remove('controls'),2400)}
 document.addEventListener('pointermove',showControls);document.addEventListener('pointerdown',showControls);document.addEventListener('keydown',showControls);
