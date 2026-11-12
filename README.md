@@ -124,9 +124,9 @@ node salon-dashboard/model.test.js
 
 ## Professional Experience
 
-- **Uber AI Solutions — Contract Financial Analyst (Independent Contractor) | Approx. May 2021–June 2025:** project-based forecast review, financial analysis, variance analysis, and documented findings.
+- **Uber AI Solutions — Contract Strategic Finance & Revenue Planning | Approx. May 2021–June 2025:** supported forecasts covering approximately $5 million in annual project revenue, evaluated demand/pricing/cost drivers, budget variances, investment cases, and capital-allocation trade-offs.
 - **Handshake — Contract Data Evaluation & Quality Assurance | 2026–Present:** structured evaluation, source verification, and error documentation.
-- **Mercor — Contract FP&A Analyst (Independent Contractor) | August–October 2026:** financial calculation and forecast review.
+- **Mercor — Contract FP&A Analyst (Independent Contractor) | August–October 2026:** developed and revised a Q3 Excel reforecast for simulated Project Westwood; analyzed approximately $2.3 million in modeled billings across 94,000 tests and investigated a modeled $9 million deposit-to-billing reconciliation difference.
 - **Beautiunlimited Salon and Spa LLC — Owner / Hairstylist | 2020–Present:** business operations across two locations.
 - **University of Illinois Springfield — Student Research Assistant, Chemistry | June 2026–Present:** literature review, data organization, and technical documentation.
 - **SIU School of Medicine — Student Hotspotting Participant | October 2025–March 2026:** interdisciplinary student case reviews and information synthesis.
@@ -228,13 +228,9 @@ The website uses GitHub Pages. Static pages can be opened in a browser; the fina
 
 ## Current résumé
 
-Approved two-page Senior FP&A version, updated October 30, 2026. Use this résumé for all profiles and applications, including Mercor and LinkedIn.
+**Current master résumé: Netta_FPA.pdf (November 2026, three pages).** This supersedes the previously published October 30 two-page résumé. The current PDF is pending upload to this repository; existing links below are archival and must not be used for new applications.
 
-- [Senior FP&A résumé (PDF)](resumes/Vannetta_Haney_Senior_FPA_Analyst_Resume.pdf)
-- [Editable Senior FP&A résumé (Word)](resumes/Vannetta_Haney_Senior_FPA_Analyst_Resume.docx)
-- [Senior FP&A PDF and Word package (ZIP)](resumes/Vannetta_Haney_Senior_FPA_Resume_Package.zip)
-
-
+- [Previous Senior FP&A résumé — ARCHIVED, not current](resumes/Vannetta_Haney_Senior_FPA_Analyst_Resume.pdf)
 
 ## Current credentials
 
