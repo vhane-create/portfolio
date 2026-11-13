@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Explore the eleven portals of Slantmere, an original VR game concept by Vannetta Haney.">
+<title>Slantmere | Vannetta Haney</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap">
+<style>
+:root{color-scheme:dark;--bg:#0c101b;--ink:#f5f4ff;--muted:#bcc4db;--line:#343951;--light:#b6fbdd}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "Space Grotesk",system-ui,sans-serif}
+a{color:inherit;text-underline-offset:.25em}
+a:focus-visible,summary:focus-visible{outline:3px solid var(--light);outline-offset:5px}
+.wrap{width:min(1120px,calc(100% - 2.5rem));margin:auto}
+nav{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1.15rem 0}
+nav a{font-size:.9rem}
+.hero{position:relative;isolation:isolate;overflow:hidden;min-height:530px;display:grid;align-items:center;border-block:1px solid var(--line);background:radial-gradient(ellipse at 78% 58%,#2b3151 0,transparent 53%),#13172a}
+.art{position:absolute;z-index:-1;right:1%;top:50%;width:min(54vw,590px);aspect-ratio:1;transform:translateY(-50%);background:repeating-radial-gradient(ellipse at center,transparent 0 24px,#8584cc45 26px 27px,transparent 29px 47px);mask-image:radial-gradient(ellipse,#000 5%,transparent 74%)}
+.art:after{content:"";position:absolute;inset:22%;border:2px solid #d0fff2;border-radius:50%;box-shadow:0 0 40px #7bfedc,inset 0 0 40px #7bfedc;transform:rotate(-28deg) scaleX(.55)}
+h1,h2,p{margin:0}
+h1{font-size:clamp(3rem,12vw,9rem);line-height:1;letter-spacing:-.075em;margin:.45rem 0 1rem}
+h2{font-size:clamp(2rem,5vw,3.4rem);line-height:1.1;letter-spacing:-.04em;margin-bottom:1rem}
+.kicker{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--light)}
+.intro{color:var(--muted);max-width:36rem}
+.cta{display:inline-block;background:var(--light);color:#10182b;text-decoration:none;font-weight:700;padding:.65rem 1rem;margin-top:1.5rem;border-radius:.3rem}
+section.wrap{padding:4rem 0}
+.worlds{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:.85rem;margin-top:1.6rem;align-items:start}
+details{background:#161b2c;border:1px solid var(--line);border-radius:.6rem}
+details[open]{border-color:#66998e}
+summary{cursor:pointer;font-size:1.15rem;font-weight:600;padding:1rem}
+.brief{border-top:1px solid var(--line);padding:.9rem 1rem;color:var(--muted)}
+.brief p+p{margin-top:.6rem}
+strong{color:var(--ink)}
+.stars{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1rem;padding:0;list-style:none;margin:1.5rem 0 0}
+.stars li{padding:.85rem .45rem;border-top:1px solid var(--line);text-align:center}
+.stars span{display:block;font-size:1.6rem;color:var(--light)}
+footer{border-top:1px solid var(--line);padding:1.5rem 0;color:var(--muted)}
+@media(max-width:600px){.hero{min-height:430px}.art{width:90vw;opacity:.5;right:-22%}section.wrap{padding:3rem 0}}
+</style>
+</head>
+<body>
+<header class="wrap"><nav aria-label="Slantmere navigation"><a href="../portfolio.html#featured-slantmere">Vannetta Haney · Portfolio</a><a href="#worlds">Portal directory</a></nav></header>
+<main>
+<div class="hero"><div class="art" aria-hidden="true"></div><div class="wrap">
+<p class="kicker">VR game concept</p><h1>Slantmere</h1>
+<p class="intro">Eleven portals. Every arrival gives you a starting objective and the controls. What happens next is yours to figure out.</p>
+<a class="cta" href="#worlds">Browse the portals</a>
+</div></div>
+<section class="wrap" id="worlds" aria-labelledby="worlds-heading">
+<h2 id="worlds-heading">Portal directory</h2>
+<p class="intro">Select a name to preview its proposed arrival briefing.</p>
+<div class="worlds">
+<details><summary>Velcassor</summary><div class="brief"><p><strong>Objective</strong><br>Catch the last tram.</p><p><strong>Controls introduced</strong><br>Move, turn, and steady yourself.</p></div></details>
+<details><summary>Zelvarrow</summary><div class="brief"><p><strong>Objective</strong><br>Follow the lanterns to the lookout.</p><p><strong>Controls introduced</strong><br>Steer and brake.</p></div></details>
+<details><summary>Tarnavique</summary><div class="brief"><p><strong>Objective</strong><br>Retrieve the key behind the gate.</p><p><strong>Controls introduced</strong><br>Reach and grab.</p></div></details>
+<details><summary>Brelasyn</summary><div class="brief"><p><strong>Objective</strong><br>Return a lost item to the theater.</p><p><strong>Controls introduced</strong><br>Crouch, turn, and reset your stance.</p></div></details>
+<details><summary>Veydrisol</summary><div class="brief"><p><strong>Objective</strong><br>Relight the plaza.</p><p><strong>Controls introduced</strong><br>Pick up and place objects.</p></div></details>
+<details><summary>Ordelquay</summary><div class="brief"><p><strong>Objective</strong><br>Find the missing beacon.</p><p><strong>Controls introduced</strong><br>Steer the submarine and ping sonar.</p></div></details>
+<details><summary>Veyscarrel</summary><div class="brief"><p><strong>Objective</strong><br>Find the source of the footsteps.</p><p><strong>Controls introduced</strong><br>Inspect tracks and mark a route.</p></div></details>
+<details><summary>Iverquell</summary><div class="brief"><p><strong>Objective</strong><br>Reopen the observatory.</p><p><strong>Controls introduced</strong><br>Use the door controls and carry objects.</p></div></details>
+<details><summary>Cadravenn</summary><div class="brief"><p><strong>Objective</strong><br>Get a message across the broken bridge.</p><p><strong>Controls introduced</strong><br>Place markers and check the route.</p></div></details>
+<details><summary>Istravune</summary><div class="brief"><p><strong>Objective</strong><br>Find where the bell is ringing.</p><p><strong>Controls introduced</strong><br>Listen and record sounds.</p></div></details>
+<details><summary>Ardelvoss</summary><div class="brief"><p><strong>Objective</strong><br>Recover a parcel from the courtyard.</p><p><strong>Controls introduced</strong><br>Move objects and call out locations to teammates.</p></div></details>
+</div></section>
+<section class="wrap" aria-labelledby="dedication">
+<h2 id="dedication">Six stars</h2>
+<p class="intro">For my six children. This universe began with you.</p>
+<ul class="stars"><li><span aria-hidden="true">✦</span>Jazemin</li><li><span aria-hidden="true">✦</span>Jaidah</li><li><span aria-hidden="true">✦</span>Naveya</li><li><span aria-hidden="true">✦</span>Rodney</li><li><span aria-hidden="true">✦</span>Yarieah</li><li><span aria-hidden="true">✦</span>Leairra</li></ul>
+</section>
+</main>
+<footer><div class="wrap">Slantmere · Designed by Vannetta Haney</div></footer>
+</body></html>
