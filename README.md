@@ -228,7 +228,7 @@ The website uses GitHub Pages. Static pages can be opened in a browser; the fina
 
 ## Current résumé
 
-**Current master résumé: Netta_FPA.pdf (November 2026, three pages).** This supersedes the previously published October 30 two-page résumé. [Download the current master résumé](resumes/Netta_FPA.pdf).
+**Current master résumé: Netta_FinCV.pdf (November 2026, two pages).** [Download the current master résumé](resumes/Netta_FinCV.pdf).
 
 - [Previous Senior FP&A résumé — ARCHIVED, not current](resumes/Vannetta_Haney_Senior_FPA_Analyst_Resume.pdf)
 
