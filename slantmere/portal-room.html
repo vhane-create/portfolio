@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SLANTMERE Portal Room</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,sans-serif;background:#100b25;color:#f8f4ff}
+*{box-sizing:border-box}body{margin:0}main{max-width:1100px;margin:auto;padding:24px}header,.actions{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}a{color:#99ffe9}h1{font-size:clamp(25px,5vw,42px);margin:20px 0 8px}p{line-height:1.6;color:#ded7ef}button{font:inherit;font-weight:650;padding:12px 18px;background:#99ffe9;color:#152436;border:0;border-radius:8px;cursor:pointer}button:disabled{background:#55516b;color:#c5bfd1;cursor:default}button:focus-visible,a:focus-visible,canvas:focus-visible{outline:3px solid #ffcc70;outline-offset:4px}canvas{width:100%;display:block;border-radius:16px;border:1px solid #66518e;touch-action:manipulation;background:#17102f}#status{min-height:52px;font-weight:600;color:#99ffe9}#location{color:#ffca86}small{color:#c9bddc}.actions{margin:18px 0}#reset{background:#32234d;color:#fff;border:1px solid #77618e}
+</style>
+</head>
+<body><main>
+<header><a href="./">SLANTMERE</a><small>Desktop portal puzzle</small></header>
+<h1 id="location">Cedar Ticket Square</h1>
+<p id="objective">Find the portal key and place it in the console to unlock Jurassic Valley.</p>
+<canvas id="scene" width="1000" height="580" tabindex="0" aria-label="Portal room map. Use the buttons below to teleport to the pedestal and console."></canvas>
+<div class="actions" aria-label="Player controls">
+<button id="pedestal">Teleport to pedestal</button>
+<button id="console">Teleport to console</button>
+<button id="interact">Interact (E)</button>
+<button id="enter" disabled>Enter portal</button>
+<button id="reset">Restart</button>
+</div>
+<p id="status" role="status" aria-live="polite"></p>
+<p>Click a glowing floor circle or use the teleport buttons. Press E to interact. In Jurassic Valley, inspect the tracks, then return through the portal.</p>
+</main>
+<script>
+'use strict';
+const scene = document.getElementById('scene');
+const ctx = scene.getContext('2d');
+const elements = Object.fromEntries(['pedestal','console','interact','enter','reset','status','location','objective'].map(id => [id, document.getElementById(id)]));
+const stops = {pedestal:{x:260,y:420},console:{x:680,y:420}};
+let state;
+let sound;
+
+function announce(message) {
+  elements.status.textContent = message;
+}
+
+function chime() {
+  try {
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContextClass) return;
+    sound ||= new AudioContextClass();
+    sound.resume();
+    const oscillator = sound.createOscillator();
+    const gain = sound.createGain();
+    oscillator.connect(gain);
+    gain.connect(sound.destination);
+    oscillator.frequency.setValueAtTime(440,sound.currentTime);
+    oscillator.frequency.exponentialRampToValueAtTime(880,sound.currentTime + .3);
+    gain.gain.setValueAtTime(.06,sound.currentTime);
+    gain.gain.exponentialRampToValueAtTime(.001,sound.currentTime + .6);
+    oscillator.start();
+    oscillator.stop(sound.currentTime + .6);
+  } catch { /* Visual feedback remains available if audio is unavailable. */ }
+}
+
+function update() {
+  const valley = state.world === 'valley';
+  elements.location.textContent = valley ? 'Jurassic Valley' : 'Cedar Ticket Square';
+  elements.objective.textContent = valley ? 'Inspect the dinosaur tracks near the river, then return to the portal room.' : 'Find the portal key and place it in the console to unlock Jurassic Valley.';
+  elements.pedestal.textContent = valley ? 'Teleport to tracks' : 'Teleport to pedestal';
+  elements.console.textContent = valley ? 'Teleport to return portal' : 'Teleport to console';
+  elements.enter.textContent = valley ? 'Return to portal room' : 'Enter portal';
+  elements.enter.disabled = valley ? state.place !== 'console' : !state.unlocked || state.place !== 'console';
+  elements.interact.textContent = valley ? 'Inspect (E)' : state.carrying ? 'Place key (E)' : 'Interact (E)';
+  paint();
+}
+
+function teleport(place) {
+  if (!stops[place]) return;
+  state.place = place;
+  announce(state.world === 'valley' ? (place === 'pedestal' ? 'Large three-toed tracks cross the riverbank. Inspect them.' : 'The return portal leads back to Cedar Ticket Square.') : (place === 'pedestal' ? 'The portal key rests on the pedestal.' : 'A key-shaped socket is set into the portal console.'));
+  update();
+}
+
+function interact() {
+  if (state.world === 'valley') {
+    if (state.place === 'pedestal') {
+      state.inspected = true;
+      announce('Tracks discovered. A dinosaur has crossed toward the distant ridge. Return through the portal to complete this prototype.');
+    } else announce('Use the return button to travel back to Cedar Ticket Square.');
+  } else if (state.place === 'pedestal' && !state.carrying && !state.unlocked) {
+    state.carrying = true;
+    announce('Key collected. Teleport to the console to place it in the socket.');
+  } else if (state.place === 'console' && state.carrying) {
+    state.carrying = false;
+    state.unlocked = true;
+    announce('Key secured. Jurassic Valley is unlocked. Enter the portal.');
+    chime();
+  } else announce(state.unlocked ? 'The portal is ready. Teleport to the console and enter.' : 'Find the key on the pedestal first.');
+  update();
+}
+
+function travel() {
+  if (state.place !== 'console' || !state.unlocked) return;
+  state.world = state.world === 'room' ? 'valley' : 'room';
+  announce(state.world === 'valley' ? 'Welcome to Jurassic Valley. Teleport to the tracks to investigate.' : state.inspected ? 'Prototype complete. You unlocked Jurassic Valley, inspected the tracks, and returned home.' : 'Back at Cedar Ticket Square. You can revisit Jurassic Valley to inspect the tracks.');
+  update();
+}
+
+function reset() {
+  state = {world:'room',place:'console',carrying:false,unlocked:false,inspected:false};
+  announce('Teleport to the pedestal to begin.');
+  update();
+}
+
+function text(label,x,y,size=22,color='#f8f4ff') {
+  ctx.fillStyle = color;
+  ctx.font = size + 'px system-ui';
+  ctx.textAlign = 'center';
+  ctx.fillText(label,x,y);
+}
+
+function paint() {
+  const valley = state.world === 'valley';
+  const gradient = ctx.createLinearGradient(0,0,0,580);
+  gradient.addColorStop(0,valley ? '#153d49' : '#24123e');
+  gradient.addColorStop(1,valley ? '#245238' : '#332256');
+  ctx.fillStyle=gradient; ctx.fillRect(0,0,1000,580);
+  if (valley) {
+    ctx.fillStyle='#40775b';
+    ctx.beginPath(); ctx.moveTo(0,250);ctx.lineTo(180,65);ctx.lineTo(340,245);ctx.lineTo(480,110);ctx.lineTo(680,280);ctx.lineTo(1000,170);ctx.lineTo(1000,580);ctx.lineTo(0,580);ctx.fill();
+    ctx.strokeStyle='#7bc3d0';ctx.lineWidth=45;ctx.beginPath();ctx.moveTo(80,580);ctx.bezierCurveTo(500,400,150,260,540,210);ctx.stroke();
+    for(let i=0;i<4;i++){
+      ctx.save();ctx.translate(170+i*38,285+i*15);ctx.rotate(-.4);ctx.strokeStyle=state.inspected?'#ffda84':'#102c23';ctx.lineWidth=7;
+      ctx.beginPath();ctx.moveTo(0,30);ctx.lineTo(0,0);ctx.moveTo(0,12);ctx.lineTo(-13,-2);ctx.moveTo(0,12);ctx.lineTo(13,-2);ctx.stroke();ctx.restore();
+    }
+    text('Dinosaur tracks',240,250);
+  } else {
+    ctx.strokeStyle='#6c4b8a';ctx.lineWidth=2;
+    for(let x=0;x<1000;x+=100){ctx.beginPath();ctx.moveTo(500,180);ctx.lineTo(x,580);ctx.stroke();}
+    for(let y=280;y<580;y+=60){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(1000,y);ctx.stroke();}
+    ctx.fillStyle='#70508f';ctx.fillRect(210,270,100,95);
+    text('Key pedestal',260,240);
+    if(!state.carrying&&!state.unlocked) drawKey(260,280);
+  }
+  ctx.save();
+  ctx.shadowColor=state.unlocked?'#7fffe1':'#986cb5';ctx.shadowBlur=state.unlocked?35:5;
+  ctx.strokeStyle=state.unlocked?'#7fffe1':'#796287';ctx.lineWidth=15;
+  ctx.beginPath();ctx.ellipse(760,220,95,140,0,0,Math.PI*2);ctx.stroke();
+  ctx.fillStyle=state.unlocked?(valley?'#431e68':'#348277'):'#171323';
+  ctx.beginPath();ctx.ellipse(760,220,85,130,0,0,Math.PI*2);ctx.fill();ctx.restore();
+  text(valley?'Cedar Ticket Square':state.unlocked?'Jurassic Valley':'Portal locked',760,50);
+  if(!valley){ctx.fillStyle='#9d87b0';ctx.fillRect(630,300,80,65);ctx.strokeStyle='#221336';ctx.lineWidth=4;ctx.strokeRect(657,311,27,36);if(state.unlocked)drawKey(670,316);}
+  for(const [name,point] of Object.entries(stops)){
+    ctx.strokeStyle='#9bffe8';ctx.lineWidth=3;ctx.beginPath();ctx.ellipse(point.x,point.y,60,18,0,0,Math.PI*2);ctx.stroke();
+    text(name==='pedestal'?(valley?'Tracks':'Pedestal'):(valley?'Return':'Console'),point.x,point.y+53,18);
+  }
+  const player=stops[state.place];
+  ctx.fillStyle='#ffc87e';ctx.beginPath();ctx.arc(player.x,player.y-32,15,0,Math.PI*2);ctx.fill();
+  ctx.fillRect(player.x-11,player.y-16,22,25);
+  if(state.carrying)drawKey(player.x+35,player.y-35);
+  text(state.unlocked?'Portal unlocked':'Find the key',500,550,19,'#bffff1');
+}
+
+function drawKey(x,y) {
+  ctx.strokeStyle='#ffe18c';ctx.lineWidth=6;ctx.beginPath();ctx.arc(x,y,10,0,Math.PI*2);ctx.moveTo(x,y+10);ctx.lineTo(x,y+37);ctx.lineTo(x+12,y+37);ctx.moveTo(x,y+28);ctx.lineTo(x+9,y+28);ctx.stroke();
+}
+
+elements.pedestal.addEventListener('click',()=>teleport('pedestal'));
+elements.console.addEventListener('click',()=>teleport('console'));
+elements.interact.addEventListener('click',interact);
+elements.enter.addEventListener('click',travel);
+elements.reset.addEventListener('click',reset);
+scene.addEventListener('keydown',event=>{
+  if(event.code==='KeyE'&&!event.repeat){event.preventDefault();interact();}
+});
+scene.addEventListener('pointerdown',event=>{
+  const bounds=scene.getBoundingClientRect();
+  const x=(event.clientX-bounds.left)*scene.width/bounds.width;
+  const y=(event.clientY-bounds.top)*scene.height/bounds.height;
+  for(const [place,point] of Object.entries(stops)) {
+    if(Math.hypot(x-point.x,y-point.y)<75){teleport(place);scene.focus();break;}
+  }
+});
+document.addEventListener('keydown',event=>{
+  if(event.target===document.body&&event.code==='KeyE'&&!event.repeat)interact();
+});
+reset();
+</script>
+</body></html>
